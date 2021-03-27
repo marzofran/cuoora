@@ -36,6 +36,11 @@ UsuarioCuOOra >> esMia: unaPregunta [
 	^ preguntas includes: unaPregunta
 ]
 
+{ #category : #accessing }
+UsuarioCuOOra >> following [
+	^ following
+]
+
 { #category : #initialization }
 UsuarioCuOOra >> initialize [
 	
@@ -50,6 +55,12 @@ UsuarioCuOOra >> initializeCon: unNombre contrasena: unaContrasena [
 	nombre := unNombre .
 	contrasena := unaContrasena .
 	fechaYHora := DateAndTime now.
+]
+
+{ #category : #accessing }
+UsuarioCuOOra >> preguntas [
+
+	^ preguntas
 ]
 
 { #category : #accessing }
