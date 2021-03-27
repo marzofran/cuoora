@@ -7,3 +7,14 @@ Class {
 	],
 	#category : #'Objetos2-CuOOra'
 }
+
+{ #category : #construction }
+Respuesta class >> conDescripcion: unaDescripcion conUsuario: unUsuario [ 
+	^ (self conDescripcion: unaDescripcion)
+	initializeConUsuario: unUsuario
+]
+
+{ #category : #initialization }
+Respuesta >> initializeConUsuario: unUsuario [
+	usuario := unUsuario 
+]
