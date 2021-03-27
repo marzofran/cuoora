@@ -37,6 +37,14 @@ CuOOra >> buscarUsuarioQueHizo: unaPregunta [
 	^  usuarios detect: [ :usuario | usuario esMia: unaPregunta]
 ]
 
+{ #category : #queries }
+CuOOra >> calcularPuntaje: unUsuario [
+	| misInteracciones |
+	misInteracciones := (OrderedCollection withAll: unUsuario preguntas).
+	misInteracciones addAll: ((self respuestasDe: unUsuario) difference: (unUsuario respuestasAMisPreguntas)).
+	^misInteracciones puntos + misInteracciones puntajeLikes
+]
+
 { #category : #'adding/removing' }
 CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [ 
 

@@ -63,6 +63,12 @@ UsuarioCuOOra >> preguntas [
 	^ preguntas
 ]
 
+{ #category : #queries }
+UsuarioCuOOra >> respuestasAMisPreguntas [
+
+	^ preguntas flatCollect: [ :pregunta | pregunta respuestas ]
+]
+
 { #category : #accessing }
 UsuarioCuOOra >> topicosFav [
 
