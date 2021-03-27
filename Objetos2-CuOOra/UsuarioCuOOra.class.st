@@ -6,8 +6,7 @@ Class {
 		'contrasena',
 		'fechaYHora',
 		'following',
-		'preguntas',
-		'pepe'
+		'preguntas'
 	],
 	#category : #'Objetos2-CuOOra'
 }

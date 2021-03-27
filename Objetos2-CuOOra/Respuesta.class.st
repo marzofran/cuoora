@@ -1,10 +1,9 @@
 Class {
-	#name : #Pregunta,
+	#name : #Respuesta,
 	#superclass : #Participacion,
 	#instVars : [
-		'titulo',
-		'respuestas',
-		'topicos'
+		'texto',
+		'usuario'
 	],
 	#category : #'Objetos2-CuOOra'
 }
