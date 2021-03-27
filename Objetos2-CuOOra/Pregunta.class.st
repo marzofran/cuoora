@@ -50,3 +50,8 @@ Pregunta >> puntos [
 Pregunta >> respuestas [
 	^ respuestas
 ]
+
+{ #category : #queries }
+Pregunta >> respuestasDe: unUsuario [
+	^ (respuestas collect: [ :unaRespuesta | unaRespuesta esDeUsuario: unUsuario])
+]
