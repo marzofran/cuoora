@@ -7,3 +7,23 @@ Class {
 	],
 	#category : #'Objetos2-CuOOra'
 }
+
+{ #category : #construction }
+Interaccion class >> conUsuario: unUsuario [
+	^ self new initializeConUsuario: unUsuario
+]
+
+{ #category : #queries }
+Interaccion >> esDeUsuario: unUsuario [
+	^ usuario = unUsuario
+]
+
+{ #category : #initialization }
+Interaccion >> initialize [
+	fechaYHora := DateAndTime now.
+]
+
+{ #category : #initialization }
+Interaccion >> initializeConUsuario: unUsuario [
+	usuario := unUsuario 
+]
