@@ -32,12 +32,6 @@ CuOOra >> borrarPregunta: unaPregunta [
 ]
 
 { #category : #queries }
-CuOOra >> buscarUsuarioQueHizo: unaPregunta [
-
-	^  usuarios detect: [ :usuario | usuario esMia: unaPregunta]
-]
-
-{ #category : #queries }
 CuOOra >> calcularPuntaje: unUsuario [
 	| misInteracciones |
 	misInteracciones := (OrderedCollection withAll: unUsuario preguntas).

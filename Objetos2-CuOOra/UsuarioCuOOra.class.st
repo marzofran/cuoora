@@ -25,15 +25,15 @@ UsuarioCuOOra >> agregarPregunta: unaPregunta [
 ]
 
 { #category : #'adding/removing' }
+UsuarioCuOOra >> agregarTopicoFavorito: unTopico [
+
+	topicosFav add: unTopico .
+]
+
+{ #category : #'adding/removing' }
 UsuarioCuOOra >> borrarPregunta: unaPregunta [
 
 	preguntas remove: unaPregunta.
-]
-
-{ #category : #queries }
-UsuarioCuOOra >> esMia: unaPregunta [
-
-	^ preguntas includes: unaPregunta
 ]
 
 { #category : #accessing }
