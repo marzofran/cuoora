@@ -30,3 +30,34 @@ CuOOra >> borrarPregunta: unaPregunta [
 	preguntas remove: unaPregunta.
 	usuarios borrarPregunta: unaPregunta.
 ]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> buscarUsuarioQueHizo: unaPregunta [
+
+	^  usuarios detect: [ :usuario | usuario esMia: unaPregunta]
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> crearUsuario: unNombre contrasena: unaContrasena [ 
+
+	usuarios add: (UsuarioCuOOra conNombre: unNombre contrasena: unaContrasena).
+]
+
+{ #category : #initialization }
+CuOOra >> initialize [ 
+	preguntas := OrderedCollection new.
+	usuarios := OrderedCollection new.
+	topicos := OrderedCollection new.
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> preguntasDe: unTopico [
+
+	^ preguntas collect: [ :pregunta | pregunta esDe: unTopico ]
+]
+
+{ #category : #'as yet unclassified' }
+CuOOra >> preguntasRelevantesDe: unUsuario [
+
+	unUsuario topicosFav 
+]
