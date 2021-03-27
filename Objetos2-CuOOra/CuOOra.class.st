@@ -58,8 +58,11 @@ CuOOra >> preguntasDe: unTopico [
 
 { #category : #queries }
 CuOOra >> preguntasRelevantesDe: unUsuario [
-    | topicosF | topicosF :=unUsuario topicosFav.
-    preguntas collect: [ :pregunta | pregunta esDeTopico: (unUsuario topicosFav do: [:topico | ^topico])  ]
+	| topicosF |
+	topicosF := unUsuario topicosFav.
+	preguntas
+		collect:
+			[ :pregunta | pregunta esDeTopico: (unUsuario topicosFav do: [ :topico | ^ topico ]) ]
 ]
 
 { #category : #queries }
