@@ -14,6 +14,11 @@ Respuesta class >> conDescripcion: unaDescripcion conUsuario: unUsuario [
 	initializeConUsuario: unUsuario
 ]
 
+{ #category : #queries }
+Respuesta >> esDeUsuario: unUsuario [
+	^ usuario = unUsuario
+]
+
 { #category : #initialization }
 Respuesta >> initializeConUsuario: unUsuario [
 	usuario := unUsuario 

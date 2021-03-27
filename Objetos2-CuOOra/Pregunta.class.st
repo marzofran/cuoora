@@ -25,6 +25,11 @@ Pregunta >> borrarRespuestas [
 	respuestas removeAll 
 ]
 
+{ #category : #queries }
+Pregunta >> esDeTopico: unTopico [
+	^ topicos includes: unTopico
+]
+
 { #category : #initialization }
 Pregunta >> initialize [
 	respuestas := OrderedCollection new.
