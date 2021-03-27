@@ -15,6 +15,21 @@ Pregunta class >> conTitulo: unTitulo conDescripcion: unaDescripcion conTopicos:
 	initializeConTitulo: unTitulo conTopicos: unosTopicos 
 ]
 
+{ #category : #'adding/removing' }
+Pregunta >> agregarRespuestaDe: unUsuario conDescripcion: unaDescripcion [
+	respuestas add:( Respuesta conDescripcion: unaDescripcion conUsuario: unUsuario )
+]
+
+{ #category : #'adding/removing' }
+Pregunta >> borrarRespuestas [
+	respuestas removeAll 
+]
+
+{ #category : #queries }
+Pregunta >> esDeTopico: unTopico [
+	^ topicos includes: unTopico
+]
+
 { #category : #initialization }
 Pregunta >> initialize [
 	respuestas := OrderedCollection new.
@@ -24,6 +39,11 @@ Pregunta >> initialize [
 Pregunta >> initializeConTitulo: unTitulo conTopicos: unosTopicos [
 	titulo := unTitulo.
 	topicos := unosTopicos 
+]
+
+{ #category : #queries }
+Pregunta >> puntos [
+	^ 20
 ]
 
 { #category : #accessing }

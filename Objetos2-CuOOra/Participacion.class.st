@@ -26,3 +26,8 @@ Participacion >> initialize [
 Participacion >> initializeConDescripcion: unaDescripcion [
 	descripcion := unaDescripcion 
 ]
+
+{ #category : #queries }
+Participacion >> puntos [
+	self subclassResponsibility
+]
