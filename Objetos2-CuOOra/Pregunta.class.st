@@ -48,7 +48,7 @@ Pregunta >> puntos [
 
 { #category : #accessing }
 Pregunta >> respuestas [
-	^ respuestas
+	^ respuestas sort: [ :r1 :r2 | r1 puntajeLikes >= r2 puntajeLikes]
 ]
 
 { #category : #queries }
