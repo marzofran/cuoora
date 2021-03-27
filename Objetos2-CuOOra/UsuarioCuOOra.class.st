@@ -12,10 +12,10 @@ Class {
 	#category : #'Objetos2-CuOOra'
 }
 
-{ #category : #'as yet unclassified' }
-UsuarioCuOOra class >> conNombre: unNombre contrasena: unaContrasena [
+{ #category : #construction }
+UsuarioCuOOra class >> conNombre: unNombre conContrasena: unaContrasena [
 
-	^ self new initializeCon: unNombre contrasena: unaContrasena 
+	^ self new initializeConNombre: unNombre conContrasena: unaContrasena 
 ]
 
 { #category : #'adding/removing' }
@@ -50,7 +50,7 @@ UsuarioCuOOra >> initialize [
 ]
 
 { #category : #initialization }
-UsuarioCuOOra >> initializeCon: unNombre contrasena: unaContrasena [
+UsuarioCuOOra >> initializeConNombre: unNombre conContrasena: unaContrasena [
 
 	nombre := unNombre .
 	contrasena := unaContrasena .

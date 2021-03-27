@@ -40,7 +40,7 @@ CuOOra >> buscarUsuarioQueHizo: unaPregunta [
 { #category : #'adding/removing' }
 CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [ 
 
-	usuarios add: (UsuarioCuOOra conNombre: unNombre contrasena: unaContrasena).
+	usuarios add: (UsuarioCuOOra conNombre: unNombre conContrasena: unaContrasena).
 ]
 
 { #category : #initialization }
