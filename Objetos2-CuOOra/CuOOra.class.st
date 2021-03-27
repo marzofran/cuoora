@@ -58,12 +58,12 @@ CuOOra >> preguntasDe: unTopico [
 
 { #category : #queries }
 CuOOra >> preguntasRelevantesDe: unUsuario [
-	| topicosF | topicosF :=unUsuario topicosFav.
-	preguntas collect: [ :pregunta | pregunta esDeTopico: unUsuario topicosFav] 
+    | topicosF | topicosF :=unUsuario topicosFav.
+    preguntas collect: [ :pregunta | pregunta esDeTopico: (unUsuario topicosFav do: [:topico | ^topico])  ]
 ]
 
 { #category : #queries }
 CuOOra >> respuestasDe: unUsuario [
 
-	preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ]
+	^ preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ]
 ]
