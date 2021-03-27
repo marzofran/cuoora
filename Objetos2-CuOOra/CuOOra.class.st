@@ -56,14 +56,14 @@ CuOOra >> preguntasDe: unTopico [
 	^ preguntas collect: [ :pregunta | pregunta esDe: unTopico ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #queries }
 CuOOra >> preguntasRelevantesDe: unUsuario [
 	| topicosF | topicosF :=unUsuario topicosFav.
 	topicosF do: [ :topico |  ].
 	preguntas collect: [ :pregunta | pregunta esDeTopico: (unUsuario topicosFav do: [:topico | ^topico])  ] 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #queries }
 CuOOra >> respuestasDe: unUsuario [
 
 	^ preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ]
