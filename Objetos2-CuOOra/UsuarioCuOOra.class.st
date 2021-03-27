@@ -69,6 +69,12 @@ UsuarioCuOOra >> respuestasAMisPreguntas [
 	^ preguntas flatCollect: [ :pregunta | pregunta respuestas ]
 ]
 
+{ #category : #'adding/removing' }
+UsuarioCuOOra >> seguir: unUsuario [
+
+	following add: unUsuario 
+]
+
 { #category : #accessing }
 UsuarioCuOOra >> topicosFav [
 

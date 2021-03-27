@@ -66,8 +66,9 @@ CuOOra >> preguntasDe: unTopico [
 
 { #category : #queries }
 CuOOra >> preguntasRelevantesDe: unUsuario [
-	| topicosF | topicosF :=unUsuario topicosFav.
-	preguntas collect: [ :pregunta | pregunta esDeTopico: (unUsuario topicosFav do: [:topico | ^topico])  ] 
+	^ (unUsuario topicosFav
+		flatCollect: [ :topico | self preguntasDe: topico ])
+		union: (unUsuario following flatCollect: [ :follow | follow preguntas ])
 ]
 
 { #category : #queries }
