@@ -37,6 +37,14 @@ CuOOra >> buscarUsuarioQueHizo: unaPregunta [
 	^  usuarios detect: [ :usuario | usuario esMia: unaPregunta]
 ]
 
+{ #category : #queries }
+CuOOra >> calcularPuntaje: unUsuario [
+	| misInteracciones |
+	misInteracciones := (OrderedCollection withAll: unUsuario preguntas).
+	misInteracciones addAll: ((self respuestasDe: unUsuario) difference: (unUsuario respuestasAMisPreguntas)).
+	^misInteracciones puntos + misInteracciones puntajeLikes
+]
+
 { #category : #'adding/removing' }
 CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [ 
 
@@ -58,15 +66,12 @@ CuOOra >> preguntasDe: unTopico [
 
 { #category : #queries }
 CuOOra >> preguntasRelevantesDe: unUsuario [
-	| topicosF |
-	topicosF := unUsuario topicosFav.
-	preguntas
-		collect:
-			[ :pregunta | pregunta esDeTopico: (unUsuario topicosFav do: [ :topico | ^ topico ]) ]
+	| topicosF | topicosF :=unUsuario topicosFav.
+	preguntas collect: [ :pregunta | pregunta esDeTopico: (unUsuario topicosFav do: [:topico | ^topico])  ] 
 ]
 
 { #category : #queries }
 CuOOra >> respuestasDe: unUsuario [
 
-	^ preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ]
+	^ (preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ])
 ]
