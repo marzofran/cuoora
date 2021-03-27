@@ -18,19 +18,19 @@ UsuarioCuOOra class >> conNombre: unNombre contrasena: unaContrasena [
 	^ self new initializeCon: unNombre contrasena: unaContrasena 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'adding/removing' }
 UsuarioCuOOra >> agregarPregunta: unaPregunta [
 
 	preguntas add: unaPregunta.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'adding/removing' }
 UsuarioCuOOra >> borrarPregunta: unaPregunta [
 
 	preguntas remove: unaPregunta.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #queries }
 UsuarioCuOOra >> esMia: unaPregunta [
 
 	^ preguntas includes: unaPregunta
