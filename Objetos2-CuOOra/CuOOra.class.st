@@ -58,6 +58,12 @@ CuOOra >> preguntasDe: unTopico [
 
 { #category : #'as yet unclassified' }
 CuOOra >> preguntasRelevantesDe: unUsuario [
+	| topicosF | topicosF :=unUsuario topicosFav.
+	preguntas collect: [ :pregunta | pregunta esDeTopico: unUsuario topicosFav] 
+]
 
-	unUsuario topicosFav 
+{ #category : #'as yet unclassified' }
+CuOOra >> respuestasDe: unUsuario [
+
+	preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ]
 ]
