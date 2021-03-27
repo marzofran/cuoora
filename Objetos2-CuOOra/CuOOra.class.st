@@ -1,6 +1,6 @@
 Class {
 	#name : #CuOOra,
-	#superclass : #UsuarioCuOOra,
+	#superclass : #Object,
 	#instVars : [
 		'usuarios',
 		'preguntas',

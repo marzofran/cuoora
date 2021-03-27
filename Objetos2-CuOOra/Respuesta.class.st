@@ -18,3 +18,8 @@ Respuesta class >> conDescripcion: unaDescripcion conUsuario: unUsuario [
 Respuesta >> initializeConUsuario: unUsuario [
 	usuario := unUsuario 
 ]
+
+{ #category : #queries }
+Respuesta >> puntos [
+	^ 50
+]
