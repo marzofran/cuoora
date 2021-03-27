@@ -9,36 +9,36 @@ Class {
 	#category : #'Objetos2-CuOOra'
 }
 
-{ #category : #'as yet unclassified' }
-CuOOra >> agregarPregunta: unTitulo descripcion: unaDescripcion topicos: unosTopicos usuario: unUsuario [
+{ #category : #'adding/removing' }
+CuOOra >> agregarPreguntaConTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos deUsuario: unUsuario [
 	| p |
-	p := Pregunta new: unTitulo.
+	p := Pregunta conTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos.
 	preguntas add: p.
 	usuarios agregarPregunta: p.
 	
 ]
 
-{ #category : #'as yet unclassified' }
-CuOOra >> agregarTopico: unNombre descripcion: unaDescripcion [
+{ #category : #'adding/removing' }
+CuOOra >> agregarTopicoConNombre: unNombre conDescripcion: unaDescripcion [
 
-	"topicos add: (Topico new: unNombre desc: unaDescripcion)."
+	topicos add: (Topico conNombre: unNombre conDescripcion: unaDescripcion )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'adding/removing' }
 CuOOra >> borrarPregunta: unaPregunta [
 
 	preguntas remove: unaPregunta.
 	usuarios borrarPregunta: unaPregunta.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #queries }
 CuOOra >> buscarUsuarioQueHizo: unaPregunta [
 
 	^  usuarios detect: [ :usuario | usuario esMia: unaPregunta]
 ]
 
-{ #category : #'as yet unclassified' }
-CuOOra >> crearUsuario: unNombre contrasena: unaContrasena [ 
+{ #category : #'adding/removing' }
+CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [ 
 
 	usuarios add: (UsuarioCuOOra conNombre: unNombre contrasena: unaContrasena).
 ]
@@ -50,7 +50,7 @@ CuOOra >> initialize [
 	topicos := OrderedCollection new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #queries }
 CuOOra >> preguntasDe: unTopico [
 
 	^ preguntas collect: [ :pregunta | pregunta esDe: unTopico ]
