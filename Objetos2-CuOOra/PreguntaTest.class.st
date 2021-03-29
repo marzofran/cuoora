@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'pregunta',
 		'respuesta',
-		'topicos'
+		'topicos',
+		'usuario'
 	],
 	#category : #'Objetos2-CuOOra-Tests'
 }
