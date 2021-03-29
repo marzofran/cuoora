@@ -6,7 +6,7 @@ Class {
 		'respuestas',
 		'topicos'
 	],
-	#category : #'Objetos2-CuOOra'
+	#category : #'Objetos2-CuOOra-model'
 }
 
 { #category : #construction }
