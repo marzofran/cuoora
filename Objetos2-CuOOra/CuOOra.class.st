@@ -6,7 +6,7 @@ Class {
 		'preguntas',
 		'topicos'
 	],
-	#category : #'Objetos2-CuOOra-model'
+	#category : #'Objetos2-CuOOra-Model'
 }
 
 { #category : #'adding/removing' }
