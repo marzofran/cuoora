@@ -16,7 +16,7 @@ Respuesta class >> conDescripcion: unaDescripcion conUsuario: unUsuario [
 
 { #category : #queries }
 Respuesta >> esDeUsuario: unUsuario [
-	^ usuario = unUsuario
+	^ usuario == unUsuario
 ]
 
 { #category : #initialization }

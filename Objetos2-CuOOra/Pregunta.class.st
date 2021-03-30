@@ -60,5 +60,5 @@ Pregunta >> respuestas [
 
 { #category : #queries }
 Pregunta >> respuestasDe: unUsuario [
-	^ (respuestas collect: [ :unaRespuesta | unaRespuesta esDeUsuario: unUsuario])
+	^ (respuestas select: [ :unaRespuesta | unaRespuesta esDeUsuario: unUsuario])
 ]

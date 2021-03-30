@@ -21,7 +21,7 @@ CuOOra >> agregarPreguntaConTitulo: unTitulo conDescripcion: unaDescripcion conT
 	| p |
 	p := Pregunta conTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos.
 	preguntas add: p.
-	usuarios agregarPregunta: p.
+	unUsuario agregarPregunta: p.
 	
 ]
 
@@ -42,7 +42,8 @@ CuOOra >> borrarPregunta: unaPregunta [
 CuOOra >> calcularPuntaje: unUsuario [
 	| misInteracciones |
 	misInteracciones := (OrderedCollection withAll: unUsuario preguntas).
-	misInteracciones addAll: ((self respuestasDe: unUsuario) removeAllFoundIn: (unUsuario respuestasAMisPreguntas)).
+	misInteracciones addAll: (self respuestasDe: unUsuario).
+	misInteracciones removeAllFoundIn: (unUsuario respuestasAMisPreguntas).
 	^misInteracciones sumNumbers: [:interaccion | interaccion puntos + interaccion puntajeLikes ]
 ]
 
