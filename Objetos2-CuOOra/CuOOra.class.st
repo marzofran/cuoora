@@ -9,38 +9,20 @@ Class {
 	#category : #'Objetos2-CuOOra-Model'
 }
 
-{ #category : #testing }
-CuOOra >> agregarPregunta: unaPregunta de: unUsuario [
-
-	preguntas add: unaPregunta.
-	unUsuario agregarPregunta: unaPregunta.
-]
-
 { #category : #'adding/removing' }
 CuOOra >> agregarPreguntaConTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos deUsuario: unUsuario [
 	| p |
 	p := Pregunta conTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos.
 	preguntas add: p.
 	unUsuario agregarPregunta: p.
+	^ p
 	
-]
-
-{ #category : #testing }
-CuOOra >> agregarTopico: unTopico [
-
-	topicos add: unTopico
 ]
 
 { #category : #'adding/removing' }
 CuOOra >> agregarTopicoConNombre: unNombre conDescripcion: unaDescripcion [
 
-	topicos add: (Topico conNombre: unNombre conDescripcion: unaDescripcion )
-]
-
-{ #category : #testing }
-CuOOra >> agregarUsuario: unUsuario [
-	
-	usuarios add: unUsuario 
+	^ topicos add: (Topico conNombre: unNombre conDescripcion: unaDescripcion)
 ]
 
 { #category : #'adding/removing' }
@@ -62,7 +44,7 @@ CuOOra >> calcularPuntaje: unUsuario [
 { #category : #'adding/removing' }
 CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [ 
 
-	usuarios add: (UsuarioCuOOra conNombre: unNombre conContrasena: unaContrasena).
+	^usuarios add: (UsuarioCuOOra conNombre: unNombre conContrasena: unaContrasena).
 ]
 
 { #category : #initialization }

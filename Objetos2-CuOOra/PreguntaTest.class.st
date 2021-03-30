@@ -49,9 +49,8 @@ PreguntaTest >> testLikeDislike [
 PreguntaTest >> testRespuestas [
 	| usuario r1 r2 |
 	usuario := UsuarioCuOOra conNombre: 'Jorge Bell' conContrasena: 'ringring'.
-	r1 := Respuesta conDescripcion: 'Si' conUsuario: usuario.
-	r2 := Respuesta conDescripcion: 'No' conUsuario: usuario.
-	pregunta agregarRespuesta: r1; agregarRespuesta: r2.
+	r1 := pregunta agregarRespuestaDe: usuario conDescripcion: 'Si'. 
+	r2 := pregunta agregarRespuestaDe: usuario conDescripcion: 'Si'. 
 	
 	self assert: (pregunta respuestas first == r1).
 	self assert: (pregunta respuestas last == r2).
