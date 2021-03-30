@@ -107,3 +107,89 @@ CuOOraTest >> testPreguntasDeTopico [
 	self assert: (cuOOra preguntasDe: topico1) size equals: 2.
 	self assert: (cuOOra preguntasDe: topico2) size equals: 1
 ]
+
+{ #category : #tests }
+CuOOraTest >> testPreguntasRelevantesDe [
+	| usuario topico topico2 topicos otrosTopicos otroUsuario usuarioSeguido preguntas |
+	topico := cuOOra
+		agregarTopicoConNombre: 'Smalltalk'
+		conDescripcion: 'About oop languaje Smalltalk.'.
+	topico2 := cuOOra
+		agregarTopicoConNombre: 'JavaScript'
+		conDescripcion: 'Pretty nice but not Smalltalk'.
+	usuario := cuOOra
+		crearUsuarioConNombre: 'Pepe'
+		conContrasena: 'pharorulzok'.
+	usuarioSeguido := cuOOra
+		crearUsuarioConNombre: 'BabyShark'
+		conContrasena: 'tutururuturu'.
+	otroUsuario := cuOOra
+		crearUsuarioConNombre: 'Levi'
+		conContrasena: 'escoba'.
+	topicos := OrderedCollection with: topico.
+	otrosTopicos := OrderedCollection with: topico2.
+	usuario agregarTopicoFavorito: topico.
+	preguntas := OrderedCollection new.
+	preguntas
+		add:
+			(cuOOra
+				agregarPreguntaConTitulo: 'Seaside 3.0'
+				conDescripcion: 'Hola, no puedo instalarlo como ago'
+				conTopicos: topicos
+				deUsuario: otroUsuario).
+	preguntas
+		add:
+			(cuOOra
+				agregarPreguntaConTitulo: 'Matrices'
+				conDescripcion: 'Hola, como se declaran?'
+				conTopicos: otrosTopicos
+				deUsuario: usuarioSeguido).
+				preguntas
+		add:
+			(cuOOra
+				agregarPreguntaConTitulo: 'Herencia'
+				conDescripcion: 'Hola, como funciona la herencia aca??'
+				conTopicos: topicos
+				deUsuario: usuario).
+	usuario seguir: usuarioSeguido.
+	self assert: (cuOOra preguntasRelevantesDe: usuario) size equals: 3.
+	self assertCollection: (cuOOra preguntasRelevantesDe: usuario) hasSameElements: preguntas.
+	
+	usuario seguir: otroUsuario .
+	self assert: (cuOOra preguntasRelevantesDe: usuario) size equals: 3.
+]
+
+{ #category : #tests }
+CuOOraTest >> testRespuestasDe [
+	| usuario topico topicos otroUsuario pregunta respuesta otraRespuesta respuestas |
+	usuario := cuOOra
+		crearUsuarioConNombre: 'levi'
+		conContrasena: 'escoba'.
+	otroUsuario := cuOOra
+		crearUsuarioConNombre: 'pepe'
+		conContrasena: '2'.
+	topico := cuOOra
+		agregarTopicoConNombre: 'TikTok'
+		conDescripcion: 'Trends y cosas locas de la app de la cuarentena'.
+	topicos := OrderedCollection with: topico.
+	pregunta := cuOOra
+		agregarPreguntaConTitulo: 'Seaside 3.0'
+		conDescripcion: 'Hola, no puedo instalarlo como ago'
+		conTopicos: topicos
+		deUsuario: usuario.
+	respuesta := pregunta
+		agregarRespuestaDe: usuario
+		conDescripcion: 'porfa ayudaaaa'.
+	cuOOra
+		agregarPreguntaConTitulo: 'ReactJS'
+		conDescripcion: 'Hola, donde lo descargo?'
+		conTopicos: topicos
+		deUsuario: otroUsuario.
+	otraRespuesta := pregunta
+		agregarRespuestaDe: usuario
+		conDescripcion: 'aca te dejo el link *zelda*'.
+	respuestas := OrderedCollection with: respuesta.
+	respuestas add: otraRespuesta.
+	self assert: (cuOOra respuestasDe: usuario) equals: respuestas.
+	self assert: (cuOOra respuestasDe: otroUsuario) isEmpty
+]
