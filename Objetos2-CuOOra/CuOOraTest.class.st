@@ -16,11 +16,16 @@ CuOOraTest >> setUp [
 
 { #category : #tests }
 CuOOraTest >> testCalcularPuntaje [
-	|topicos|
+	|topicos p otroUsuario|
 	usuario := UsuarioCuOOra  conNombre: 'pepe' conContrasena: '2'.
+	otroUsuario := 
 	topicos := OrderedCollection new.
 	topicos add: (Topico conNombre: 'TikTok' conDescripcion: 'Trends y cosas locas de la app de la cuarentena').
-	cuOOra agregarPreguntaConTitulo: 'Babooshka?' conDescripcion: 'Did she do right?' conTopicos: topicos deUsuario: usuario. 
+	p:= Pregunta conTitulo: 'Babooshka?' conDescripcion: 'Did she do right?' conTopicos: topicos.
+	cuOOra agregarPregunta: p de: usuario.
+	
+	
+	
 	
 ]
 
