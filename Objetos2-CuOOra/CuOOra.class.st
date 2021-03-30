@@ -43,7 +43,7 @@ CuOOra >> calcularPuntaje: unUsuario [
 	| misInteracciones |
 	misInteracciones := (OrderedCollection withAll: unUsuario preguntas).
 	misInteracciones addAll: ((self respuestasDe: unUsuario) difference: (unUsuario respuestasAMisPreguntas)).
-	^misInteracciones puntos + misInteracciones puntajeLikes
+	^ misInteracciones puntos + misInteracciones puntajeLikes
 ]
 
 { #category : #'adding/removing' }
