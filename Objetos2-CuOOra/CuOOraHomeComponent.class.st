@@ -1,9 +1,9 @@
 Class {
-	#name : #CuOOraLoginComponent,
+	#name : #CuOOraHomeComponent,
 	#superclass : #WAComponent,
 	#category : #'Objetos2-CuOOra-UI'
 }
 
 { #category : #rendering }
-CuOOraLoginComponent >> renderContentOn: aCanvas [
+CuOOraHomeComponent >> renderContentOn: aCanvas [
 ]
