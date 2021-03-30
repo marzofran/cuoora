@@ -129,6 +129,7 @@ CuOOraTest >> testPreguntasRelevantesDe [
 	topicos := OrderedCollection with: topico.
 	otrosTopicos := OrderedCollection with: topico2.
 	usuario agregarTopicoFavorito: topico.
+	usuario agregarTopicoFavorito: topico2.
 	preguntas := OrderedCollection new.
 	preguntas
 		add:
@@ -144,6 +145,7 @@ CuOOraTest >> testPreguntasRelevantesDe [
 				conDescripcion: 'Hola, como se declaran?'
 				conTopicos: otrosTopicos
 				deUsuario: usuarioSeguido).
+				topicos add: topico2.
 				preguntas
 		add:
 			(cuOOra
