@@ -46,6 +46,11 @@ Participacion >> descripcion [
 	^ descripcion
 ]
 
+{ #category : #accessing }
+Participacion >> dislikes [
+	^ dislikes
+]
+
 { #category : #initialization }
 Participacion >> initialize [ 
 	likes := OrderedCollection new.
@@ -56,6 +61,11 @@ Participacion >> initialize [
 { #category : #initialization }
 Participacion >> initializeConDescripcion: unaDescripcion [
 	descripcion := unaDescripcion 
+]
+
+{ #category : #accessing }
+Participacion >> likes [
+	^ likes
 ]
 
 { #category : #queries }

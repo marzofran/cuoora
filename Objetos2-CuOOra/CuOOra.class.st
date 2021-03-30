@@ -25,10 +25,22 @@ CuOOra >> agregarPreguntaConTitulo: unTitulo conDescripcion: unaDescripcion conT
 	
 ]
 
+{ #category : #testing }
+CuOOra >> agregarTopico: unTopico [
+
+	topicos add: unTopico
+]
+
 { #category : #'adding/removing' }
 CuOOra >> agregarTopicoConNombre: unNombre conDescripcion: unaDescripcion [
 
 	topicos add: (Topico conNombre: unNombre conDescripcion: unaDescripcion )
+]
+
+{ #category : #testing }
+CuOOra >> agregarUsuario: unUsuario [
+	
+	usuarios add: unUsuario 
 ]
 
 { #category : #'adding/removing' }
@@ -60,10 +72,15 @@ CuOOra >> initialize [
 	topicos := OrderedCollection new.
 ]
 
+{ #category : #testing }
+CuOOra >> preguntas [
+	^ preguntas
+]
+
 { #category : #queries }
 CuOOra >> preguntasDe: unTopico [
 
-	^ preguntas collect: [ :pregunta | pregunta esDe: unTopico ]
+	^ preguntas select: [ :pregunta | pregunta esDeTopico: unTopico ]
 ]
 
 { #category : #queries }

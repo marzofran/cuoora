@@ -29,6 +29,20 @@ PreguntaTest >> testAgregarRespuestaDe [
 PreguntaTest >> testLikeDislike [
 	| usuario |
 	usuario := UsuarioCuOOra conNombre: 'Jorge Bell' conContrasena: 'ringring'.
+	
+	pregunta agregarLikeDe: usuario.
+	self denyEmpty: pregunta likes.
+	
+	pregunta agregarDislikeDe: usuario.
+	self assertEmpty: pregunta likes.
+	self denyEmpty: pregunta dislikes.
+	
+	pregunta agregarLikeDe: usuario.
+	self assertEmpty: pregunta dislikes.
+	self denyEmpty: pregunta likes.
+	
+	pregunta borrarLikeDe: usuario.
+	self assertEmpty: pregunta likes
 ]
 
 { #category : #tests }
