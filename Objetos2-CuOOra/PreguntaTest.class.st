@@ -26,6 +26,12 @@ PreguntaTest >> testAgregarRespuestaDe [
 ]
 
 { #category : #tests }
+PreguntaTest >> testLikeDislike [
+	| usuario |
+	usuario := UsuarioCuOOra conNombre: 'Jorge Bell' conContrasena: 'ringring'.
+]
+
+{ #category : #tests }
 PreguntaTest >> testRespuestas [
 	| usuario r1 r2 |
 	usuario := UsuarioCuOOra conNombre: 'Jorge Bell' conContrasena: 'ringring'.

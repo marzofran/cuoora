@@ -75,7 +75,7 @@ CuOOra >> preguntasRelevantesDe: unUsuario [
 { #category : #queries }
 CuOOra >> respuestasDe: unUsuario [
 
-	^ (preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ])
+	^ (preguntas flatCollect: [ :pregunta | pregunta respuestasDe: unUsuario ])
 ]
 
 { #category : #testing }
