@@ -9,6 +9,13 @@ Class {
 	#category : #'Objetos2-CuOOra-Model'
 }
 
+{ #category : #testing }
+CuOOra >> agregarPregunta: unaPregunta de: unUsuario [
+
+	preguntas add: unaPregunta.
+	unUsuario agregarPregunta: unaPregunta.
+]
+
 { #category : #'adding/removing' }
 CuOOra >> agregarPreguntaConTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos deUsuario: unUsuario [
 	| p |
@@ -69,4 +76,10 @@ CuOOra >> preguntasRelevantesDe: unUsuario [
 CuOOra >> respuestasDe: unUsuario [
 
 	^ (preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ])
+]
+
+{ #category : #testing }
+CuOOra >> usuarios [
+
+	^ usuarios
 ]
