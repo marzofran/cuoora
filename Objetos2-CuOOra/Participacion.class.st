@@ -41,6 +41,11 @@ Participacion >> borrarLikeDe: unUsuario [
 	ifFound: [ :elLike | likes remove: elLike ].
 ]
 
+{ #category : #accessing }
+Participacion >> descripcion [
+	^ descripcion
+]
+
 { #category : #initialization }
 Participacion >> initialize [ 
 	likes := OrderedCollection new.

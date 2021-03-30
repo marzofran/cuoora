@@ -15,6 +15,12 @@ Pregunta class >> conTitulo: unTitulo conDescripcion: unaDescripcion conTopicos:
 	initializeConTitulo: unTitulo conTopicos: unosTopicos 
 ]
 
+{ #category : #testing }
+Pregunta >> agregarRespuesta: unaRespuesta [
+	
+	respuestas add: unaRespuesta 
+]
+
 { #category : #'adding/removing' }
 Pregunta >> agregarRespuestaDe: unUsuario conDescripcion: unaDescripcion [
 	respuestas add:( Respuesta conDescripcion: unaDescripcion conUsuario: unUsuario )
@@ -32,6 +38,7 @@ Pregunta >> esDeTopico: unTopico [
 
 { #category : #initialization }
 Pregunta >> initialize [
+	super initialize.
 	respuestas := OrderedCollection new.
 ]
 
