@@ -42,8 +42,8 @@ CuOOra >> borrarPregunta: unaPregunta [
 CuOOra >> calcularPuntaje: unUsuario [
 	| misInteracciones |
 	misInteracciones := (OrderedCollection withAll: unUsuario preguntas).
-	misInteracciones addAll: ((self respuestasDe: unUsuario) difference: (unUsuario respuestasAMisPreguntas)).
-	^misInteracciones puntos + misInteracciones puntajeLikes
+	misInteracciones addAll: ((self respuestasDe: unUsuario) removeAllFoundIn: (unUsuario respuestasAMisPreguntas)).
+	^misInteracciones sumNumbers: [:interaccion | interaccion puntos + interaccion puntajeLikes ]
 ]
 
 { #category : #'adding/removing' }
@@ -75,7 +75,7 @@ CuOOra >> preguntasRelevantesDe: unUsuario [
 { #category : #queries }
 CuOOra >> respuestasDe: unUsuario [
 
-	^ (preguntas collect: [ :pregunta | pregunta respuestasDe: unUsuario ])
+	^ (preguntas flatCollect: [ :pregunta | pregunta respuestasDe: unUsuario ])
 ]
 
 { #category : #testing }
