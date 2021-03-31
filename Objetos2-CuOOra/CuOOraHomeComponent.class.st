@@ -44,10 +44,6 @@ CuOOraHomeComponent >> initialize [
 	
 ]
 
-{ #category : #'as yet unclassified' }
-CuOOraHomeComponent >> nuevaPregunta [
-]
-
 { #category : #queries }
 CuOOraHomeComponent >> preguntasVisibles [
 	| preguntas |
