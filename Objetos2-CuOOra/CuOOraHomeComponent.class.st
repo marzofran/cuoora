@@ -55,26 +55,49 @@ CuOOraHomeComponent >> preguntasVisibles [
 { #category : #rendering }
 CuOOraHomeComponent >> renderContentOn: aCanvas [
 	aCanvas heading: 'CuOOra'.
-	aCanvas paragraph: [ 
-		aCanvas strong: usuario nombre.
-		aCanvas space.
-		aCanvas anchor callback: [ self answer ]; with: 'Log out'.
-	].
+	aCanvas
+		paragraph: [ aCanvas strong: usuario nombre.
+			aCanvas space.
+			aCanvas anchor
+				callback: [ self answer ];
+				with: 'Log out' ].
 	aCanvas horizontalRule.
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
+	aCanvas unorderedList
+		with: [ self preguntasVisibles
+				do: [ :each | 
+					aCanvas
+						listItem: [ aCanvas heading
+								level: 3;
+								with: [ aCanvas emphasis: each titulo ].
+							aCanvas
+								paragraph: [ aCanvas text: 'Realizada por '.
+									aCanvas strong: (cuoora usuarioQueHizoPregunta: each) nombre.
+									aCanvas
+										text: ' | ' , each respuestas size asString , ' respuestas' ].
+							aCanvas anchor
+								callback: [ each agregarLikeDe: usuario ];
+								with: each likes size asString , ' likes'.
+							aCanvas text: ' | '.
+							aCanvas anchor
+								callback: [ each agregarDislikeDe: usuario ];
+								with: each dislikes size asString , ' dislikes'.
+							aCanvas horizontalRule ] ] ].
 	aCanvas
-		unorderedList with: [ (self preguntasVisibles) do: [ :each | aCanvas listItem: [
-				aCanvas heading level: 3; with: [ aCanvas emphasis: each titulo ]. 
-				aCanvas paragraph: [ 
-					aCanvas text: 'Realizada por '.
-					aCanvas strong: (cuoora usuarioQueHizoPregunta: each) nombre.
-					aCanvas text: ' | ' , each respuestas size asString , ' respuestas'.
-				].
-				aCanvas anchor callback:[ each agregarLikeDe: usuario ]; with: each likes size asString , ' likes'.
-				aCanvas text: ' | ' .
-				aCanvas anchor callback:[ each agregarDislikeDe: usuario ]; with: each dislikes size asString , ' dislikes'.
-				aCanvas horizontalRule.
-		]]]
+		form: [ aCanvas header: 'Crear una pregunta nueva'.
+			aCanvas
+				paragraph: [ aCanvas label: 'Titulo: '.
+					aCanvas textInput on: #titulo of: self ] ].
+	aCanvas
+		paragraph: [ aCanvas label: 'Descripcion: '.
+			aCanvas textInput on: #descripcion of: self ].
+	aCanvas button
+		callback: [ cuoora
+				agregarPreguntaConTitulo: titulo
+				conDescripcion: descripcion
+				conTopicos: topicos
+				deUsuario: usuario ];
+		with: 'Crear!'
 ]
 
 { #category : #accessing }
