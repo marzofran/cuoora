@@ -133,8 +133,9 @@ CuOOraHomeComponent >> updateRoot: anHtmlRoot [
 		}
 		
 		body { 
-				background-color: #9cc599;
-			}
+			font-family: sans-serif;
+			background-color: #9cc599;
+		}
 
 		h1 { 
 			font-weight: 500;
