@@ -54,20 +54,24 @@ CuOOraHomeComponent >> preguntasVisibles [
 
 { #category : #rendering }
 CuOOraHomeComponent >> renderContentOn: aCanvas [
-	aCanvas heading: 'CuOOra'.
-	aCanvas
-		paragraph: [ aCanvas strong: usuario nombre.
-			aCanvas space.
-			aCanvas anchor
-				callback: [ self answer ];
-				with: 'Log out' ].
+	aCanvas div
+		with:
+			[ aCanvas heading: 'CuOOra'.
+			aCanvas paragraph
+				class: 'floating-right';
+				with: [ aCanvas strong: usuario nombre.
+					aCanvas space.
+					aCanvas anchor
+						callback: [ self answer ];
+						with: 'Log out' ] ] .
 	aCanvas horizontalRule.
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
 	aCanvas unorderedList
 		with: [ self preguntasVisibles
 				do: [ :each | 
-					aCanvas
-						listItem: [ aCanvas heading
+					aCanvas listItem
+						class: 'pregunta';
+						with: [ aCanvas heading
 								level: 3;
 								with: [ aCanvas emphasis: each titulo ].
 							aCanvas
@@ -81,23 +85,29 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 							aCanvas text: ' | '.
 							aCanvas anchor
 								callback: [ each agregarDislikeDe: usuario ];
-								with: each dislikes size asString , ' dislikes'.
-							aCanvas horizontalRule ] ] ].
-	aCanvas
-		form: [ aCanvas header: 'Crear una pregunta nueva'.
+								with: each dislikes size asString , ' dislikes' ] ] ].
+	aCanvas horizontalRule.
+	aCanvas form
+		class: 'question-form';
+		with: [ aCanvas heading
+				level: 3;
+				with: 'Crear una pregunta nueva'.
 			aCanvas
 				paragraph: [ aCanvas label: 'Titulo: '.
-					aCanvas textInput on: #titulo of: self ] .
-	aCanvas
-		paragraph: [ aCanvas label: 'Descripcion: '.
-			aCanvas textInput on: #descripcion of: self ].
-	aCanvas button
-		callback: [ cuoora
-				agregarPreguntaConTitulo: titulo
-				conDescripcion: descripcion
-				conTopicos: topicos
-				deUsuario: usuario ];
-		with: 'Crear!']
+					aCanvas textInput on: #titulo of: self ].
+			aCanvas
+				paragraph: [ aCanvas label: 'Descripcion: '.
+					aCanvas textInput
+						on: #descripcion of: self;
+						class: 'descripcion-input' ].
+			aCanvas submitButton
+				class: 'submit-button';
+				callback: [ cuoora
+						agregarPreguntaConTitulo: titulo
+						conDescripcion: descripcion
+						conTopicos: topicos
+						deUsuario: usuario ];
+				with: 'Crear!' ]
 ]
 
 { #category : #accessing }
@@ -119,25 +129,35 @@ CuOOraHomeComponent >> updateRoot: anHtmlRoot [
 			list-style-type: none
 		}
 		
+		.floating-right { 
+			text-align: right;
+		}
+		
 		body { 
 				background-color: #9cc599;
 			}
-
-		hr { 
-			height: 5px;
-		}
 
 		h1 { 
 			font-weight: 500;
 			font-size: 3rem;
 		}
 
-		.login-form { 
+		.question-form { 
 			text-align: center;
 			background-color: #e8f1e7;
 			margin: auto;
 			width: 30%;
 			background: white;
+			border-radius: 10px;
+			padding: 10px;
+			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+		}
+			
+		.pregunta { 
+			background-color: #e8f1e7;
+			background: white;
+			margin-horizontal: auto;
+			margin-top: 10px;
 			border-radius: 10px;
 			padding: 10px;
 			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
@@ -154,5 +174,10 @@ CuOOraHomeComponent >> updateRoot: anHtmlRoot [
 			padding:10px;
 			border-radius:10px;
 		}
+		
+		.descripcion-input { 
+			height: 200px;
+		}
+		
 		'.
 ]
