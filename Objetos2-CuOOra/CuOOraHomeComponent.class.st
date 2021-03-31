@@ -3,14 +3,29 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'cuoora',
-		'usuario'
+		'usuario',
+		'topicos',
+		'titulo',
+		'descripcion'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
 
+{ #category : #accessing }
+CuOOraHomeComponent >> descripcion [ 
+
+^descripcion
+]
+
+{ #category : #accessing }
+CuOOraHomeComponent >> descripcion: aString [
+
+	descripcion := aString.
+]
+
 { #category : #initialization }
 CuOOraHomeComponent >> initialize [
-	|topico1 topico2 topicos otrosTopicos usuario2|
+	|topico1 topico2 otrosTopicos usuario2|
 	super initialize.
 	cuoora := CuOOra new.
 	usuario := cuoora crearUsuarioConNombre: 'Levi' conContrasena: 'escobitas'.
@@ -27,6 +42,10 @@ CuOOraHomeComponent >> initialize [
 	usuario agregarTopicoFavorito: topico2.
 	 
 	
+]
+
+{ #category : #'as yet unclassified' }
+CuOOraHomeComponent >> nuevaPregunta [
 ]
 
 { #category : #queries }
@@ -60,4 +79,15 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 				aCanvas anchor callback:[ each agregarDislikeDe: usuario ]; with: each dislikes size asString , ' dislikes'.
 				aCanvas horizontalRule.
 		]]]
+]
+
+{ #category : #accessing }
+CuOOraHomeComponent >> titulo [ 
+	^ titulo
+]
+
+{ #category : #accessing }
+CuOOraHomeComponent >> titulo: aString [
+
+	titulo:= aString
 ]
