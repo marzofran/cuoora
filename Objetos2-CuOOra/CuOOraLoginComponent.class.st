@@ -11,13 +11,9 @@ CuOOraLoginComponent >> renderContentOn: aCanvas [
 	aCanvas form
 		class: 'login-form';
 		with: [ aCanvas
-				paragraph: [ aCanvas label: 'Usuario: '.
-					aCanvas space.
-					aCanvas textInput ].
+				paragraph: [ aCanvas textInput placeholder: 'Usuario'].
 			aCanvas
-				paragraph: [ aCanvas label: 'Contrasena: '.
-					aCanvas space.
-					aCanvas textInput ].
+				paragraph: [ aCanvas textInput placeholder: 'Contrasena'].
 			aCanvas submitButton
 				callback: [ self call: CuOOraHomeComponent new ];
 				with: 'Iniciar Sesion' ]
@@ -32,9 +28,8 @@ CuOOraLoginComponent >> updateRoot: anHtmlRoot [
 			}
 			
 			input { 
-				width:200px;
-  				padding:20px;
-				box-sizing: border-box;
+				padding:10px;
+  				border-radius:10px;
 			}
 		'.
 ]
