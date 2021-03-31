@@ -58,7 +58,7 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 	aCanvas paragraph: [ 
 		aCanvas strong: usuario nombre.
 		aCanvas space.
-		aCanvas anchor callback: [ ]; with: 'Log out'.
+		aCanvas anchor callback: [ self answer ]; with: 'Log out'.
 	].
 	aCanvas horizontalRule.
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
@@ -74,19 +74,7 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 				aCanvas text: ' | ' .
 				aCanvas anchor callback:[ each agregarDislikeDe: usuario ]; with: each dislikes size asString , ' dislikes'.
 				aCanvas horizontalRule.
-		]]].
-	
-	aCanvas form:[
-		aCanvas header: 'Crear una pregunta nueva'.
-		aCanvas paragraph: [ 			
-			aCanvas label: 'Titulo: '.
-			aCanvas textInput on: #titulo of: self ].
-		].
-	aCanvas paragraph: [ 			
-			aCanvas label: 'Descripcion: '.
-			aCanvas textInput on: #descripcion of: self ].
-		aCanvas button callback: [ cuoora agregarPreguntaConTitulo: titulo conDescripcion: descripcion  conTopicos: topicos deUsuario: usuario ];
-		with: 'Crear!'
+		]]]
 ]
 
 { #category : #accessing }

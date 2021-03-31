@@ -7,8 +7,10 @@ Class {
 { #category : #rendering }
 CuOOraLoginComponent >> renderContentOn: aCanvas [
 	aCanvas heading: 'CuOOra'.
-	aCanvas
-		form: [ aCanvas
+	aCanvas horizontalRule.
+	aCanvas form
+		class: 'login-form';
+		with: [ aCanvas
 				paragraph: [ aCanvas label: 'Usuario: '.
 					aCanvas space.
 					aCanvas textInput ].
@@ -25,6 +27,12 @@ CuOOraLoginComponent >> renderContentOn: aCanvas [
 CuOOraLoginComponent >> updateRoot: anHtmlRoot [
     super updateRoot: anHtmlRoot.
     anHtmlRoot addStyle: '
-		
+			.login-form { 
+				margin: 150px;
+			}
+			
+			.login-form input { 
+				radius: 10px;
+			}
 		'.
 ]
