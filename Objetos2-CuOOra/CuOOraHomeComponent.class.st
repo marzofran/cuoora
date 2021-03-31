@@ -55,7 +55,9 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 					aCanvas strong: (cuoora usuarioQueHizoPregunta: each) nombre.
 					aCanvas text: ' | ' , each respuestas size asString , ' respuestas'.
 				].
-				aCanvas paragraph: each likes size asString , ' likes | ' , each dislikes size asString , ' dislikes'.
+				aCanvas anchor callback:[ each agregarLikeDe: usuario ]; with: each likes size asString , ' likes'.
+				aCanvas text: ' | ' .
+				aCanvas anchor callback:[ each agregarDislikeDe: usuario ]; with: each dislikes size asString , ' dislikes'.
 				aCanvas horizontalRule.
 		]]]
 ]
