@@ -78,6 +78,11 @@ CuOOra >> respuestasDe: unUsuario [
 	^ (preguntas flatCollect: [ :pregunta | pregunta respuestasDe: unUsuario ])
 ]
 
+{ #category : #queries }
+CuOOra >> usuarioQueHizoPregunta: unaPregunta [
+	^ usuarios detect: [ :unUsuario | unUsuario yoHice: unaPregunta ]
+]
+
 { #category : #testing }
 CuOOra >> usuarios [
 

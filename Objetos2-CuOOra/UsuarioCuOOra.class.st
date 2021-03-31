@@ -80,3 +80,8 @@ UsuarioCuOOra >> topicosFav [
 
 	^ topicosFav 
 ]
+
+{ #category : #queries }
+UsuarioCuOOra >> yoHice: unaPregunta [
+	^ preguntas anySatisfy: [ :pregunta | pregunta == unaPregunta ]
+]

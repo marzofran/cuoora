@@ -6,4 +6,5 @@ Class {
 
 { #category : #rendering }
 CuOOraLoginComponent >> renderContentOn: aCanvas [
+	aCanvas heading: 'CuOOra'
 ]

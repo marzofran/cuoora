@@ -51,6 +51,11 @@ Participacion >> dislikes [
 	^ dislikes
 ]
 
+{ #category : #accessing }
+Participacion >> fechaYHora [
+	^ fechaYHora
+]
+
 { #category : #initialization }
 Participacion >> initialize [ 
 	likes := OrderedCollection new.
