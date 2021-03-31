@@ -40,7 +40,7 @@ CuOOraHomeComponent >> preguntasVisibles [
 { #category : #rendering }
 CuOOraHomeComponent >> renderContentOn: aCanvas [
 	aCanvas heading: 'CuOOra'.
-	aCanvas paragraph with: [ 
+	aCanvas paragraph: [ 
 		aCanvas strong: usuario nombre.
 		aCanvas space.
 		aCanvas anchor callback: [ ]; with: 'Log out'.
@@ -48,14 +48,14 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 	aCanvas horizontalRule.
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
 	aCanvas
-		unorderedList: [ (self preguntasVisibles) do: [ :each | aCanvas listItem: [
-				aCanvas heading with: [ aCanvas emphasis: each titulo ]. 
-				aCanvas paragraph with: [ 
+		unorderedList with: [ (self preguntasVisibles) do: [ :each | aCanvas listItem: [
+				aCanvas heading level: 3; with: [ aCanvas emphasis: each titulo ]. 
+				aCanvas paragraph: [ 
 					aCanvas text: 'Realizada por '.
 					aCanvas strong: (cuoora usuarioQueHizoPregunta: each) nombre.
-					aCanvas text: ' | ', each respuestas size, ' respuestas'.
+					aCanvas text: ' l ' , each respuestas size asString , ' respuestas'.
 				].
-				aCanvas paragraph: each likes size, ' likes | ', each dislikes size, ' dislikes'.
+				aCanvas paragraph: each likes size asString , ' likes l ' , each dislikes size asString , ' dislikes'.
 				aCanvas horizontalRule.
 		]]]
 ]

@@ -57,3 +57,8 @@ Pregunta >> respuestas [
 Pregunta >> respuestasDe: unUsuario [
 	^ (respuestas select: [ :unaRespuesta | unaRespuesta esDeUsuario: unUsuario])
 ]
+
+{ #category : #accessing }
+Pregunta >> titulo [
+	^ titulo
+]
