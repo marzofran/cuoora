@@ -20,3 +20,11 @@ CuOOraLoginComponent >> renderContentOn: aCanvas [
 				callback: [ self call: CuOOraHomeComponent new ];
 				with: 'Iniciar Sesion' ]
 ]
+
+{ #category : #updating }
+CuOOraLoginComponent >> updateRoot: anHtmlRoot [
+    super updateRoot: anHtmlRoot.
+    anHtmlRoot addStyle: '
+		
+		'.
+]

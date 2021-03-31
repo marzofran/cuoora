@@ -18,15 +18,19 @@ Participacion class >> conDescripcion: unaDescripcion [
 { #category : #'adding/removing' }
 Participacion >> agregarDislikeDe: unUsuario [
 	self borrarLikeDe: unUsuario.
-	dislikes detect: [ :unDislike | unDislike esDeUsuario: unUsuario]
-	ifNone: [dislikes add: (Interaccion conUsuario: unUsuario)].
+	dislikes
+		detect: [ :unDislike | unDislike esDeUsuario: unUsuario ]
+		ifFound: [ self borrarDislikeDe: unUsuario ]
+		ifNone: [ dislikes add: (Interaccion conUsuario: unUsuario) ]
 ]
 
 { #category : #'adding/removing' }
 Participacion >> agregarLikeDe: unUsuario [
 	self borrarDislikeDe: unUsuario.
-	likes detect: [ :unLike | unLike esDeUsuario: unUsuario]
-	ifNone: [likes add: (Interaccion conUsuario: unUsuario)].
+	likes
+		detect: [ :unLike | unLike esDeUsuario: unUsuario ]
+		ifFound: [ self borrarLikeDe: unUsuario ]
+		ifNone: [ likes add: (Interaccion conUsuario: unUsuario) ]
 ]
 
 { #category : #'adding/removing' }
