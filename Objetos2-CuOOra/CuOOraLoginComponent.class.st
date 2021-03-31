@@ -31,8 +31,10 @@ CuOOraLoginComponent >> updateRoot: anHtmlRoot [
 				margin: 150px;
 			}
 			
-			.login-form input { 
-				radius: 10px;
+			input { 
+				width:200px;
+  				padding:20px;
+				box-sizing: border-box;
 			}
 		'.
 ]
