@@ -87,7 +87,7 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 		form: [ aCanvas header: 'Crear una pregunta nueva'.
 			aCanvas
 				paragraph: [ aCanvas label: 'Titulo: '.
-					aCanvas textInput on: #titulo of: self ] ].
+					aCanvas textInput on: #titulo of: self ] .
 	aCanvas
 		paragraph: [ aCanvas label: 'Descripcion: '.
 			aCanvas textInput on: #descripcion of: self ].
@@ -97,7 +97,7 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 				conDescripcion: descripcion
 				conTopicos: topicos
 				deUsuario: usuario ];
-		with: 'Crear!'
+		with: 'Crear!']
 ]
 
 { #category : #accessing }
