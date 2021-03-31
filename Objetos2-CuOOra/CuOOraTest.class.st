@@ -199,5 +199,6 @@ CuOOraTest >> testRespuestasDe [
 { #category : #tests }
 CuOOraTest >> testUsuarioQueHizoPregunta [
 
-	
+	"falta desarrollar"
+	self assert: 1 equals: 2
 ]
