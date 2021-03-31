@@ -6,8 +6,7 @@ Class {
 
 { #category : #rendering }
 CuOOraLoginComponent >> renderContentOn: aCanvas [
-	aCanvas heading: 'CuOOra'.
-	aCanvas horizontalRule.
+	aCanvas heading level: 1; with: 'CuOOra'.
 	aCanvas form
 		class: 'login-form';
 		with: [ 
@@ -27,15 +26,21 @@ CuOOraLoginComponent >> updateRoot: anHtmlRoot [
     super updateRoot: anHtmlRoot.
     anHtmlRoot addStyle: '
 			body { 
-				background-color: #69FFCA;
+				background-color: #9cc599;
 			}
 
 			hr { 
 				height: 5px;
 			}
 
+			h1 { 
+				font-weight: 500;
+				font-size: 3rem;
+			}
+
 			.login-form { 
 				text-align: center;
+				background-color: #e8f1e7;
 				margin: auto;
 				width: 30%;
 				background: white;
@@ -46,7 +51,7 @@ CuOOraLoginComponent >> updateRoot: anHtmlRoot [
 			
 			.submit-button { 
 				color: white;
-				background-color: #7BB964;
+				background-color: #64a460;
 			}
 			
 			input { 
