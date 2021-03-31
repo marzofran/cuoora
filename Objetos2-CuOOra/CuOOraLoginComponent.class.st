@@ -36,10 +36,12 @@ CuOOraLoginComponent >> updateRoot: anHtmlRoot [
 			h1 { 
 				font-weight: 500;
 				font-size: 3rem;
+				font-family: sans-serif;
 			}
 
 			.login-form { 
 				text-align: center;
+				font-family: sans-serif;
 				background-color: #e8f1e7;
 				margin: auto;
 				width: 30%;
