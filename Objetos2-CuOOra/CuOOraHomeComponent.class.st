@@ -62,7 +62,7 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 	aCanvas paragraph: [ 
 		aCanvas strong: usuario nombre.
 		aCanvas space.
-		aCanvas anchor callback: [ ]; with: 'Log out'.
+		aCanvas anchor callback: [ self answer ]; with: 'Log out'.
 	].
 	aCanvas horizontalRule.
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
