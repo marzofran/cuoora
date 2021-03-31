@@ -18,7 +18,7 @@ CuOOraLoginComponent >> renderContentOn: aCanvas [
 			aCanvas submitButton
 				class: 'submit-button';
 				callback: [ self call: CuOOraHomeComponent new ];
-				with: 'INICIAR SESION' ]
+				with: 'Iniciar Sesion' ]
 ]
 
 { #category : #updating }

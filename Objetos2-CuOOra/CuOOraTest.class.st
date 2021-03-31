@@ -195,3 +195,9 @@ CuOOraTest >> testRespuestasDe [
 	self assert: (cuOOra respuestasDe: usuario) equals: respuestas.
 	self assert: (cuOOra respuestasDe: otroUsuario) isEmpty
 ]
+
+{ #category : #tests }
+CuOOraTest >> testUsuarioQueHizoPregunta [
+
+	
+]
