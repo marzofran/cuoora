@@ -64,7 +64,6 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 					aCanvas anchor
 						callback: [ self answer ];
 						with: 'Log out' ] ] .
-	aCanvas horizontalRule.
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
 	aCanvas unorderedList
 		with: [ self preguntasVisibles
