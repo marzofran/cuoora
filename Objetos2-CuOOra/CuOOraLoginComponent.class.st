@@ -8,3 +8,11 @@ Class {
 CuOOraLoginComponent >> renderContentOn: aCanvas [
 	aCanvas heading: 'CuOOra'
 ]
+
+{ #category : #updating }
+CuOOraLoginComponent >> updateRoot: anHtmlRoot [
+    super updateRoot: anHtmlRoot.
+    anHtmlRoot addStyle: '
+		
+		'.
+]

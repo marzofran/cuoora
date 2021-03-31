@@ -61,3 +61,11 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 				aCanvas horizontalRule.
 		]]]
 ]
+
+{ #category : #updating }
+CuOOraHomeComponent >> updateRoot: anHtmlRoot [
+    super updateRoot: anHtmlRoot.
+    anHtmlRoot addStyle: '
+		ul {list-style-type: none}
+		'.
+]
