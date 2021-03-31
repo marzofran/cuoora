@@ -115,6 +115,8 @@ CuOOraHomeComponent >> titulo: aString [
 CuOOraHomeComponent >> updateRoot: anHtmlRoot [
     super updateRoot: anHtmlRoot.
     anHtmlRoot addStyle: '
-		ul {list-style-type: none}
+		ul {
+			list-style-type: none
+		}
 		'.
 ]
