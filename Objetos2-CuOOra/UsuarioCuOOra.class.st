@@ -58,6 +58,11 @@ UsuarioCuOOra >> initializeConNombre: unNombre conContrasena: unaContrasena [
 ]
 
 { #category : #accessing }
+UsuarioCuOOra >> nombre [
+	^ nombre
+]
+
+{ #category : #accessing }
 UsuarioCuOOra >> preguntas [
 
 	^ preguntas
