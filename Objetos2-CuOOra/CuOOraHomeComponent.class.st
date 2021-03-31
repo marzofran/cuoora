@@ -10,11 +10,22 @@ Class {
 
 { #category : #initialization }
 CuOOraHomeComponent >> initialize [
+	|topico1 topico2 topicos otrosTopicos usuario2|
 	super initialize.
 	cuoora := CuOOra new.
 	usuario := cuoora crearUsuarioConNombre: 'Levi' conContrasena: 'escobitas'.
-	cuoora crearUsuarioConNombre: 'Link' conContrasena: 'epona'.
+	usuario2 := cuoora crearUsuarioConNombre: 'Link' conContrasena: 'epona'.
 	cuoora crearUsuarioConNombre: 'Jotaro' conContrasena: 'oraora'.
+	topico1 := cuoora agregarTopicoConNombre: 'Smalltalk' conDescripcion: 'POO Supremacy'.
+	topico2 := cuoora agregarTopicoConNombre: 'Rinfo' conDescripcion: 'Hell'.
+	topicos := OrderedCollection with: topico1.
+	otrosTopicos := OrderedCollection with: topico2.
+	cuoora agregarPreguntaConTitulo: 'Seaside 3.0' conDescripcion: 'Como lo instalo??' conTopicos: topicos deUsuario: usuario.
+	cuoora agregarPreguntaConTitulo: 'Mis robotos no paran de explotar' conDescripcion: 'Por favor ayuda con este codigo [inserte codigo imaginario aqui]' conTopicos: otrosTopicos deUsuario: usuario2.
+	
+	usuario agregarTopicoFavorito: topico1.
+	usuario agregarTopicoFavorito: topico2.
+	 
 	
 ]
 
