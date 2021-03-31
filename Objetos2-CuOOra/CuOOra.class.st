@@ -54,7 +54,7 @@ CuOOra >> initialize [
 	topicos := OrderedCollection new.
 ]
 
-{ #category : #testing }
+{ #category : #accessing }
 CuOOra >> preguntas [
 	^ preguntas
 ]
@@ -83,7 +83,7 @@ CuOOra >> usuarioQueHizoPregunta: unaPregunta [
 	^ usuarios detect: [ :unUsuario | unUsuario yoHice: unaPregunta ]
 ]
 
-{ #category : #testing }
+{ #category : #accessing }
 CuOOra >> usuarios [
 
 	^ usuarios

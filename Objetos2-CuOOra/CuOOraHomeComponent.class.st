@@ -70,7 +70,9 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 				do: [ :each | 
 					aCanvas listItem
 						class: 'pregunta';
-						with: [ aCanvas heading
+						with: [ 
+							"self renderPregunta: each en: aCanvas"
+							aCanvas heading
 								level: 3;
 								with: [ aCanvas emphasis: each titulo ].
 							aCanvas
@@ -78,6 +80,7 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 									aCanvas strong: (cuoora usuarioQueHizoPregunta: each) nombre.
 									aCanvas
 										text: ' | ' , each respuestas size asString , ' respuestas' ].
+							"self renderLikesDislikes: aCanvas.   <--- algo asi"
 							aCanvas anchor
 								callback: [ each agregarLikeDe: usuario ];
 								with: each likes size asString , ' likes'.
