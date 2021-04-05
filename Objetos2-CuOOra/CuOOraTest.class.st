@@ -13,6 +13,27 @@ CuOOraTest >> setUp [
 
 ]
 
+{ #category : #test }
+CuOOraTest >> testAgregarPreguntaConTituloConDescripcionConTopicosDeUsuario [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
+CuOOraTest >> testAgregarTopicoConNombreConDescripcion [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
+CuOOraTest >> testBorrarPregunta [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
 { #category : #tests }
 CuOOraTest >> testCalcularPuntaje [
 	| usuario otroUsuario topicos p p1 topico |
@@ -58,16 +79,17 @@ CuOOraTest >> testCalcularPuntaje [
 	self assert: (cuOOra calcularPuntaje: otroUsuario) equals: 70
 ]
 
-{ #category : #tests }
-CuOOraTest >> testCrearUsuario [
+{ #category : #test }
+CuOOraTest >> testCrearUsuarioConNombreConContrasena [
 	cuOOra crearUsuarioConNombre: 'pepe' conContrasena: '2'.
 	self denyEmpty: cuOOra usuarios.
-	
-	 
+	cuOOra crearUsuarioConNombre: 'pepe' conContrasena: '2'.
+	self assert: cuOOra usuarios size equals: 1
 ]
 
-{ #category : #tests }
-CuOOraTest >> testPreguntasDeTopico [
+{ #category : #test }
+CuOOraTest >> testPreguntasDe [
+
 	| topico1 topico2 topicos otrosTopicos usuario |
 	topico1 := cuOOra
 		agregarTopicoConNombre: 'Smalltalk'
@@ -199,6 +221,6 @@ CuOOraTest >> testRespuestasDe [
 { #category : #tests }
 CuOOraTest >> testUsuarioQueHizoPregunta [
 
-	"falta desarrollar"
-	self assert: 1 equals: 2
+	self flag: #toImplement.
+	self assert: false.
 ]

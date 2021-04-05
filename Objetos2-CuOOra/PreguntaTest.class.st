@@ -16,7 +16,7 @@ PreguntaTest >> setUp [
 ]
 
 { #category : #tests }
-PreguntaTest >> testAgregarRespuestaDe [
+PreguntaTest >> testAgregarRespuestaDeConDescripcion [
 	| usuario |
 	usuario := UsuarioCuOOra conNombre: 'Jorge Bell' conContrasena: 'ringring'.
 	pregunta agregarRespuestaDe: usuario conDescripcion: 'Si, funciona!'.
@@ -25,24 +25,18 @@ PreguntaTest >> testAgregarRespuestaDe [
 	self assert: (pregunta respuestas first descripcion = 'Si, funciona!').
 ]
 
-{ #category : #tests }
-PreguntaTest >> testLikeDislike [
-	| usuario |
-	usuario := UsuarioCuOOra conNombre: 'Jorge Bell' conContrasena: 'ringring'.
-	
-	pregunta agregarLikeDe: usuario.
-	self denyEmpty: pregunta likes.
-	
-	pregunta agregarDislikeDe: usuario.
-	self assertEmpty: pregunta likes.
-	self denyEmpty: pregunta dislikes.
-	
-	pregunta agregarLikeDe: usuario.
-	self assertEmpty: pregunta dislikes.
-	self denyEmpty: pregunta likes.
-	
-	pregunta borrarLikeDe: usuario.
-	self assertEmpty: pregunta likes
+{ #category : #test }
+PreguntaTest >> testBorrarRespuestas [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
+{ #category : #test }
+PreguntaTest >> testEsDeTopico [
+
+	self flag: #toImplement.
+	self assert: false
 ]
 
 { #category : #tests }
@@ -59,4 +53,11 @@ PreguntaTest >> testRespuestas [
 	
 	self assert: (pregunta respuestas first == r2).
 	self assert: (pregunta respuestas last == r1).
+]
+
+{ #category : #test }
+PreguntaTest >> testRespuestasDe [
+
+	self flag: #toImplement.
+	self assert: false
 ]

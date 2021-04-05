@@ -6,8 +6,21 @@ Class {
 		'preguntas',
 		'topicos'
 	],
+	#classInstVars : [
+		'soleInstance'
+	],
 	#category : #'Objetos2-CuOOra-Model'
 }
+
+{ #category : #'instance creation' }
+CuOOra class >> clearSoleInstance [ 
+	soleInstance := nil
+]
+
+{ #category : #accessing }
+CuOOra class >> soleInstance [
+	^ soleInstance ifNil: [ soleInstance := self new ]
+]
 
 { #category : #'adding/removing' }
 CuOOra >> agregarPreguntaConTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos deUsuario: unUsuario [
@@ -42,9 +55,14 @@ CuOOra >> calcularPuntaje: unUsuario [
 ]
 
 { #category : #'adding/removing' }
-CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [ 
-
-	^usuarios add: (UsuarioCuOOra conNombre: unNombre conContrasena: unaContrasena).
+CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [
+	| nuevoUsuario |
+	nuevoUsuario := UsuarioCuOOra
+		conNombre: unNombre
+		conContrasena: unaContrasena.
+	usuarios
+		detect: [ :each | each nombre == unNombre ]
+		ifNone: [ ^ usuarios add: nuevoUsuario ]
 ]
 
 { #category : #initialization }

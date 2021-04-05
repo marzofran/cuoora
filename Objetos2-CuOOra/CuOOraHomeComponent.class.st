@@ -24,22 +24,42 @@ CuOOraHomeComponent >> descripcion: aString [
 ]
 
 { #category : #initialization }
-CuOOraHomeComponent >> initialize [
+CuOOraHomeComponent >> hardcodeModel [
 	|topico1 topico2 otrosTopicos usuario2|
-	super initialize.
-	cuoora := CuOOra new.
-	usuario := cuoora crearUsuarioConNombre: 'Levi' conContrasena: 'escobitas'.
-	usuario2 := cuoora crearUsuarioConNombre: 'Link' conContrasena: 'epona'.
+	usuario := cuoora
+		crearUsuarioConNombre: 'Levi'
+		conContrasena: 'escobitas'.
+	usuario2 := cuoora
+		crearUsuarioConNombre: 'Link'
+		conContrasena: 'epona'.
 	cuoora crearUsuarioConNombre: 'Jotaro' conContrasena: 'oraora'.
-	topico1 := cuoora agregarTopicoConNombre: 'Smalltalk' conDescripcion: 'POO Supremacy'.
-	topico2 := cuoora agregarTopicoConNombre: 'Rinfo' conDescripcion: 'Hell'.
+	topico1 := cuoora
+		agregarTopicoConNombre: 'Smalltalk'
+		conDescripcion: 'POO Supremacy'.
+	topico2 := cuoora
+		agregarTopicoConNombre: 'Rinfo'
+		conDescripcion: 'Hell'.
 	topicos := OrderedCollection with: topico1.
 	otrosTopicos := OrderedCollection with: topico2.
-	cuoora agregarPreguntaConTitulo: 'Seaside 3.0' conDescripcion: 'Como lo instalo??' conTopicos: topicos deUsuario: usuario.
-	cuoora agregarPreguntaConTitulo: 'Mis robotos no paran de explotar' conDescripcion: 'Por favor ayuda con este codigo [inserte codigo imaginario aqui]' conTopicos: otrosTopicos deUsuario: usuario2.
-	
+	cuoora
+		agregarPreguntaConTitulo: 'Seaside 3.0'
+		conDescripcion: 'Como lo instalo??'
+		conTopicos: topicos
+		deUsuario: usuario.
+	cuoora
+		agregarPreguntaConTitulo: 'Mis robotos no paran de explotar'
+		conDescripcion: 'Por favor ayuda con este codigo [inserte codigo imaginario aqui]'
+		conTopicos: otrosTopicos
+		deUsuario: usuario2.
 	usuario agregarTopicoFavorito: topico1.
-	usuario agregarTopicoFavorito: topico2.
+	usuario agregarTopicoFavorito: topico2
+]
+
+{ #category : #initialization }
+CuOOraHomeComponent >> initialize [
+	super initialize.
+	cuoora := CuOOra soleInstance.
+	self hardcodeModel
 	 
 	
 ]
@@ -99,8 +119,8 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 					aCanvas textInput on: #titulo of: self ].
 			aCanvas
 				paragraph: [ aCanvas label: 'Descripcion: '.
-					aCanvas textInput
-						on: #descripcion of: self;
+					(aCanvas textArea
+						on: #descripcion of: self) columns: 80; rows: 5;
 						class: 'descripcion-input' ].
 			aCanvas submitButton
 				class: 'submit-button';
@@ -180,6 +200,9 @@ CuOOraHomeComponent >> updateRoot: anHtmlRoot [
 		
 		.descripcion-input { 
 			height: 200px;
+			width: 98%;
+			border-radius:10px;
+			padding: 10px;
 		}
 		
 		'.
