@@ -23,10 +23,10 @@ CuOOraTest >> testAgregarPreguntaConTituloConDescripcionConTopicosDeUsuario [
 { #category : #test }
 CuOOraTest >> testAgregarTopicoConNombreConDescripcion [
 
-	cuOOra agregarTopicoConNombre: 'Pharo' conDescripcion: 'Go Smalltalk!'.
+	cuOOra agregarTopicoConNombre: 'prueba' conDescripcion: 'Una descripcion'.
 	self denyEmpty: cuOOra topicos.
 	
-	cuOOra agregarTopicoConNombre: 'Pharo' conDescripcion: 'Go Charlacorta!'.
+	cuOOra agregarTopicoConNombre: 'prueba' conDescripcion: 'Otra descripcion'.
 	self assert: cuOOra topicos size equals: 1.
 	
 ]

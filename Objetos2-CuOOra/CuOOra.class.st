@@ -17,9 +17,14 @@ CuOOra class >> clearSoleInstance [
 	soleInstance := nil
 ]
 
+{ #category : #'instance creation' }
+CuOOra class >> notHardcoded [
+	^ self new.
+]
+
 { #category : #accessing }
 CuOOra class >> soleInstance [
-	^ soleInstance ifNil: [ soleInstance := self new ]
+	^ soleInstance ifNil: [ soleInstance := self new hardcodeModel ]
 ]
 
 { #category : #'adding/removing' }
@@ -72,25 +77,41 @@ CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [
 
 { #category : #initialization }
 CuOOra >> hardcodeModel [
-	|topico1 topico2 usuario1 usuario2 usuario3|
-	usuario1 := self 
-		crearUsuarioConNombre: 'Marzo'
-		conContrasena: 'abril'.
-	usuario2 := self
-		crearUsuarioConNombre: 'Camilo'
-		conContrasena: 'vocaloid'.
-	usuario3 := self crearUsuarioConNombre: 'Diego Torres' 
-		conContrasena: 'el cantante'.
+	| topico1 topico2 topico3 usuarioPedro usuarioDiego usuarioJuan pregunta1 pregunta2 |
+	usuarioPedro := self
+		crearUsuarioConNombre: 'pedro@cuoora.com'
+		conContrasena: 'pedro@cuoora.com'.
+	usuarioDiego := self
+		crearUsuarioConNombre: 'diego@cuoora.com'
+		conContrasena: 'diego@cuoora.com'.
+	usuarioJuan := self
+		crearUsuarioConNombre: 'juan@cuoora.com'
+		conContrasena: 'juan@cuoora.com'.
+	usuarioJuan seguir: usuarioDiego.
+	usuarioPedro seguir: usuarioJuan.
 	topico1 := self
-		agregarTopicoConNombre: 'Smalltalk'
+		agregarTopicoConNombre: 'OO1'
 		conDescripcion: 'POO Supremacy'.
 	topico2 := self
-		agregarTopicoConNombre: 'Pharo'
-		conDescripcion: 'Near the sea'.
-	usuario1 agregarTopicoFavorito: topico1.
-	usuario1 agregarTopicoFavorito: topico2.
-	usuario2 agregarTopicoFavorito: topico2.
-	usuario3 agregarTopicoFavorito: topico1.
+		agregarTopicoConNombre: 'Test de unidad'
+		conDescripcion: 'Testing those units'.
+	topico3 := self
+		agregarTopicoConNombre: 'Smalltalk'
+		conDescripcion: 'Lets have a chat'.
+	pregunta1 := self
+		agregarPreguntaConTitulo: '¿Para qué sirve el método SetUp?'
+		conDescripcion:
+			'No logro comprender la funcionalidad de este método, ¿alguien podría guiarme?'
+		conTopicos: (OrderedCollection with: topico1 with: topico2)
+		deUsuario: usuarioPedro.
+	pregunta2 := self
+		agregarPreguntaConTitulo: '¿Qué significa #messageNotUnderstood?'
+		conDescripcion:
+			'Obtengo este error cuando ejecuto mi programa, pero no se por qué. ¿Qué puede estar sucediendo?'
+		conTopicos: (OrderedCollection with: topico1 with: topico3)
+		deUsuario: usuarioDiego.
+	pregunta1 agregarRespuestaDe: usuarioDiego conDescripcion: 'Sirve para instanciar los objetos que son evaluados por el test en un único método y que se ejecute siempre antes de cada test.'.
+	pregunta2 agregarRespuestaDe: usuarioPedro conDescripcion: 'Significa que el objeto que recibió el mensaje no encontró ningún método para ejecutar en respuesta.'
 ]
 
 { #category : #initialization }
@@ -98,7 +119,6 @@ CuOOra >> initialize [
 	preguntas := OrderedCollection new.
 	usuarios := OrderedCollection new.
 	topicos := OrderedCollection new.
-	self hardcodeModel.
 ]
 
 { #category : #accessing }

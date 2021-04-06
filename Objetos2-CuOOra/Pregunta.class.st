@@ -62,3 +62,8 @@ Pregunta >> respuestasDe: unUsuario [
 Pregunta >> titulo [
 	^ titulo
 ]
+
+{ #category : #accessing }
+Pregunta >> topicos [
+	^ topicos
+]

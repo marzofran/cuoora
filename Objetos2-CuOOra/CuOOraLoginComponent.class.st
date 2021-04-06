@@ -66,13 +66,16 @@ CuOOraLoginComponent >> renderContentOn: aCanvas [
 			aCanvas submitButton
 				class: 'submit-button';
 				callback: [ self iniciarSesion ];
-				with: 'Iniciar Sesion' ]
+				with: 'Iniciar Sesion' ].
+	aCanvas paragraph: 'Sesiones: pedro@cuoora.com, diego@cuoora.com, juan@cuoora.com'
 ]
 
 { #category : #updating }
 CuOOraLoginComponent >> updateRoot: anHtmlRoot [
-    super updateRoot: anHtmlRoot.
-    anHtmlRoot addStyle: '
+	super updateRoot: anHtmlRoot.
+	anHtmlRoot
+		addStyle:
+			'
 			body { 
 				background-color: #9cc599;
 				font-family: sans-serif;
@@ -82,10 +85,11 @@ CuOOraLoginComponent >> updateRoot: anHtmlRoot [
 				height: 5px;
 			}
 
-			h1 { 
-				font-weight: 500;
-				font-size: 3rem;
-			}
+		h1 { 
+			font-weight: 500;
+			font-size: 3rem;
+			margin-left: 20px;
+		}
 
 			.login-form { 
 				text-align: center;
@@ -109,5 +113,5 @@ CuOOraLoginComponent >> updateRoot: anHtmlRoot [
 				padding:10px;
   				border-radius:10px;
 			}
-		'.
+		'
 ]

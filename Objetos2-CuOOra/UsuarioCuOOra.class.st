@@ -81,8 +81,9 @@ UsuarioCuOOra >> respuestasAMisPreguntas [
 
 { #category : #'adding/removing' }
 UsuarioCuOOra >> seguir: unUsuario [
-
-	following add: unUsuario 
+	following
+		detect: [ :unFollowed | unFollowed nombre = unUsuario nombre ]
+		ifNone: [ following add: unUsuario ]
 ]
 
 { #category : #accessing }
