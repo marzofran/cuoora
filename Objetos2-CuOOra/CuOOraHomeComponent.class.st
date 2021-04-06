@@ -83,6 +83,9 @@ CuOOraHomeComponent >> renderAgregarPreguntaOn: aCanvas [
 CuOOraHomeComponent >> renderContentOn: aCanvas [
 	self renderCuOOraHeaderOn: aCanvas.
 	aCanvas horizontalRule.
+	aCanvas paragraph class: 'floating-right';
+	class: 'nueva-pregunta-button';
+	with: 'Hacer una nueva pregunta'.
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
 	aCanvas unorderedList
 		with: [ self preguntasVisibles
@@ -177,6 +180,11 @@ CuOOraHomeComponent >> updateRoot: anHtmlRoot [
 		.floating-right { 
 			float: right;
 			margin-right: 20px;
+		}
+		
+		.nueva-pregunta-button { 
+			font-size: 1.5rem;
+			margin-top: 30px;
 		}
 		
 		body { 
