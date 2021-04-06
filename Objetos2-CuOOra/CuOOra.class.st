@@ -110,8 +110,14 @@ CuOOra >> hardcodeModel [
 			'Obtengo este error cuando ejecuto mi programa, pero no se por qué. ¿Qué puede estar sucediendo?'
 		conTopicos: (OrderedCollection with: topico1 with: topico3)
 		deUsuario: usuarioDiego.
-	pregunta1 agregarRespuestaDe: usuarioDiego conDescripcion: 'Sirve para instanciar los objetos que son evaluados por el test en un único método y que se ejecute siempre antes de cada test.'.
-	pregunta2 agregarRespuestaDe: usuarioPedro conDescripcion: 'Significa que el objeto que recibió el mensaje no encontró ningún método para ejecutar en respuesta.'
+	pregunta1
+		agregarRespuestaDe: usuarioDiego
+		conDescripcion:
+			'Sirve para instanciar los objetos que son evaluados por el test en un único método y que se ejecute siempre antes de cada test.'.
+	pregunta2
+		agregarRespuestaDe: usuarioPedro
+		conDescripcion:
+			'Significa que el objeto que recibió el mensaje no encontró ningún método para ejecutar en respuesta.'
 ]
 
 { #category : #initialization }

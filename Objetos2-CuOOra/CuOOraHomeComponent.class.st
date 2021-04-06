@@ -81,8 +81,7 @@ CuOOraHomeComponent >> renderAgregarPreguntaOn: aCanvas [
 
 { #category : #rendering }
 CuOOraHomeComponent >> renderContentOn: aCanvas [
-	self renderCuOOraHeaderOn: aCanvas.
-	aCanvas horizontalRule.
+	aCanvas render: CuOOraHeaderComponent new.
 	aCanvas paragraph class: 'floating-right';
 	class: 'nueva-pregunta-button';
 	with: 'Hacer una nueva pregunta'.
@@ -104,7 +103,8 @@ CuOOraHomeComponent >> renderCuOOraHeaderOn: aCanvas [
 					aCanvas anchor
 						callback: [ self answer ];
 						with: 'Log out' ].
-			aCanvas heading: 'CuOOra']
+			aCanvas heading: 'CuOOra'.
+			aCanvas horizontalRule.]
 ]
 
 { #category : #rendering }
@@ -119,6 +119,13 @@ CuOOraHomeComponent >> renderLikesDislikesDe: unaPregunta on: aCanvas [
 				callback: [ unaPregunta agregarDislikeDe: self session usuario ];
 				with: 'dislike' ].
 	aCanvas paragraph: (unaPregunta likes size asString) , ' likes | ' , (unaPregunta dislikes size asString) , ' dislikes'
+]
+
+{ #category : #rendering }
+CuOOraHomeComponent >> renderNombreDe: unUsuario on: aCanvas [
+	aCanvas anchor
+		callback: [ self call: CuOOraProfileComponent new ];
+		with: [ aCanvas strong: unUsuario nombre ]
 ]
 
 { #category : #rendering }
