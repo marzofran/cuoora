@@ -10,7 +10,7 @@ Class {
 
 { #category : #construction }
 Topico class >> conNombre: unNombre conDescripcion: unaDescripcion [ 
-	^ self new initializeConNombre: unNombre conDescripcion: unaDescripcion 
+	^ self new initializeConNombre: (unNombre asLowercase) conDescripcion: unaDescripcion 
 ]
 
 { #category : #accessing }

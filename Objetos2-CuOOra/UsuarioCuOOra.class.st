@@ -37,6 +37,11 @@ UsuarioCuOOra >> borrarPregunta: unaPregunta [
 ]
 
 { #category : #accessing }
+UsuarioCuOOra >> contrasena [
+	^ contrasena
+]
+
+{ #category : #accessing }
 UsuarioCuOOra >> following [
 	^ following
 ]

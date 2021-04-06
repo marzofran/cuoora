@@ -1,8 +1,56 @@
+"
+| application |
+application := WAAdmin register: CuOOraLoginComponent  asApplicationAt: 'cuoora'.
+application sessionClass: CuOOraSession.
+"
 Class {
 	#name : #CuOOraLoginComponent,
 	#superclass : #WAComponent,
+	#instVars : [
+		'nombre',
+		'contrasena'
+	],
 	#category : #'Objetos2-CuOOra-UI'
 }
+
+{ #category : #accessing }
+CuOOraLoginComponent >> contrasena [
+	^ contrasena
+]
+
+{ #category : #accessing }
+CuOOraLoginComponent >> contrasena: anObject [
+	contrasena := anObject
+]
+
+{ #category : #callbacks }
+CuOOraLoginComponent >> iniciarSesion [
+	(self model usuarioConNombre: nombre conContrasena: contrasena)
+		ifNotNil: [ :eseUsuario | self iniciarSesionCon: eseUsuario ].
+	nombre := nil.
+	contrasena := nil
+]
+
+{ #category : #private }
+CuOOraLoginComponent >> iniciarSesionCon: unUsuario [
+	self session usuario: unUsuario.
+	self call: CuOOraHomeComponent new
+]
+
+{ #category : #accessing }
+CuOOraLoginComponent >> model [
+	^ CuOOra soleInstance 
+]
+
+{ #category : #accessing }
+CuOOraLoginComponent >> nombre [
+	^ nombre
+]
+
+{ #category : #accessing }
+CuOOraLoginComponent >> nombre: anObject [
+	nombre := anObject
+]
 
 { #category : #rendering }
 CuOOraLoginComponent >> renderContentOn: aCanvas [
@@ -12,12 +60,12 @@ CuOOraLoginComponent >> renderContentOn: aCanvas [
 		with: [ 
 			aCanvas heading level: 3; with: 'Bienvenido a CuOOra!'.
 			aCanvas
-				paragraph: [ aCanvas textInput placeholder: 'Usuario'].
+				paragraph: [ aCanvas textInput placeholder: 'Usuario'; on: #nombre of: self].
 			aCanvas
-				paragraph: [ aCanvas textInput placeholder: 'Contrasena'].
+				paragraph: [ aCanvas passwordInput placeholder: 'Contrasena'; on: #contrasena of: self].
 			aCanvas submitButton
 				class: 'submit-button';
-				callback: [ self call: CuOOraHomeComponent new ];
+				callback: [ self iniciarSesion ];
 				with: 'Iniciar Sesion' ]
 ]
 

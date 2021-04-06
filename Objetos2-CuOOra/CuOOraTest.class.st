@@ -23,8 +23,12 @@ CuOOraTest >> testAgregarPreguntaConTituloConDescripcionConTopicosDeUsuario [
 { #category : #test }
 CuOOraTest >> testAgregarTopicoConNombreConDescripcion [
 
-	self flag: #toImplement.
-	self assert: false
+	cuOOra agregarTopicoConNombre: 'Pharo' conDescripcion: 'Go Smalltalk!'.
+	self denyEmpty: cuOOra topicos.
+	
+	cuOOra agregarTopicoConNombre: 'Pharo' conDescripcion: 'Go Charlacorta!'.
+	self assert: cuOOra topicos size equals: 1.
+	
 ]
 
 { #category : #test }
@@ -218,9 +222,19 @@ CuOOraTest >> testRespuestasDe [
 	self assert: (cuOOra respuestasDe: otroUsuario) isEmpty
 ]
 
+{ #category : #test }
+CuOOraTest >> testUsuarioConNombreConContrasena [
+
+	self flag: #toImplement.
+	self assert: false
+]
+
 { #category : #tests }
 CuOOraTest >> testUsuarioQueHizoPregunta [
 
-	self flag: #toImplement.
-	self assert: false.
+	|unUsuario unaPregunta topicos|
+	unUsuario := cuOOra crearUsuarioConNombre: 'Pepe' conContrasena: 'password'.
+	topicos := OrderedCollection with: (cuOOra agregarTopicoConNombre: 'Existenciales' conDescripcion: 'Filosofia y el mundo real').
+	unaPregunta := cuOOra agregarPreguntaConTitulo: 'Hola?' conDescripcion: 'Hay alguien aquí?' conTopicos: topicos deUsuario: unUsuario.
+	self assert: ((cuOOra usuarioQueHizoPregunta: unaPregunta) == unUsuario).
 ]

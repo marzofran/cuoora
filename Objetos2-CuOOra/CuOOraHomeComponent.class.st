@@ -3,63 +3,41 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'cuoora',
-		'usuario',
-		'topicos',
+		'topico',
 		'titulo',
 		'descripcion'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
 
-{ #category : #accessing }
-CuOOraHomeComponent >> descripcion [ 
-
-^descripcion
+{ #category : #callbacks }
+CuOOraHomeComponent >> crearPregunta [
+	cuoora
+		agregarPreguntaConTitulo: titulo
+		conDescripcion: descripcion
+		conTopicos:
+			(OrderedCollection
+				with: (cuoora agregarTopicoConNombre: topico conDescripcion: 'N/A'))
+		deUsuario: self session usuario.
+	descripcion := nil.
+	titulo := nil.
+	topico := nil
 ]
 
 { #category : #accessing }
-CuOOraHomeComponent >> descripcion: aString [
-
-	descripcion := aString.
+CuOOraHomeComponent >> descripcion [
+	^ descripcion
 ]
 
-{ #category : #initialization }
-CuOOraHomeComponent >> hardcodeModel [
-	|topico1 topico2 otrosTopicos usuario2|
-	usuario := cuoora
-		crearUsuarioConNombre: 'Levi'
-		conContrasena: 'escobitas'.
-	usuario2 := cuoora
-		crearUsuarioConNombre: 'Link'
-		conContrasena: 'epona'.
-	cuoora crearUsuarioConNombre: 'Jotaro' conContrasena: 'oraora'.
-	topico1 := cuoora
-		agregarTopicoConNombre: 'Smalltalk'
-		conDescripcion: 'POO Supremacy'.
-	topico2 := cuoora
-		agregarTopicoConNombre: 'Rinfo'
-		conDescripcion: 'Hell'.
-	topicos := OrderedCollection with: topico1.
-	otrosTopicos := OrderedCollection with: topico2.
-	cuoora
-		agregarPreguntaConTitulo: 'Seaside 3.0'
-		conDescripcion: 'Como lo instalo??'
-		conTopicos: topicos
-		deUsuario: usuario.
-	cuoora
-		agregarPreguntaConTitulo: 'Mis robotos no paran de explotar'
-		conDescripcion: 'Por favor ayuda con este codigo [inserte codigo imaginario aqui]'
-		conTopicos: otrosTopicos
-		deUsuario: usuario2.
-	usuario agregarTopicoFavorito: topico1.
-	usuario agregarTopicoFavorito: topico2
+{ #category : #accessing }
+CuOOraHomeComponent >> descripcion: anObject [
+	descripcion := anObject
 ]
 
 { #category : #initialization }
 CuOOraHomeComponent >> initialize [
 	super initialize.
 	cuoora := CuOOra soleInstance.
-	self hardcodeModel
 	 
 	
 ]
@@ -67,48 +45,13 @@ CuOOraHomeComponent >> initialize [
 { #category : #queries }
 CuOOraHomeComponent >> preguntasVisibles [
 	| preguntas |
-	preguntas := (cuoora preguntasRelevantesDe: usuario)
+	preguntas := (cuoora preguntasRelevantesDe: (self session usuario))
 		sort: [ :p1 :p2 | p1 fechaYHora <= p2 fechaYHora ].
 	^ OrderedCollection withAll: (preguntas select: [ :unaPregunta | (preguntas indexOf: unaPregunta) <= 5 ])
 ]
 
 { #category : #rendering }
-CuOOraHomeComponent >> renderContentOn: aCanvas [
-	aCanvas div
-		with:
-			[ aCanvas heading: 'CuOOra'.
-			aCanvas paragraph
-				class: 'floating-right';
-				with: [ aCanvas strong: usuario nombre.
-					aCanvas space.
-					aCanvas anchor
-						callback: [ self answer ];
-						with: 'Log out' ] ] .
-	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
-	aCanvas unorderedList
-		with: [ self preguntasVisibles
-				do: [ :each | 
-					aCanvas listItem
-						class: 'pregunta';
-						with: [ 
-							"self renderPregunta: each en: aCanvas"
-							aCanvas heading
-								level: 3;
-								with: [ aCanvas emphasis: each titulo ].
-							aCanvas
-								paragraph: [ aCanvas text: 'Realizada por '.
-									aCanvas strong: (cuoora usuarioQueHizoPregunta: each) nombre.
-									aCanvas
-										text: ' | ' , each respuestas size asString , ' respuestas' ].
-							"self renderLikesDislikes: aCanvas.   <--- algo asi"
-							aCanvas anchor
-								callback: [ each agregarLikeDe: usuario ];
-								with: each likes size asString , ' likes'.
-							aCanvas text: ' | '.
-							aCanvas anchor
-								callback: [ each agregarDislikeDe: usuario ];
-								with: each dislikes size asString , ' dislikes' ] ] ].
-	aCanvas horizontalRule.
+CuOOraHomeComponent >> renderAgregarPreguntaOn: aCanvas [
 	aCanvas form
 		class: 'question-form';
 		with: [ aCanvas heading
@@ -119,28 +62,89 @@ CuOOraHomeComponent >> renderContentOn: aCanvas [
 					aCanvas textInput on: #titulo of: self ].
 			aCanvas
 				paragraph: [ aCanvas label: 'Descripcion: '.
-					(aCanvas textArea
-						on: #descripcion of: self) columns: 80; rows: 5;
+					(aCanvas textArea on: #descripcion of: self)
+						columns: 80;
+						rows: 5;
 						class: 'descripcion-input' ].
+			aCanvas
+				paragraph: [ aCanvas label: 'Topico: '.
+					aCanvas textInput on: #topico of: self ].
 			aCanvas submitButton
 				class: 'submit-button';
-				callback: [ cuoora
-						agregarPreguntaConTitulo: titulo
-						conDescripcion: descripcion
-						conTopicos: topicos
-						deUsuario: usuario ];
+				callback: [ self crearPregunta ];
 				with: 'Crear!' ]
 ]
 
+{ #category : #rendering }
+CuOOraHomeComponent >> renderContentOn: aCanvas [
+	self renderCuOOraHeaderOn: aCanvas.
+	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
+	aCanvas unorderedList
+		with: [ self preguntasVisibles
+				do: [ :each | self renderPregunta: each on: aCanvas ] ].
+	aCanvas horizontalRule.
+	self renderAgregarPreguntaOn: aCanvas.
+]
+
+{ #category : #rendering }
+CuOOraHomeComponent >> renderCuOOraHeaderOn: aCanvas [
+	aCanvas div
+		with: [ aCanvas heading: 'CuOOra'.
+			aCanvas paragraph
+				class: 'floating-right';
+				with: [ aCanvas strong: self session usuario nombre.
+					aCanvas space.
+					aCanvas anchor
+						callback: [ self answer ];
+						with: 'Log out' ] ].
+]
+
+{ #category : #rendering }
+CuOOraHomeComponent >> renderLikesDislikesDe: unaPregunta on: aCanvas [
+	aCanvas anchor
+		callback: [ unaPregunta agregarLikeDe: self session usuario ];
+		with: unaPregunta likes size asString , ' likes'.
+	aCanvas text: ' | '.
+	aCanvas anchor
+		callback: [ unaPregunta agregarDislikeDe: self session usuario ];
+		with: unaPregunta dislikes size asString , ' dislikes'
+]
+
+{ #category : #rendering }
+CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
+	aCanvas listItem
+		class: 'pregunta';
+		with: [ 
+			aCanvas heading
+				level: 3;
+				with: [ aCanvas emphasis: unaPregunta titulo ].
+			aCanvas
+				paragraph: [ aCanvas text: 'Realizada por '.
+					aCanvas strong: (cuoora usuarioQueHizoPregunta: unaPregunta) nombre.
+					aCanvas
+						text: ' | ' , unaPregunta respuestas size asString , ' respuestas' ].
+			self renderLikesDislikesDe: unaPregunta on: aCanvas ]
+
+]
+
 { #category : #accessing }
-CuOOraHomeComponent >> titulo [ 
+CuOOraHomeComponent >> titulo [
 	^ titulo
 ]
 
 { #category : #accessing }
-CuOOraHomeComponent >> titulo: aString [
+CuOOraHomeComponent >> titulo: anObject [
+	titulo := anObject
+]
 
-	titulo:= aString
+{ #category : #accessing }
+CuOOraHomeComponent >> topico [
+	^ topico
+]
+
+{ #category : #accessing }
+CuOOraHomeComponent >> topico: anObject [
+	topico := anObject
 ]
 
 { #category : #updating }
