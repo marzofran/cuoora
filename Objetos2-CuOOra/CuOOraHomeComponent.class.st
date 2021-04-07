@@ -3,19 +3,29 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'cuoora',
-		'topicos',
-		'titulo',
-		'descripcion'
+		'header'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
+
+{ #category : #hooks }
+CuOOraHomeComponent >> children [ 
+	^ Array with: header
+]
 
 { #category : #initialization }
 CuOOraHomeComponent >> initialize [
 	super initialize.
 	cuoora := CuOOra soleInstance.
+	header := CuOOraHeaderComponent new.
 	 
 	
+]
+
+{ #category : #callbacks }
+CuOOraHomeComponent >> logout [
+    self session unregister. 
+    self requestContext redirectTo: self application url
 ]
 
 { #category : #queries }
@@ -28,17 +38,19 @@ CuOOraHomeComponent >> preguntasVisibles [
 
 { #category : #rendering }
 CuOOraHomeComponent >> renderContentOn: aCanvas [
-	aCanvas render: CuOOraHeaderComponent new.
-	aCanvas paragraph class: 'floating-right';
-	class: 'submitButton';
-	callback: [ CuOOraNewQuestionComponent new. ];
-	with: 'Hacer una nueva pregunta'.
+	aCanvas render: header.
+	"self renderCuOOraHeaderOn: aCanvas."
+	aCanvas anchor
+		class: 'floating-right';
+		callback: [ self call: CuOOraNewQuestionComponent new ];
+		with: [ aCanvas paragraph
+				class: 'nueva-pregunta-button';
+				with: 'Hacer una nueva pregunta' ].
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
 	aCanvas unorderedList
 		with: [ self preguntasVisibles
 				do: [ :each | self renderPregunta: each on: aCanvas ] ].
-	aCanvas horizontalRule.
-	
+	aCanvas horizontalRule
 ]
 
 { #category : #rendering }
@@ -46,13 +58,14 @@ CuOOraHomeComponent >> renderCuOOraHeaderOn: aCanvas [
 	aCanvas div
 		with: [ aCanvas paragraph
 				class: 'floating-right';
-				with: [ aCanvas strong: self session usuario nombre.
+				with: [ 
+					self renderNombreDe: self session usuario on: aCanvas.
 					aCanvas space.
 					aCanvas anchor
-						callback: [ self answer ];
+						callback: [ self logout ];
 						with: 'Log out' ].
 			aCanvas heading: 'CuOOra'.
-			aCanvas horizontalRule.]
+			aCanvas horizontalRule ]
 ]
 
 { #category : #rendering }
@@ -72,7 +85,7 @@ CuOOraHomeComponent >> renderLikesDislikesDe: unaPregunta on: aCanvas [
 { #category : #rendering }
 CuOOraHomeComponent >> renderNombreDe: unUsuario on: aCanvas [
 	aCanvas anchor
-		callback: [ self call: CuOOraProfileComponent new ];
+		callback: [ self call: (CuOOraProfileComponent conUsuario: unUsuario) ];
 		with: [ aCanvas strong: unUsuario nombre ]
 ]
 
@@ -81,14 +94,15 @@ CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
 	aCanvas listItem
 		class: 'pregunta';
 		with: [ 
-			aCanvas heading
+			aCanvas anchor with:
+			[aCanvas heading
 				class: 'pregunta-titulo';
 				level: 3;
-				with: [ aCanvas emphasis: unaPregunta titulo ].
+				with: [ aCanvas emphasis: unaPregunta titulo ]].
 			aCanvas paragraph class: 'topicos'; with: [aCanvas emphasis with: 'Tópicos: ' , (self topicosComoStringDe: unaPregunta) , '.'].
 			aCanvas
 				paragraph: [ aCanvas text: 'Realizada por '.
-					aCanvas strong: (cuoora usuarioQueHizoPregunta: unaPregunta) nombre.
+					self renderNombreDe: (cuoora usuarioQueHizoPregunta: unaPregunta) on: aCanvas.
 					aCanvas
 						text: ' | ' , unaPregunta respuestas size asString , ' respuestas' ].
 			self renderLikesDislikesDe: unaPregunta on: aCanvas ]
@@ -120,6 +134,12 @@ CuOOraHomeComponent >> updateRoot: anHtmlRoot [
 		.nueva-pregunta-button { 
 			font-size: 1.5rem;
 			margin-top: 30px;
+			color: darkgreen;
+		}
+		
+		a { 
+			text-decoration: none;
+			color: darkgreen;
 		}
 		
 		body { 
@@ -132,17 +152,6 @@ CuOOraHomeComponent >> updateRoot: anHtmlRoot [
 			font-size: 3rem;
 			margin-left: 20px;
 		}
-
-		.question-form { 
-			text-align: center;
-			background-color: #e8f1e7;
-			margin: 20px auto;
-			width: 30%;
-			background: white;
-			border-radius: 10px;
-			padding: 10px;
-			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-		}
 			
 		.pregunta { 
 			background-color: #e8f1e7;
@@ -153,32 +162,9 @@ CuOOraHomeComponent >> updateRoot: anHtmlRoot [
 			padding: 10px 20px;
 			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 		}
-			
-		.submit-button { 
-			color: white;
-			background-color: #64a460;
-		}
-			
-		input { 
-			box-sizing: border-box;
-			width: 100%;
-			padding:10px;
-			border-radius:10px;
-		}
-		
-		.descripcion-input { 
-			height: 200px;
-			width: 94%;
-			border-radius:10px;
-			padding: 10px;
-		}
 		
 		.like-dislike-buttons { 
 			float: right;
-		}
-		
-		.pregunta-titulo { 
-			color: darkgreen;
 		}
 		
 		.topicos { 

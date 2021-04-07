@@ -15,7 +15,9 @@ CuOOraHeaderComponent >> renderContentOn: aCanvas [
 	aCanvas div
 		with: [ aCanvas paragraph
 				class: 'floating-right';
-				with: [ aCanvas strong: self session usuario nombre.
+				with: [ aCanvas anchor
+						callback: [ self call: (CuOOraProfileComponent conUsuario: self session usuario) ];
+						with: [ aCanvas strong: self session usuario nombre ].
 					aCanvas space.
 					aCanvas anchor
 						callback: [ self logout ];
