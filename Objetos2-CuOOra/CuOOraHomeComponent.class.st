@@ -10,15 +10,14 @@ Class {
 
 { #category : #hooks }
 CuOOraHomeComponent >> children [ 
-	^ Array with: header
+	^ Array with: header.
 ]
 
 { #category : #initialization }
 CuOOraHomeComponent >> initialize [
 	super initialize.
 	cuoora := CuOOra soleInstance.
-	header := CuOOraHeaderComponent new.
-	 
+	header := CuOOraHeaderComponent conParent: self.
 	
 ]
 
@@ -26,6 +25,11 @@ CuOOraHomeComponent >> initialize [
 CuOOraHomeComponent >> logout [
     self session unregister. 
     self requestContext redirectTo: self application url
+]
+
+{ #category : #callbacks }
+CuOOraHomeComponent >> perfilDeUsuario: unUsuario [
+	self call: (CuOOraProfileComponent conUsuario: unUsuario).
 ]
 
 { #category : #queries }
@@ -38,8 +42,8 @@ CuOOraHomeComponent >> preguntasVisibles [
 
 { #category : #rendering }
 CuOOraHomeComponent >> renderContentOn: aCanvas [
-	aCanvas render: header.
-	"self renderCuOOraHeaderOn: aCanvas."
+	"aCanvas render: header."
+	self renderCuOOraHeaderOn: aCanvas.
 	aCanvas anchor
 		class: 'floating-right';
 		callback: [ self call: CuOOraNewQuestionComponent new ];
@@ -85,7 +89,7 @@ CuOOraHomeComponent >> renderLikesDislikesDe: unaPregunta on: aCanvas [
 { #category : #rendering }
 CuOOraHomeComponent >> renderNombreDe: unUsuario on: aCanvas [
 	aCanvas anchor
-		callback: [ self call: (CuOOraProfileComponent conUsuario: unUsuario) ];
+		callback: [ self perfilDeUsuario: unUsuario ];
 		with: [ aCanvas strong: unUsuario nombre ]
 ]
 
