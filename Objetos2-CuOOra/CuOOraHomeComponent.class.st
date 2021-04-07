@@ -10,34 +10,6 @@ Class {
 	#category : #'Objetos2-CuOOra-UI'
 }
 
-{ #category : #callbacks }
-CuOOraHomeComponent >> crearPregunta [
-	cuoora
-		agregarPreguntaConTitulo: titulo
-		conDescripcion: descripcion
-		conTopicos: (self generarTopicosDesde: topicos)
-		deUsuario: self session usuario.
-	descripcion := nil.
-	titulo := nil.
-	topicos := nil
-]
-
-{ #category : #accessing }
-CuOOraHomeComponent >> descripcion [
-	^ descripcion
-]
-
-{ #category : #accessing }
-CuOOraHomeComponent >> descripcion: anObject [
-	descripcion := anObject
-]
-
-{ #category : #formatting }
-CuOOraHomeComponent >> generarTopicosDesde: unString [
-
-	^ ((unString splitOn: ',') collect: [ :substring | substring trimBoth ]) collect: [ :unNombre | cuoora agregarTopicoConNombre: unNombre conDescripcion: 'n/a' ]
-]
-
 { #category : #initialization }
 CuOOraHomeComponent >> initialize [
 	super initialize.
@@ -55,42 +27,18 @@ CuOOraHomeComponent >> preguntasVisibles [
 ]
 
 { #category : #rendering }
-CuOOraHomeComponent >> renderAgregarPreguntaOn: aCanvas [
-	aCanvas form
-		class: 'question-form';
-		with: [ aCanvas heading
-				level: 3;
-				with: 'Crear una pregunta nueva'.
-			aCanvas
-				paragraph: [ aCanvas label: 'Título: '.
-					aCanvas textInput on: #titulo of: self ].
-			aCanvas
-				paragraph: [ aCanvas label: 'Descripción: '.
-					(aCanvas textArea on: #descripcion of: self)
-						columns: 80;
-						rows: 5;
-						class: 'descripcion-input' ].
-			aCanvas
-				paragraph: [ aCanvas label: 'Tópicos (separar con ,): '.
-					aCanvas textInput on: #topicos of: self ].
-			aCanvas submitButton
-				class: 'submit-button';
-				callback: [ self crearPregunta ];
-				with: 'Crear!' ]
-]
-
-{ #category : #rendering }
 CuOOraHomeComponent >> renderContentOn: aCanvas [
 	aCanvas render: CuOOraHeaderComponent new.
 	aCanvas paragraph class: 'floating-right';
-	class: 'nueva-pregunta-button';
+	class: 'submitButton';
+	callback: [ CuOOraNewQuestionComponent new. ];
 	with: 'Hacer una nueva pregunta'.
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
 	aCanvas unorderedList
 		with: [ self preguntasVisibles
 				do: [ :each | self renderPregunta: each on: aCanvas ] ].
 	aCanvas horizontalRule.
-	self renderAgregarPreguntaOn: aCanvas.
+	
 ]
 
 { #category : #rendering }
@@ -145,26 +93,6 @@ CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
 						text: ' | ' , unaPregunta respuestas size asString , ' respuestas' ].
 			self renderLikesDislikesDe: unaPregunta on: aCanvas ]
 
-]
-
-{ #category : #accessing }
-CuOOraHomeComponent >> titulo [
-	^ titulo
-]
-
-{ #category : #accessing }
-CuOOraHomeComponent >> titulo: anObject [
-	titulo := anObject
-]
-
-{ #category : #accessing }
-CuOOraHomeComponent >> topicos [
-	^ topicos
-]
-
-{ #category : #accessing }
-CuOOraHomeComponent >> topicos: anObject [
-	topicos := anObject
 ]
 
 { #category : #queries }
