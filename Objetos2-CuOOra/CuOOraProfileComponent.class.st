@@ -1,9 +1,8 @@
 Class {
 	#name : #CuOOraProfileComponent,
-	#superclass : #WAComponent,
+	#superclass : #CuOOraPageComponent,
 	#instVars : [
-		'usuario',
-		'cuoora'
+		'usuario'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
@@ -14,28 +13,29 @@ CuOOraProfileComponent class >> conUsuario: unUsuario [
 ]
 
 { #category : #initialization }
-CuOOraProfileComponent >> initialize [
-	super initialize.
-	cuoora := CuOOra soleInstance 
-]
-
-{ #category : #initialization }
 CuOOraProfileComponent >> initializeConUsuario: unUsuario [
 	usuario := unUsuario
 ]
 
-{ #category : #callbacks }
-CuOOraProfileComponent >> perfilDeUsuario: unUsuario [
-	self call: (CuOOraProfileComponent conUsuario: unUsuario).
-]
-
 { #category : #rendering }
 CuOOraProfileComponent >> renderContentOn: aCanvas [
-	aCanvas render: CuOOraHeaderComponent new.
+	aCanvas render: header.
+	self renderFollowButtonOn: aCanvas. 
 	aCanvas heading with: 'Preguntas de ' , usuario nombre.
 	aCanvas unorderedList
 		with: [ usuario preguntas
 				do: [ :each | self renderPregunta: each on: aCanvas ] ].
+]
+
+{ #category : #rendering }
+CuOOraProfileComponent >> renderFollowButtonOn: aCanvas [
+	usuario == self session usuario
+		ifFalse: [ aCanvas anchor
+				class: 'floating-right';
+				callback: [ self session usuario seguir: usuario ];
+				with: [ aCanvas paragraph
+						class: 'floating-button';
+						with: 'Follow' ] ]
 ]
 
 { #category : #rendering }
@@ -82,56 +82,4 @@ CuOOraProfileComponent >> renderPregunta: unaPregunta on: aCanvas [
 CuOOraProfileComponent >> topicosComoStringDe: unaPregunta [
 	
 	^ String streamContents: [ :stream | (unaPregunta topicos collect: [ :unTopico | unTopico nombre ]) asStringOn: stream delimiter: ', '. ]
-]
-
-{ #category : #updating }
-CuOOraProfileComponent >> updateRoot: anHtmlRoot [
-    super updateRoot: anHtmlRoot.
-    anHtmlRoot addStyle: '
-		ul {
-			list-style-type: none;
-			margin: 30px auto;
-			padding-horizontal: auto;
-			width: 90%;
-		}
-		
-		.floating-right { 
-			float: right;
-			margin-right: 20px;
-		}
-		
-		a { 
-			text-decoration: none;
-			color: darkgreen;
-		}
-		
-		body { 
-			font-family: sans-serif;
-			background-color: #9cc599;
-		}
-
-		h1 { 
-			font-weight: 500;
-			font-size: 3rem;
-			margin-left: 20px;
-		}
-			
-		.pregunta { 
-			background-color: #e8f1e7;
-			background: white;
-			margin-horizontal: auto;
-			margin-top: 10px;
-			border-radius: 10px;
-			padding: 10px 20px;
-			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-		}
-		
-		.like-dislike-buttons { 
-			float: right;
-		}
-		
-		.topicos { 
-			color: dimgrey;
-		}
-		'.
 ]

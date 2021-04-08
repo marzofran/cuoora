@@ -1,36 +1,8 @@
 Class {
 	#name : #CuOOraHomeComponent,
-	#superclass : #WAComponent,
-	#instVars : [
-		'cuoora',
-		'header'
-	],
+	#superclass : #CuOOraPageComponent,
 	#category : #'Objetos2-CuOOra-UI'
 }
-
-{ #category : #hooks }
-CuOOraHomeComponent >> children [ 
-	^ Array with: header.
-]
-
-{ #category : #initialization }
-CuOOraHomeComponent >> initialize [
-	super initialize.
-	cuoora := CuOOra soleInstance.
-	header := CuOOraHeaderComponent conParent: self.
-	
-]
-
-{ #category : #callbacks }
-CuOOraHomeComponent >> logout [
-    self session unregister. 
-    self requestContext redirectTo: self application url
-]
-
-{ #category : #callbacks }
-CuOOraHomeComponent >> perfilDeUsuario: unUsuario [
-	self call: (CuOOraProfileComponent conUsuario: unUsuario).
-]
 
 { #category : #queries }
 CuOOraHomeComponent >> preguntasVisibles [
@@ -42,34 +14,18 @@ CuOOraHomeComponent >> preguntasVisibles [
 
 { #category : #rendering }
 CuOOraHomeComponent >> renderContentOn: aCanvas [
-	"aCanvas render: header."
-	self renderCuOOraHeaderOn: aCanvas.
+	aCanvas render: header.
 	aCanvas anchor
 		class: 'floating-right';
 		callback: [ self call: CuOOraNewQuestionComponent new ];
 		with: [ aCanvas paragraph
-				class: 'nueva-pregunta-button';
+				class: 'floating-button';
 				with: 'Hacer una nueva pregunta' ].
 	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
 	aCanvas unorderedList
 		with: [ self preguntasVisibles
 				do: [ :each | self renderPregunta: each on: aCanvas ] ].
 	aCanvas horizontalRule
-]
-
-{ #category : #rendering }
-CuOOraHomeComponent >> renderCuOOraHeaderOn: aCanvas [
-	aCanvas div
-		with: [ aCanvas paragraph
-				class: 'floating-right';
-				with: [ 
-					self renderNombreDe: self session usuario on: aCanvas.
-					aCanvas space.
-					aCanvas anchor
-						callback: [ self logout ];
-						with: 'Log out' ].
-			aCanvas heading: 'CuOOra'.
-			aCanvas horizontalRule ]
 ]
 
 { #category : #rendering }
@@ -117,62 +73,4 @@ CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
 CuOOraHomeComponent >> topicosComoStringDe: unaPregunta [
 	
 	^ String streamContents: [ :stream | (unaPregunta topicos collect: [ :unTopico | unTopico nombre ]) asStringOn: stream delimiter: ', '. ]
-]
-
-{ #category : #updating }
-CuOOraHomeComponent >> updateRoot: anHtmlRoot [
-    super updateRoot: anHtmlRoot.
-    anHtmlRoot addStyle: '
-		ul {
-			list-style-type: none;
-			margin: 30px auto;
-			padding-horizontal: auto;
-			width: 90%;
-		}
-		
-		.floating-right { 
-			float: right;
-			margin-right: 20px;
-		}
-		
-		.nueva-pregunta-button { 
-			font-size: 1.5rem;
-			margin-top: 30px;
-			color: darkgreen;
-		}
-		
-		a { 
-			text-decoration: none;
-			color: darkgreen;
-		}
-		
-		body { 
-			font-family: sans-serif;
-			background-color: #9cc599;
-		}
-
-		h1 { 
-			font-weight: 500;
-			font-size: 3rem;
-			margin-left: 20px;
-		}
-			
-		.pregunta { 
-			background-color: #e8f1e7;
-			background: white;
-			margin-horizontal: auto;
-			margin-top: 10px;
-			border-radius: 10px;
-			padding: 10px 20px;
-			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-		}
-		
-		.like-dislike-buttons { 
-			float: right;
-		}
-		
-		.topicos { 
-			color: dimgrey;
-		}
-		'.
 ]

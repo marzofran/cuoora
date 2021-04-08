@@ -35,6 +35,8 @@ CuOOraHeaderComponent >> renderContentOn: aCanvas [
 					aCanvas anchor
 						callback: [ self logout ];
 						with: 'Log out' ].
-			aCanvas heading: 'CuOOra'.
+			aCanvas anchor
+				callback: [ parent return ];
+				with: [ aCanvas heading: 'CuOOra' ].
 			aCanvas horizontalRule ]
 ]

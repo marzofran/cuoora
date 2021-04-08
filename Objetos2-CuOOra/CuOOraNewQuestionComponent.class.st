@@ -1,6 +1,6 @@
 Class {
 	#name : #CuOOraNewQuestionComponent,
-	#superclass : #WAComponent,
+	#superclass : #CuOOraPageComponent,
 	#instVars : [
 		'topicos',
 		'titulo',
@@ -8,6 +8,14 @@ Class {
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
+
+{ #category : #actions }
+CuOOraNewQuestionComponent >> cancel [
+	descripcion := nil.
+	titulo := nil.
+	topicos := nil.
+	self answer
+]
 
 { #category : #callbacks }
 CuOOraNewQuestionComponent >> crearPregunta [
@@ -19,7 +27,8 @@ CuOOraNewQuestionComponent >> crearPregunta [
 		deUsuario: self session usuario.
 	descripcion := nil.
 	titulo := nil.
-	topicos := nil
+	topicos := nil.
+	self answer.
 ]
 
 { #category : #accessing }
@@ -40,7 +49,7 @@ CuOOraNewQuestionComponent >> generarTopicosDesde: unString [
 
 { #category : #rendering }
 CuOOraNewQuestionComponent >> renderContentOn: aCanvas [
-	aCanvas render: CuOOraHeaderComponent new.
+	aCanvas render: header.
 	aCanvas form
 		class: 'question-form';
 		with: [ aCanvas heading
@@ -61,8 +70,14 @@ CuOOraNewQuestionComponent >> renderContentOn: aCanvas [
 			aCanvas submitButton
 				class: 'submit-button';
 				callback: [ self crearPregunta ];
-				with: 'Crear!' ]
-	
+				with: 'Crear!'.
+			aCanvas space.
+			aCanvas submitButton
+				class: 'submit-button';
+				callback: [ self cancel ];
+				with: 'Cancelar'
+			].
+			
 ]
 
 { #category : #accessing }
@@ -83,64 +98,4 @@ CuOOraNewQuestionComponent >> topicos [
 { #category : #accessing }
 CuOOraNewQuestionComponent >> topicos: anObject [
 	topicos := anObject
-]
-
-{ #category : #updating }
-CuOOraNewQuestionComponent >> updateRoot: anHtmlRoot [
-	super updateRoot: anHtmlRoot.
-	anHtmlRoot
-		addStyle:'
-			
-		body { 
-			font-family: sans-serif;
-			background-color: #9cc599;
-		}
-		
-		h1 { 
-			font-weight: 500;
-			font-size: 3rem;
-			margin-left: 20px;
-		}
-		
-		.floating-right { 
-			float: right;
-			margin-right: 20px;
-		}
-		
-		a { 
-			text-decoration: none;
-			color: darkgreen;
-		}
-		
-		.question-form { 
-			text-align: center;
-			background-color: #e8f1e7;
-			margin: 20px auto;
-			width: 30%;
-			background: white;
-			border-radius: 10px;
-			padding: 10px;
-			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-		}
-		
-		.submit-button { 
-			color: white;
-			background-color: #64a460;
-		}
-			
-		input { 
-			box-sizing: border-box;
-			width: 100%;
-			padding:10px;
-			border-radius:10px;
-		}
-		
-		.descripcion-input { 
-			height: 200px;
-			width: 94%;
-			border-radius:10px;
-			padding: 10px;
-		}
-		
-		'
 ]
