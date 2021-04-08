@@ -3,16 +3,15 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'pregunta',
-		'topicos'
+		'topico'
 	],
 	#category : #'Objetos2-CuOOra-Tests'
 }
 
 { #category : #running }
 PreguntaTest >> setUp [
-	topicos := OrderedCollection new.
-	topicos add: (Topico conNombre: 'Funcionamiento' conDescripcion: 'Sobre funcionamiento de tests en Pharo').
-	pregunta := Pregunta conTitulo: 'Hola, funciona?' conDescripcion: 'Hola, acaso esto funciona?' conTopicos: topicos.
+	topico := Topico conNombre: 'Funcionamiento' conDescripcion: 'Sobre funcionamiento de tests en Pharo'.
+	pregunta := Pregunta conTitulo: 'Hola, funciona?' conDescripcion: 'Hola, acaso esto funciona?' conTopicos: (OrderedCollection with: topico).
 ]
 
 { #category : #tests }
@@ -28,15 +27,26 @@ PreguntaTest >> testAgregarRespuestaDeConDescripcion [
 { #category : #test }
 PreguntaTest >> testBorrarRespuestas [
 
-	self flag: #toImplement.
-	self assert: false
+	| unUsuario otroUsuario |
+	unUsuario := UsuarioCuOOra conNombre: 'pepe' conContrasena: 'pepe'.
+	otroUsuario := UsuarioCuOOra conNombre: 'carlos' conContrasena: 'carlos'.
+	
+	self assertEmpty: pregunta respuestas.
+	pregunta agregarRespuestaDe: unUsuario conDescripcion: 'hola'.
+	pregunta agregarRespuestaDe: otroUsuario conDescripcion: 'chau'.
+	self denyEmpty: pregunta respuestas.
+	
+	pregunta borrarRespuestas.
+	self assertEmpty: pregunta respuestas.
 ]
 
 { #category : #test }
 PreguntaTest >> testEsDeTopico [
 
-	self flag: #toImplement.
-	self assert: false
+	| otroTopico |
+	otroTopico := Topico conNombre: 'Este topico no es el mismo' conDescripcion: 'no, no lo es'.
+	self assert: (pregunta esDeTopico: topico).
+	self deny: (pregunta esDeTopico: otroTopico)
 ]
 
 { #category : #tests }
@@ -58,6 +68,22 @@ PreguntaTest >> testRespuestas [
 { #category : #test }
 PreguntaTest >> testRespuestasDe [
 
-	self flag: #toImplement.
-	self assert: false
+	| unUsuario otroUsuario |
+	unUsuario := UsuarioCuOOra conNombre: 'pepe' conContrasena: 'pepe'.
+	otroUsuario := UsuarioCuOOra conNombre: 'carlos' conContrasena: 'carlos'.
+	
+	self assert: (pregunta respuestasDe: unUsuario) size equals: 0.
+	self assert: (pregunta respuestasDe: otroUsuario) size equals: 0.
+	
+	pregunta agregarRespuestaDe: unUsuario conDescripcion: 'hola'.
+	self assert: (pregunta respuestasDe: unUsuario) size equals: 1.
+	self assert: (pregunta respuestasDe: otroUsuario) size equals: 0.
+	
+	pregunta agregarRespuestaDe: unUsuario conDescripcion: 'chau'.
+	self assert: (pregunta respuestasDe: unUsuario) size equals: 2.
+	self assert: (pregunta respuestasDe: otroUsuario) size equals: 0.
+	
+	pregunta agregarRespuestaDe: otroUsuario conDescripcion: 'hola'.
+	self assert: (pregunta respuestasDe: unUsuario) size equals: 2.
+	self assert: (pregunta respuestasDe: otroUsuario) size equals: 1.
 ]

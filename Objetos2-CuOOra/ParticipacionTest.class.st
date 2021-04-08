@@ -2,14 +2,14 @@ Class {
 	#name : #ParticipacionTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'pregunta'
+		'participacion'
 	],
 	#category : #'Objetos2-CuOOra-Tests'
 }
 
 { #category : #running }
 ParticipacionTest >> setUp [
-	|topicos|
+	"|topicos|
 	topicos := OrderedCollection new.
 	topicos
 		add:
@@ -19,7 +19,9 @@ ParticipacionTest >> setUp [
 	pregunta := Pregunta
 		conTitulo: 'Hola, funciona?'
 		conDescripcion: 'Hola, acaso esto funciona?'
-		conTopicos: topicos	"Hooks that subclasses may override to define the fixture of test."
+		conTopicos: topicos."
+			
+	participacion := Participacion conDescripcion: 'hola'.
 ]
 
 { #category : #tests }
@@ -27,24 +29,38 @@ ParticipacionTest >> testLikeDislike [
 	| usuario |
 	usuario := UsuarioCuOOra conNombre: 'Jorge Bell' conContrasena: 'ringring'.
 	
-	pregunta agregarLikeDe: usuario.
-	self denyEmpty: pregunta likes.
+	participacion agregarLikeDe: usuario.
+	self denyEmpty: participacion likes.
 	
-	pregunta agregarDislikeDe: usuario.
-	self assertEmpty: pregunta likes.
-	self denyEmpty: pregunta dislikes.
+	participacion agregarDislikeDe: usuario.
+	self assertEmpty: participacion likes.
+	self denyEmpty: participacion dislikes.
 	
-	pregunta agregarLikeDe: usuario.
-	self assertEmpty: pregunta dislikes.
-	self denyEmpty: pregunta likes.
+	participacion agregarLikeDe: usuario.
+	self assertEmpty: participacion dislikes.
+	self denyEmpty: participacion likes.
 	
-	pregunta borrarLikeDe: usuario.
-	self assertEmpty: pregunta likes
+	participacion borrarLikeDe: usuario.
+	self assertEmpty: participacion likes
 ]
 
 { #category : #test }
 ParticipacionTest >> testPuntajeLikes [
-
-	self flag: #toImplement.
-	self assert: false
+	| usuario otroUsuario |
+	usuario := UsuarioCuOOra conNombre: 'pepe' conContrasena: 'pepe'.
+	otroUsuario := UsuarioCuOOra conNombre: 'carlos' conContrasena: 'carlos'.
+	
+	self assert: participacion puntajeLikes equals: 0.
+	
+	participacion agregarLikeDe: usuario.
+	self assert: participacion puntajeLikes equals: 1.
+	
+	participacion agregarLikeDe: otroUsuario.
+	self assert: participacion puntajeLikes equals: 2.
+	
+	participacion agregarDislikeDe: usuario.
+	self assert: participacion puntajeLikes equals: 0.
+	
+	participacion agregarDislikeDe: otroUsuario.
+	self assert: participacion puntajeLikes equals: -2.
 ]
