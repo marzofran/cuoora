@@ -42,6 +42,12 @@ CuOOraPageComponent >> return [
 	( self isMemberOf: CuOOraHomeComponent) ifFalse: [ self answer ]
 ]
 
+{ #category : #queries }
+CuOOraPageComponent >> topicosComoStringDe: unaPregunta [
+	
+	^ String streamContents: [ :stream | (unaPregunta topicos collect: [ :unTopico | unTopico nombre ]) asStringOn: stream delimiter: ', '. ]
+]
+
 { #category : #updating }
 CuOOraPageComponent >> updateRoot: anHtmlRoot [
     super updateRoot: anHtmlRoot.
@@ -118,7 +124,9 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 			color: white;
 			background-color: #64a460;
 			width: 30%;
-			margin-horizontal: auto;
+			display: block;
+			margin-left: auto;
+    		margin-right: auto;
 		}
 			
 		input { 
@@ -133,6 +141,14 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 			width: 94%;
 			border-radius:10px;
 			padding: 10px;
+		}
+		
+		.pregunta-content { 
+			margin-horizontal: auto;
+			margin-top: 10px;
+			border-radius: 10px;
+			padding: 10px 20px;
+			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 		}
 		'.
 ]

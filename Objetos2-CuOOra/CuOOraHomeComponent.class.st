@@ -68,9 +68,3 @@ CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
 			self renderLikesDislikesDe: unaPregunta on: aCanvas ]
 
 ]
-
-{ #category : #queries }
-CuOOraHomeComponent >> topicosComoStringDe: unaPregunta [
-	
-	^ String streamContents: [ :stream | (unaPregunta topicos collect: [ :unTopico | unTopico nombre ]) asStringOn: stream delimiter: ', '. ]
-]
