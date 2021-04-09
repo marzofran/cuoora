@@ -62,9 +62,10 @@ CuOOraProfileComponent >> renderPageContentOn: aCanvas [
 CuOOraProfileComponent >> renderPregunta: unaPregunta on: aCanvas [
 	aCanvas listItem
 		class: 'pregunta';
-		with: [ 
-			aCanvas anchor with:
-			[aCanvas heading
+		with: [
+			aCanvas anchor 
+			callback: [ self call: (CuOOraAllAnswersComponent conPregunta: unaPregunta) ];
+			with: [aCanvas heading
 				class: 'pregunta-titulo';
 				level: 3;
 				with: [ aCanvas emphasis: unaPregunta titulo ]].
@@ -75,10 +76,4 @@ CuOOraProfileComponent >> renderPregunta: unaPregunta on: aCanvas [
 					aCanvas
 						text: ' | ' , unaPregunta respuestas size asString , ' respuestas' ].
 			self renderLikesDislikesDe: unaPregunta on: aCanvas ]
-]
-
-{ #category : #queries }
-CuOOraProfileComponent >> topicosComoStringDe: unaPregunta [
-	
-	^ String streamContents: [ :stream | (unaPregunta topicos collect: [ :unTopico | unTopico nombre ]) asStringOn: stream delimiter: ', '. ]
 ]
