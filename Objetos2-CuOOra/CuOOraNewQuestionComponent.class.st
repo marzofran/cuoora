@@ -25,9 +25,6 @@ CuOOraNewQuestionComponent >> crearPregunta [
 		conDescripcion: descripcion
 		conTopicos: (self generarTopicosDesde: topicos)
 		deUsuario: self session usuario.
-	descripcion := nil.
-	titulo := nil.
-	topicos := nil.
 	self answer.
 ]
 

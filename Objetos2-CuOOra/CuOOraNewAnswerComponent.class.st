@@ -1,41 +1,53 @@
 Class {
 	#name : #CuOOraNewAnswerComponent,
 	#superclass : #CuOOraQuestionComponent,
+	#instVars : [
+		'descripcion'
+	],
 	#category : #'Objetos2-CuOOra-UI'
 }
 
-{ #category : #initialization }
-CuOOraNewAnswerComponent >> initialize: unaPregunta [
+{ #category : #'as yet unclassified' }
+CuOOraNewAnswerComponent >> cancelar [
 
-	pregunta := unaPregunta. 
+	descripcion := nil.
+	self answer .
 ]
 
-{ #category : #initialization }
-CuOOraNewAnswerComponent >> initializeConPregunta: unaPregunta [
+{ #category : #'as yet unclassified' }
+CuOOraNewAnswerComponent >> crearRespuesta [
 
-	pregunta := unaPregunta. 
+	pregunta agregarRespuestaDe: (self session usuario) conDescripcion: descripcion.
+	descripcion := nil.
+	self answer.
+]
+
+{ #category : #accessing }
+CuOOraNewAnswerComponent >> descripcion [ 
+
+^ descripcion
+]
+
+{ #category : #accessing }
+CuOOraNewAnswerComponent >> descripcion: unaDescripcion [ 
+
+descripcion := unaDescripcion .
 ]
 
 { #category : #rendering }
 CuOOraNewAnswerComponent >> renderAnswersOn: aCanvas [
+
+	aCanvas form: [ aCanvas label: 'RESPONDER'.
+		aCanvas textInput placeholder: 'Escriba su respuesta aqui'; on: #descripcion of: self.
+		aCanvas submitButton
+				class: 'submit-button';
+				callback: [ self crearRespuesta ];
+				with: 'Guardar' .
+			aCanvas submitButton 
+			class: 'submit-button';
+			callback: [ self cancelar ];
+			with: 'Cancelar'.]
+			
+		 
 	 
-]
-
-{ #category : #rendering }
-CuOOraNewAnswerComponent >> renderContentOn: aCanvas [
-	aCanvas render: header.
-	aCanvas form: [  ]
-]
-
-{ #category : #rendering }
-CuOOraNewAnswerComponent >> renderPreguntaOn: aCanvas [
-
-[aCanvas heading
-				class: 'pregunta-titulo';
-				level: 3;
-				with: [ aCanvas emphasis: pregunta titulo ]].
-			aCanvas paragraph class: 'topicos'; with: [aCanvas emphasis with: 'Tópicos: ' , (self topicosComoStringDe: pregunta) , '.'].
-			aCanvas
-				paragraph: [ aCanvas text: 'Realizada por '.
-					self renderNombreDe: (cuoora usuarioQueHizoPregunta: pregunta) on: aCanvas.]
 ]

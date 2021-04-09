@@ -29,12 +29,12 @@ CuOOraPageComponent >> perfilDeUsuario: unUsuario [
 { #category : #rendering }
 CuOOraPageComponent >> renderContentOn: aCanvas [
 	aCanvas render: header.
-	self renderPageContentOn: aCanvas.
+	self renderPageContentOn: aCanvas
 ]
 
 { #category : #rendering }
 CuOOraPageComponent >> renderPageContentOn: aCanvas [
-	self subclassResponsibility
+	self subclassResponsibility 
 ]
 
 { #category : #handling }
