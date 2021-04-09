@@ -15,3 +15,12 @@ CuOOraQuestionComponent class >> conPregunta: unaPregunta [
 { #category : #initialization }
 CuOOraQuestionComponent >> initializeConPregunta: unaPregunta [
 ]
+
+{ #category : #rendering }
+CuOOraQuestionComponent >> renderPageContentOn: aCanvas [
+	aCanvas anchor
+		callback: [ self call: (CuOOraNewAnswerComponent conPregunta: pregunta) ];
+		with: [ aCanvas submitButton
+				class: 'new-answer-button';
+				with: 'Agregar Respuesta' ]
+]
