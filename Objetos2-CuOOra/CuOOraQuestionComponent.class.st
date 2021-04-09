@@ -23,10 +23,5 @@ CuOOraQuestionComponent >> renderAnswersOn: aCanvas [
 
 { #category : #rendering }
 CuOOraQuestionComponent >> renderPageContentOn: aCanvas [
-	aCanvas anchor
-		callback: [ self call: (CuOOraNewAnswerComponent conPregunta: pregunta) ];
-		with: [ aCanvas submitButton
-				class: 'new-answer-button';
-				with: 'Agregar Respuesta' ].
 	aCanvas renderAnswersOn: aCanvas.
 ]
