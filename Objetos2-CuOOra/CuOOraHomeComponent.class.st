@@ -53,9 +53,10 @@ CuOOraHomeComponent >> renderNombreDe: unUsuario on: aCanvas [
 CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
 	aCanvas listItem
 		class: 'pregunta';
-		with: [ 
-			aCanvas anchor with:
-			[aCanvas heading
+		with: [
+			aCanvas anchor 
+			callback: [ self call: (CuOOraQuestionComponent conPregunta: unaPregunta) ];
+			with: [aCanvas heading
 				class: 'pregunta-titulo';
 				level: 3;
 				with: [ aCanvas emphasis: unaPregunta titulo ]].
