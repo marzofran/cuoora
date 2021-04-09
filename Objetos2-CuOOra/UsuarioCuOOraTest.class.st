@@ -70,21 +70,19 @@ UsuarioCuOOraTest >> testRespuestasAMisPreguntas [
 	| otroUsuario pregunta |
 	otroUsuario := UsuarioCuOOra conNombre: 'juanita' conContrasena: '3'.
 	pregunta := Pregunta
-				conTitulo: 'Hola?'
-				conDescripcion: 'Hay alguien ahi?'
-				conTopicos:
-					(OrderedCollection
-						with: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy')).
-	 usuario
-		agregarPregunta:
-			pregunta.
+		conTitulo: 'Hola?'
+		conDescripcion: 'Hay alguien ahi?'
+		conTopicos:
+			(OrderedCollection
+				with: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy')).
+	usuario agregarPregunta: pregunta.
 	self assertEmpty: usuario respuestasAMisPreguntas.
-	
 	pregunta agregarRespuestaDe: usuario conDescripcion: 'Ayuda plis.'.
 	self assert: usuario respuestasAMisPreguntas size equals: 1.
-	
-	pregunta agregarRespuestaDe: otroUsuario conDescripcion: 'Yo te ayudo!'.
-	self assert: usuario respuestasAMisPreguntas size equals: 2.
+	pregunta
+		agregarRespuestaDe: otroUsuario
+		conDescripcion: 'Yo te ayudo!'.
+	self assert: usuario respuestasAMisPreguntas size equals: 2
 ]
 
 { #category : #test }
