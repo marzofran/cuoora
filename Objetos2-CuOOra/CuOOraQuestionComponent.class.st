@@ -23,5 +23,5 @@ CuOOraQuestionComponent >> renderAnswersOn: aCanvas [
 
 { #category : #rendering }
 CuOOraQuestionComponent >> renderPageContentOn: aCanvas [
-	aCanvas renderAnswersOn: aCanvas.
+	self renderAnswersOn: aCanvas.
 ]
