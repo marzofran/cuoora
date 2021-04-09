@@ -16,8 +16,19 @@ CuOOraTest >> setUp [
 { #category : #test }
 CuOOraTest >> testAgregarPreguntaConTituloConDescripcionConTopicosDeUsuario [
 
-	self flag: #toImplement.
-	self assert: false
+	| topico usuario |
+	usuario := cuOOra crearUsuarioConNombre: 'pepe' conContrasena: 'pepe'.
+	topico := cuOOra agregarTopicoConNombre: 'Smalltalk' conDescripcion: 'POO Supremacy'.
+
+	cuOOra agregarPreguntaConTitulo: 'Hola' conDescripcion: 'Hay alguien' conTopicos: (OrderedCollection with: topico)  deUsuario: usuario.
+	self denyEmpty: cuOOra preguntas.
+	self denyEmpty: usuario preguntas.
+	
+	cuOOra agregarPreguntaConTitulo: '' conDescripcion: 'No tengo nombre?' conTopicos: (OrderedCollection with: topico)  deUsuario: usuario.
+	self assert: cuOOra preguntas size equals: 1.
+	self assert: usuario preguntas size equals: 1.
+	
+
 ]
 
 { #category : #test }
@@ -34,8 +45,20 @@ CuOOraTest >> testAgregarTopicoConNombreConDescripcion [
 { #category : #test }
 CuOOraTest >> testBorrarPregunta [
 
-	self flag: #toImplement.
-	self assert: false
+	| usuario pregunta topico |
+	usuario := cuOOra crearUsuarioConNombre: 'pepe' conContrasena: 'pepe'.
+	topico := cuOOra agregarTopicoConNombre: 'Smalltalk' conDescripcion: 'POO Supremacy'.
+	self assert: cuOOra preguntas size equals: 0.
+	self assert: usuario preguntas size equals: 0.
+	
+	pregunta := cuOOra agregarPreguntaConTitulo: 'Hola?' conDescripcion: 'Hay alguien?' conTopicos: (OrderedCollection with: topico) deUsuario: usuario.
+	cuOOra agregarPreguntaConTitulo: 'Chau' conDescripcion: 'Hmmm' conTopicos: (OrderedCollection with: topico) deUsuario: usuario.
+	self assert: cuOOra preguntas size equals: 2.
+	self assert: usuario preguntas size equals: 2.
+	
+	cuOOra borrarPregunta: pregunta.
+	self assert: cuOOra preguntas size equals: 1.
+	self assert: usuario preguntas size equals: 1.
 ]
 
 { #category : #tests }
@@ -85,9 +108,12 @@ CuOOraTest >> testCalcularPuntaje [
 
 { #category : #test }
 CuOOraTest >> testCrearUsuarioConNombreConContrasena [
-	cuOOra crearUsuarioConNombre: 'pepe' conContrasena: '2'.
+
+	| usuario |	
+
+	usuario := cuOOra crearUsuarioConNombre: 'pepe' conContrasena: '2'.
 	self denyEmpty: cuOOra usuarios.
-	cuOOra crearUsuarioConNombre: 'pepe' conContrasena: '2'.
+	self assert: usuario = (cuOOra crearUsuarioConNombre: 'pepe' conContrasena: '2').
 	self assert: cuOOra usuarios size equals: 1
 ]
 
@@ -225,8 +251,12 @@ CuOOraTest >> testRespuestasDe [
 { #category : #test }
 CuOOraTest >> testUsuarioConNombreConContrasena [
 
-	self flag: #toImplement.
-	self assert: false
+	| usuario otroUsuario |
+	usuario := cuOOra crearUsuarioConNombre: 'pepe' conContrasena: 'pepe'.
+	otroUsuario := cuOOra crearUsuarioConNombre: 'carlos' conContrasena: 'carlos'. 
+	
+	self assert: (usuario = (cuOOra usuarioConNombre: 'pepe' conContrasena: 'pepe' )).
+	self deny: (otroUsuario = (cuOOra usuarioConNombre: 'pepe' conContrasena: 'pepe' )).
 ]
 
 { #category : #tests }

@@ -26,14 +26,14 @@ UsuarioCuOOra >> agregarPregunta: unaPregunta [
 
 { #category : #'adding/removing' }
 UsuarioCuOOra >> agregarTopicoFavorito: unTopico [
-
-	topicosFav add: unTopico .
+	topicosFav
+		detect: [ :cadaTopico | cadaTopico nombre = unTopico nombre ]
+		ifNone: [ topicosFav add: unTopico ]
 ]
 
 { #category : #'adding/removing' }
 UsuarioCuOOra >> borrarPregunta: unaPregunta [
-
-	preguntas remove: unaPregunta.
+	preguntas ifNotEmpty: [ preguntas remove: unaPregunta ]
 ]
 
 { #category : #accessing }
@@ -94,5 +94,5 @@ UsuarioCuOOra >> topicosFav [
 
 { #category : #queries }
 UsuarioCuOOra >> yoHice: unaPregunta [
-	^ preguntas anySatisfy: [ :pregunta | pregunta == unaPregunta ]
+	^ preguntas anySatisfy: [ :pregunta | pregunta = unaPregunta ]
 ]

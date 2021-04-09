@@ -2,8 +2,7 @@ Class {
 	#name : #UsuarioCuOOraTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'usuario',
-		'otroUsuario'
+		'usuario'
 	],
 	#category : #'Objetos2-CuOOra-Tests'
 }
@@ -11,42 +10,88 @@ Class {
 { #category : #running }
 UsuarioCuOOraTest >> setUp [
 	usuario := UsuarioCuOOra conNombre: 'pepe' conContrasena: '2' .
-	otroUsuario:= UsuarioCuOOra conNombre: 'juanita' conContrasena: '3'. 
 	
 
 ]
 
 { #category : #test }
 UsuarioCuOOraTest >> testAgregarPregunta [
-
-	self flag: #toImplement.
-	self assert: false
+	| pregunta |
+	pregunta := Pregunta
+		conTitulo: 'Hola?'
+		conDescripcion: 'Hay alguien ahi?'
+		conTopicos:
+			(OrderedCollection
+				with: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy')).
+	self assertEmpty: usuario preguntas.
+	usuario agregarPregunta: pregunta.
+	self assert: usuario preguntas size equals: 1.
 ]
 
 { #category : #test }
 UsuarioCuOOraTest >> testAgregarTopicoFavorito [
 
-	self flag: #toImplement.
-	self assert: false
+	self assertEmpty: usuario topicosFav.
+	usuario agregarTopicoFavorito: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy').
+	self denyEmpty: usuario topicosFav.
+	usuario agregarTopicoFavorito: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy').
+	self assert: usuario topicosFav size equals: 1.
 ]
 
 { #category : #test }
 UsuarioCuOOraTest >> testBorrarPregunta [
-
-	self flag: #toImplement.
-	self assert: false
+	| pregunta pregunta2 |
+	pregunta := Pregunta
+		conTitulo: 'Hola?'
+		conDescripcion: 'Hay alguien ahi?'
+		conTopicos:
+			(OrderedCollection
+				with: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy')).
+	pregunta2 := Pregunta
+		conTitulo: 'Si?'
+		conDescripcion: 'No hay nadie aqui :C'
+		conTopicos:
+			(OrderedCollection
+				with: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy')).
+	self assertEmpty: usuario preguntas.
+	usuario agregarPregunta: pregunta.
+	usuario agregarPregunta: pregunta2.
+	self assert: usuario preguntas size equals: 2.
+	usuario borrarPregunta: pregunta.
+	self assert: usuario preguntas size equals: 1.
+	usuario borrarPregunta: pregunta2.
+	self assertEmpty: usuario preguntas.
+	usuario borrarPregunta: pregunta2.
+	self assertEmpty: usuario preguntas
 ]
 
 { #category : #test }
 UsuarioCuOOraTest >> testRespuestasAMisPreguntas [
-
-	self flag: #toImplement.
-	self assert: false
+	| otroUsuario pregunta |
+	otroUsuario := UsuarioCuOOra conNombre: 'juanita' conContrasena: '3'.
+	pregunta := Pregunta
+				conTitulo: 'Hola?'
+				conDescripcion: 'Hay alguien ahi?'
+				conTopicos:
+					(OrderedCollection
+						with: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy')).
+	 usuario
+		agregarPregunta:
+			pregunta.
+	self assertEmpty: usuario respuestasAMisPreguntas.
+	
+	pregunta agregarRespuestaDe: usuario conDescripcion: 'Ayuda plis.'.
+	self assert: usuario respuestasAMisPreguntas size equals: 1.
+	
+	pregunta agregarRespuestaDe: otroUsuario conDescripcion: 'Yo te ayudo!'.
+	self assert: usuario respuestasAMisPreguntas size equals: 2.
 ]
 
 { #category : #test }
 UsuarioCuOOraTest >> testSeguir [
 
+	| otroUsuario |
+	otroUsuario:= UsuarioCuOOra conNombre: 'juanita' conContrasena: '3'. 
 	usuario seguir: otroUsuario.
 	self denyEmpty: (usuario following).
 	self assert: ((usuario following) includes: otroUsuario).
@@ -58,6 +103,13 @@ UsuarioCuOOraTest >> testSeguir [
 { #category : #test }
 UsuarioCuOOraTest >> testYoHice [
 
-	self flag: #toImplement.
-	self assert: false
+	| pregunta |
+	pregunta := Pregunta
+		conTitulo: 'Hola?'
+		conDescripcion: 'Hay alguien ahi?'
+		conTopicos:
+			(OrderedCollection
+				with: (Topico conNombre: 'Smalltalk' conDescripcion: 'POO Supremacy')).
+	usuario agregarPregunta: pregunta.
+	self assert: (usuario yoHice: pregunta).
 ]

@@ -30,15 +30,20 @@ CuOOra class >> soleInstance [
 { #category : #'adding/removing' }
 CuOOra >> agregarPreguntaConTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos deUsuario: unUsuario [
 	| p |
-	p := Pregunta conTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos.
-	preguntas add: p.
-	unUsuario agregarPregunta: p.
-	^ p
-	
+	unTitulo = ''
+		ifFalse: [ p := Pregunta
+				conTitulo: unTitulo
+				conDescripcion: unaDescripcion
+				conTopicos: unosTopicos.
+			preguntas add: p.
+			unUsuario agregarPregunta: p.
+			^ p ]
 ]
 
 { #category : #'adding/removing' }
 CuOOra >> agregarTopicoConNombre: unNombre conDescripcion: unaDescripcion [
+
+	"Este metodo devuelve el topico creado, o si ya habia un topico con ese nombre, lo busca y lo devuelve."
 
 	| nuevoTopico |	
 	nuevoTopico := Topico conNombre: unNombre conDescripcion: unaDescripcion.
@@ -49,9 +54,9 @@ CuOOra >> agregarTopicoConNombre: unNombre conDescripcion: unaDescripcion [
 
 { #category : #'adding/removing' }
 CuOOra >> borrarPregunta: unaPregunta [
-
-	preguntas remove: unaPregunta.
-	usuarios borrarPregunta: unaPregunta.
+	preguntas
+		ifNotEmpty: [ preguntas remove: unaPregunta.
+			usuarios do: [ :unUsuario | unUsuario borrarPregunta: unaPregunta ] ]
 ]
 
 { #category : #queries }
