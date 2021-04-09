@@ -1,9 +1,6 @@
 Class {
 	#name : #CuOOraNewAnswerComponent,
-	#superclass : #CuOOraPageComponent,
-	#instVars : [
-		'pregunta'
-	],
+	#superclass : #CuOOraQuestionComponent,
 	#category : #'Objetos2-CuOOra-UI'
 }
 
