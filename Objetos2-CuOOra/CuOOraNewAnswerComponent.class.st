@@ -17,6 +17,11 @@ CuOOraNewAnswerComponent >> initializeConPregunta: unaPregunta [
 ]
 
 { #category : #rendering }
+CuOOraNewAnswerComponent >> renderAnswersOn: aCanvas [
+	 
+]
+
+{ #category : #rendering }
 CuOOraNewAnswerComponent >> renderContentOn: aCanvas [
 	aCanvas render: header.
 	aCanvas form: [  ]

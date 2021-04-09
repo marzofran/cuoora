@@ -54,7 +54,7 @@ CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
 		class: 'pregunta';
 		with: [
 			aCanvas anchor 
-			callback: [ self call: (CuOOraQuestionComponent conPregunta: unaPregunta) ];
+			callback: [ self call: (CuOOraAllAnswersComponent conPregunta: unaPregunta) ];
 			with: [aCanvas heading
 				class: 'pregunta-titulo';
 				level: 3;
