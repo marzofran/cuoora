@@ -1,5 +1,5 @@
 Class {
-	#name : #CuOOraNewAnswerComponent,
+	#name : #CuOOraAllAnswersComponent,
 	#superclass : #CuOOraQuestionComponent,
 	#category : #'Objetos2-CuOOra-UI'
 }
