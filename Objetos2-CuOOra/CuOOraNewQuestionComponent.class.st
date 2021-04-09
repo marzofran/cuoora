@@ -45,24 +45,33 @@ CuOOraNewQuestionComponent >> generarTopicosDesde: unString [
 ]
 
 { #category : #rendering }
+CuOOraNewQuestionComponent >> renderButtonsOn: aCanvas [
+]
+
+{ #category : #rendering }
+CuOOraNewQuestionComponent >> renderInputOn: aCanvas [
+	aCanvas
+		paragraph: [ aCanvas label: 'Título: '.
+			aCanvas textInput on: #titulo of: self ].
+	aCanvas
+		paragraph: [ aCanvas label: 'Descripción: '.
+			(aCanvas textArea on: #descripcion of: self)
+				columns: 80;
+				rows: 5;
+				class: 'descripcion-input' ].
+	aCanvas
+		paragraph: [ aCanvas label: 'Tópicos (separar con ,): '.
+			aCanvas textInput on: #topicos of: self ]
+]
+
+{ #category : #rendering }
 CuOOraNewQuestionComponent >> renderPageContentOn: aCanvas [
 	aCanvas form
 		class: 'question-form';
 		with: [ aCanvas heading
 				level: 3;
 				with: 'Crear una pregunta nueva'.
-			aCanvas
-				paragraph: [ aCanvas label: 'Título: '.
-					aCanvas textInput on: #titulo of: self ].
-			aCanvas
-				paragraph: [ aCanvas label: 'Descripción: '.
-					(aCanvas textArea on: #descripcion of: self)
-						columns: 80;
-						rows: 5;
-						class: 'descripcion-input' ].
-			aCanvas
-				paragraph: [ aCanvas label: 'Tópicos (separar con ,): '.
-					aCanvas textInput on: #topicos of: self ].
+			self renderInputOn: aCanvas.
 			aCanvas submitButton
 				class: 'submit-button';
 				callback: [ self crearPregunta ];

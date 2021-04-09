@@ -46,7 +46,7 @@ CuOOraQuestionComponent >> renderNombreDe: unUsuario on: aCanvas [
 { #category : #rendering }
 CuOOraQuestionComponent >> renderPageContentOn: aCanvas [
 	aCanvas div
-		class: 'pregunta';
+		class: 'pregunta separate';
 		with: [ aCanvas heading
 				class: 'pregunta-titulo';
 				level: 3;

@@ -150,5 +150,9 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 			padding: 10px 20px;
 			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 		}
+		
+		.separate { 
+			margin: 30px;
+		}
 		'.
 ]
