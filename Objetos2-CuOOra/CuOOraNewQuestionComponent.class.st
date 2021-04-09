@@ -48,8 +48,7 @@ CuOOraNewQuestionComponent >> generarTopicosDesde: unString [
 ]
 
 { #category : #rendering }
-CuOOraNewQuestionComponent >> renderContentOn: aCanvas [
-	aCanvas render: header.
+CuOOraNewQuestionComponent >> renderPageContentOn: aCanvas [
 	aCanvas form
 		class: 'question-form';
 		with: [ aCanvas heading

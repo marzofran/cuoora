@@ -18,16 +18,6 @@ CuOOraProfileComponent >> initializeConUsuario: unUsuario [
 ]
 
 { #category : #rendering }
-CuOOraProfileComponent >> renderContentOn: aCanvas [
-	aCanvas render: header.
-	self renderFollowButtonOn: aCanvas. 
-	aCanvas heading with: 'Preguntas de ' , usuario nombre.
-	aCanvas unorderedList
-		with: [ usuario preguntas
-				do: [ :each | self renderPregunta: each on: aCanvas ] ].
-]
-
-{ #category : #rendering }
 CuOOraProfileComponent >> renderFollowButtonOn: aCanvas [
 	usuario == self session usuario
 		ifFalse: [ aCanvas anchor
@@ -57,6 +47,15 @@ CuOOraProfileComponent >> renderNombreDe: unUsuario on: aCanvas [
 	aCanvas anchor
 		callback: [ self perfilDeUsuario: unUsuario ];
 		with: [ aCanvas strong: unUsuario nombre ]
+]
+
+{ #category : #rendering }
+CuOOraProfileComponent >> renderPageContentOn: aCanvas [
+	self renderFollowButtonOn: aCanvas. 
+	aCanvas heading with: 'Preguntas de ' , usuario nombre.
+	aCanvas unorderedList
+		with: [ usuario preguntas
+				do: [ :each | self renderPregunta: each on: aCanvas ] ].
 ]
 
 { #category : #rendering }

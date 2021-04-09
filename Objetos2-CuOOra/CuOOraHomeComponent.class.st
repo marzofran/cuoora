@@ -13,22 +13,6 @@ CuOOraHomeComponent >> preguntasVisibles [
 ]
 
 { #category : #rendering }
-CuOOraHomeComponent >> renderContentOn: aCanvas [
-	aCanvas render: header.
-	aCanvas anchor
-		class: 'floating-right';
-		callback: [ self call: CuOOraNewQuestionComponent new ];
-		with: [ aCanvas paragraph
-				class: 'floating-button';
-				with: 'Hacer una nueva pregunta' ].
-	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
-	aCanvas unorderedList
-		with: [ self preguntasVisibles
-				do: [ :each | self renderPregunta: each on: aCanvas ] ].
-	aCanvas horizontalRule
-]
-
-{ #category : #rendering }
 CuOOraHomeComponent >> renderLikesDislikesDe: unaPregunta on: aCanvas [
 	aCanvas div
 		class: 'like-dislike-buttons';
@@ -47,6 +31,21 @@ CuOOraHomeComponent >> renderNombreDe: unUsuario on: aCanvas [
 	aCanvas anchor
 		callback: [ self perfilDeUsuario: unUsuario ];
 		with: [ aCanvas strong: unUsuario nombre ]
+]
+
+{ #category : #rendering }
+CuOOraHomeComponent >> renderPageContentOn: aCanvas [
+	aCanvas anchor
+		class: 'floating-right';
+		callback: [ self call: CuOOraNewQuestionComponent new ];
+		with: [ aCanvas paragraph
+				class: 'floating-button';
+				with: 'Hacer una nueva pregunta' ].
+	aCanvas heading with: [ aCanvas strong: 'Últimas preguntas' ].
+	aCanvas unorderedList
+		with: [ self preguntasVisibles
+				do: [ :each | self renderPregunta: each on: aCanvas ] ].
+	aCanvas horizontalRule
 ]
 
 { #category : #rendering }

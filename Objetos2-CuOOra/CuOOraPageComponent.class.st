@@ -26,6 +26,17 @@ CuOOraPageComponent >> perfilDeUsuario: unUsuario [
 	self call: (CuOOraProfileComponent conUsuario: unUsuario).
 ]
 
+{ #category : #rendering }
+CuOOraPageComponent >> renderContentOn: aCanvas [
+	aCanvas render: header.
+	self renderPageContentOn: aCanvas.
+]
+
+{ #category : #rendering }
+CuOOraPageComponent >> renderPageContentOn: aCanvas [
+	self subclassResponsibility
+]
+
 { #category : #handling }
 CuOOraPageComponent >> return [
 	( self isMemberOf: CuOOraHomeComponent) ifFalse: [ self answer ]
@@ -101,6 +112,13 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 		.submit-button { 
 			color: white;
 			background-color: #64a460;
+		}
+			
+		.new-answer-button { 
+			color: white;
+			background-color: #64a460;
+			width: 30%;
+			margin-horizontal: auto;
 		}
 			
 		input { 
