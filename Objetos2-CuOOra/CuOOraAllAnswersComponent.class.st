@@ -9,6 +9,6 @@ CuOOraAllAnswersComponent >> renderAnswersOn: aCanvas [
 		aCanvas anchor
 		callback: [ self call: (CuOOraNewAnswerComponent conPregunta: pregunta) ];
 		with: [ aCanvas submitButton
-				class: 'new-answer-button';
+				class: 'submit-button floating-center';
 				with: 'Agregar Respuesta' ].
 ]
