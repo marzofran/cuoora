@@ -54,7 +54,7 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
     anHtmlRoot addStyle: '
 		body { 
 			font-family: sans-serif;
-			background-color: #9cc599;
+			background-color: darkseagreen;
 		}
 
 		h1 { 
@@ -82,14 +82,21 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 		ul {
 			list-style-type: none;
 			margin: 30px auto;
-			padding-horizontal: auto;
+    		padding-inline-start: 0px;
 			width: 90%;
 		}
 		
-		.pregunta { 
-			background-color: #e8f1e7;
+		.pregunta {
 			background: white;
 			margin-horizontal: auto;
+			margin-top: 10px;
+			border-radius: 10px;
+			padding: 10px 20px;
+			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+		}
+		
+		.respuesta {
+			background: darkseagreen;
 			margin-top: 10px;
 			border-radius: 10px;
 			padding: 10px 20px;
@@ -104,21 +111,20 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 			color: dimgrey;
 		}
 		
-		.question-form { 
-			text-align: center;
-			background-color: #e8f1e7;
+		.question-form {
 			margin: 20px auto;
-			width: 30%;
+			width: 90%;
 			background: white;
 			border-radius: 10px;
-			padding: 10px;
+			margin: 10px auto;
+			padding: 20px;
 			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 		}
 		
 		.answer-form {
 			margin: 20px auto;
 			width: 90%;
-			background: lightgreen;
+			background: darkseagreen;
 			border-radius: 10px;
 			margin: 10px auto;
 			padding: 20px;
@@ -131,40 +137,39 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 			margin: auto;
 			border-radius:10px;
 			padding: 10px;
+			resize: none;
 		}
 		
-		.answer-button { 
+		
+		.submit-button { 
 			color: white;
 			background-color: #64a460;
 			width: 45%;
 			margin: 10px;
 		}
-		
-		.submit-button { 
-			color: white;
-			background-color: #64a460;
-		}
 			
 		.floating-center {
-		 margin: 20px;
+		 	margin: 20px;
 			width: 30%;
 			display: block;
 			margin-left: auto;
     		margin-right: auto;
+		text-align: center;
 		}
 			
 		input { 
 			box-sizing: border-box;
-			width: 100%;
+			width: 50%;
 			padding:10px;
 			border-radius:10px;
 		}
 		
 		.descripcion-input { 
 			height: 200px;
-			width: 94%;
+			width: 98%;
 			margin: 0px auto;
 			border-radius:10px;
+			resize: none;
 			padding: 10px;
 		}
 		

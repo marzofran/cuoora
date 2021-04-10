@@ -23,13 +23,13 @@ Respuesta >> initializeConUsuario: unUsuario [
 	usuario := unUsuario 
 ]
 
-{ #category : #'as yet unclassified' }
-Respuesta >> nombreUsuario [
-
-	^ usuario nombre
-]
-
 { #category : #queries }
 Respuesta >> puntos [
 	^ 50
+]
+
+{ #category : #accessing }
+Respuesta >> usuario [
+
+	^ usuario
 ]

@@ -45,14 +45,9 @@ CuOOraNewQuestionComponent >> generarTopicosDesde: unString [
 ]
 
 { #category : #rendering }
-CuOOraNewQuestionComponent >> renderButtonsOn: aCanvas [
-	
-]
-
-{ #category : #rendering }
 CuOOraNewQuestionComponent >> renderInputOn: aCanvas [
 	aCanvas
-		paragraph: [ aCanvas label: 'Título: '.
+		paragraph: [ aCanvas paragraph: 'Título: '.
 			aCanvas textInput on: #titulo of: self ].
 	aCanvas
 		paragraph: [ aCanvas label: 'Descripción: '.
@@ -61,7 +56,7 @@ CuOOraNewQuestionComponent >> renderInputOn: aCanvas [
 				rows: 5;
 				class: 'descripcion-input' ].
 	aCanvas
-		paragraph: [ aCanvas label: 'Tópicos (separar con ,): '.
+		paragraph: [ aCanvas paragraph: 'Tópicos (separar con ,): '.
 			aCanvas textInput on: #topicos of: self ]
 ]
 
@@ -74,7 +69,7 @@ CuOOraNewQuestionComponent >> renderPageContentOn: aCanvas [
 				with: 'Crear una pregunta nueva'.
 			self renderInputOn: aCanvas.
 			aCanvas submitButton
-				class: 'submit-button';
+				class: 'submit-button floating-right';
 				callback: [ self crearPregunta ];
 				with: 'Crear!'.
 			aCanvas space.

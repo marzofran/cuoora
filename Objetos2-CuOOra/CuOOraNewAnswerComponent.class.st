@@ -45,11 +45,11 @@ CuOOraNewAnswerComponent >> renderAnswersOn: aCanvas [
 				columns: 80;
 				rows: 50.
 			aCanvas submitButton
-				class: 'answer-button floating-right';
+				class: 'submit-button floating-right';
 				callback: [ self crearRespuesta ];
 				with: 'Guardar'.
 			aCanvas submitButton
-				class: 'answer-button';
+				class: 'submit-button';
 				callback: [ self cancelar ];
 				with: 'Cancelar' ]
 ]
