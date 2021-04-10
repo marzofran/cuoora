@@ -115,14 +115,38 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 		}
 		
+		.answer-form {
+			margin: 20px auto;
+			width: 90%;
+			background: lightgreen;
+			border-radius: 10px;
+			margin: 10px auto;
+			padding: 20px;
+			box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+		}
+		
+		.answer-input { 
+			height: 100px;
+			width: 97%;
+			margin: auto;
+			border-radius:10px;
+			padding: 10px;
+		}
+		
+		.answer-button { 
+			color: white;
+			background-color: #64a460;
+			width: 45%;
+			margin: 10px;
+		}
+		
 		.submit-button { 
 			color: white;
 			background-color: #64a460;
 		}
 			
-		.new-answer-button { 
-			color: white;
-			background-color: #64a460;
+		.floating-center {
+		 margin: 20px;
 			width: 30%;
 			display: block;
 			margin-left: auto;
@@ -139,6 +163,7 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 		.descripcion-input { 
 			height: 200px;
 			width: 94%;
+			margin: 0px auto;
 			border-radius:10px;
 			padding: 10px;
 		}

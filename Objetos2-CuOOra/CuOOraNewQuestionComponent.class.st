@@ -46,6 +46,7 @@ CuOOraNewQuestionComponent >> generarTopicosDesde: unString [
 
 { #category : #rendering }
 CuOOraNewQuestionComponent >> renderButtonsOn: aCanvas [
+	
 ]
 
 { #category : #rendering }
