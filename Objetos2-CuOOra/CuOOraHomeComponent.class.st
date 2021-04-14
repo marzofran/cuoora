@@ -7,9 +7,12 @@ Class {
 { #category : #queries }
 CuOOraHomeComponent >> preguntasVisibles [
 	| preguntas |
-	preguntas := (cuoora preguntasRelevantesDe: (self session usuario))
+	preguntas := (self model preguntasRelevantesDe: self session usuario)
 		sort: [ :p1 :p2 | p1 fechaYHora <= p2 fechaYHora ].
-	^ OrderedCollection withAll: (preguntas select: [ :unaPregunta | (preguntas indexOf: unaPregunta) <= 5 ])
+	^ OrderedCollection
+		withAll:
+			(preguntas
+				select: [ :unaPregunta | (preguntas indexOf: unaPregunta) <= 5 ])
 ]
 
 { #category : #rendering }
@@ -23,7 +26,10 @@ CuOOraHomeComponent >> renderLikesDislikesDe: unaPregunta on: aCanvas [
 			aCanvas anchor
 				callback: [ unaPregunta agregarDislikeDe: self session usuario ];
 				with: 'dislike' ].
-	aCanvas paragraph: (unaPregunta likes size asString) , ' likes | ' , (unaPregunta dislikes size asString) , ' dislikes'
+	aCanvas
+		paragraph:
+			unaPregunta likes size asString , ' likes | '
+				, unaPregunta dislikes size asString , ' dislikes'
 ]
 
 { #category : #rendering }
@@ -52,19 +58,27 @@ CuOOraHomeComponent >> renderPageContentOn: aCanvas [
 CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
 	aCanvas listItem
 		class: 'pregunta';
-		with: [
-			aCanvas anchor 
-			callback: [ self call: (CuOOraAllAnswersComponent conPregunta: unaPregunta) ];
-			with: [aCanvas heading
-				class: 'pregunta-titulo';
-				level: 3;
-				with: [ aCanvas emphasis: unaPregunta titulo ]].
-			aCanvas paragraph class: 'topicos'; with: [aCanvas emphasis with: 'Tópicos: ' , (self topicosComoStringDe: unaPregunta) , '.'].
+		with: [ aCanvas anchor
+				callback: [ self call: (CuOOraAllAnswersComponent conPregunta: unaPregunta) ];
+				with: [ aCanvas heading
+						class: 'pregunta-titulo';
+						level: 3;
+						with: [ aCanvas emphasis: unaPregunta titulo ] ].
+			aCanvas paragraph
+				class: 'topicos';
+				with: [ aCanvas emphasis
+						with: 'Tópicos: ' , (self topicosComoStringDe: unaPregunta) , '.' ].
 			aCanvas
 				paragraph: [ aCanvas text: 'Realizada por '.
-					self renderNombreDe: (cuoora usuarioQueHizoPregunta: unaPregunta) on: aCanvas.
+					self
+						renderNombreDe: (self model usuarioQueHizoPregunta: unaPregunta)
+						on: aCanvas.
 					aCanvas
 						text: ' | ' , unaPregunta respuestas size asString , ' respuestas' ].
 			self renderLikesDislikesDe: unaPregunta on: aCanvas ]
+]
 
+{ #category : #handling }
+CuOOraHomeComponent >> return [
+	"This method does nothing at all"
 ]

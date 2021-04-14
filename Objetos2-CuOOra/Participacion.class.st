@@ -35,14 +35,16 @@ Participacion >> agregarLikeDe: unUsuario [
 
 { #category : #'adding/removing' }
 Participacion >> borrarDislikeDe: unUsuario [
-	dislikes detect:[ :unDislike | unDislike esDeUsuario: unUsuario]
-	ifFound: [ :elDislike | dislikes remove: elDislike ].
+	dislikes
+		detect: [ :unDislike | unDislike esDeUsuario: unUsuario ]
+		ifFound: [ :elDislike | dislikes remove: elDislike ]
 ]
 
 { #category : #'adding/removing' }
 Participacion >> borrarLikeDe: unUsuario [
-	likes detect:[ :unLike | unLike esDeUsuario: unUsuario]
-	ifFound: [ :elLike | likes remove: elLike ].
+	likes
+		detect: [ :unLike | unLike esDeUsuario: unUsuario ]
+		ifFound: [ :elLike | likes remove: elLike ]
 ]
 
 { #category : #accessing }

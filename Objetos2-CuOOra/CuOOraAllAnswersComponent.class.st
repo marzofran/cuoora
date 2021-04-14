@@ -6,14 +6,18 @@ Class {
 
 { #category : #rendering }
 CuOOraAllAnswersComponent >> renderAnswersOn: aCanvas [
-		aCanvas unorderedList: [ self respuestas do: [ :each | self renderRespuesta: each On: aCanvas ] ].
-		aCanvas paragraph class: 'floating-center'; with: 'No hay mas respuestas'.
-		aCanvas horizontalRule.
-		aCanvas anchor
+	aCanvas
+		unorderedList: [ self respuestas
+				do: [ :each | self renderRespuesta: each On: aCanvas ] ].
+	aCanvas paragraph
+		class: 'floating-center';
+		with: 'No hay mas respuestas'.
+	aCanvas horizontalRule.
+	aCanvas anchor
 		callback: [ self call: (CuOOraNewAnswerComponent conPregunta: pregunta) ];
 		with: [ aCanvas submitButton
 				class: 'floating-center submit-button';
-				with: 'Agregar Respuesta' ].
+				with: 'Agregar Respuesta' ]
 ]
 
 { #category : #rendering }
@@ -29,6 +33,6 @@ CuOOraAllAnswersComponent >> renderRespuesta: unaRespuesta On: aCanvas [
 
 { #category : #accessing }
 CuOOraAllAnswersComponent >> respuestas [
-
- ^ (pregunta respuestas sort: [ :r1 :r2 | r1 puntajeLikes >= r2 puntajeLikes ])
+	^ pregunta respuestas
+		sort: [ :r1 :r2 | r1 puntajeLikes >= r2 puntajeLikes ]
 ]

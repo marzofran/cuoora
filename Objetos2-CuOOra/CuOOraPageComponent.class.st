@@ -2,7 +2,6 @@ Class {
 	#name : #CuOOraPageComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'cuoora',
 		'header'
 	],
 	#category : #'Objetos2-CuOOra-UI'
@@ -16,13 +15,17 @@ CuOOraPageComponent >> children [
 { #category : #initialization }
 CuOOraPageComponent >> initialize [
 	super initialize.
-	cuoora := CuOOra soleInstance.
 	header := CuOOraHeaderComponent conParent: self.
+]
+
+{ #category : #accessing }
+CuOOraPageComponent >> model [
+	^ CuOOra soleInstance 
 ]
 
 { #category : #callbacks }
 CuOOraPageComponent >> perfilDeUsuario: unUsuario [
-	self call: (CuOOraProfileComponent conUsuario: unUsuario).
+	self call: (CuOOraProfileComponent conUsuario: unUsuario)
 ]
 
 { #category : #rendering }
@@ -38,13 +41,16 @@ CuOOraPageComponent >> renderPageContentOn: aCanvas [
 
 { #category : #handling }
 CuOOraPageComponent >> return [
-	( self isMemberOf: CuOOraHomeComponent) ifFalse: [ self answer ]
+	self subclassResponsibility
 ]
 
 { #category : #queries }
 CuOOraPageComponent >> topicosComoStringDe: unaPregunta [
-	
-	^ String streamContents: [ :stream | (unaPregunta topicos collect: [ :unTopico | unTopico nombre ]) asStringOn: stream delimiter: ', '. ]
+	^ String
+		streamContents: [ :stream | 
+			(unaPregunta topicos collect: [ :unTopico | unTopico nombre ])
+				asStringOn: stream
+				delimiter: ', ' ]
 ]
 
 { #category : #updating }

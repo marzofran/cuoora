@@ -33,7 +33,10 @@ CuOOraQuestionComponent >> renderLikesDislikesDe: unaPregunta on: aCanvas [
 			aCanvas anchor
 				callback: [ unaPregunta agregarDislikeDe: self session usuario ];
 				with: 'dislike' ].
-	aCanvas paragraph: (unaPregunta likes size asString) , ' likes | ' , (unaPregunta dislikes size asString) , ' dislikes'
+	aCanvas
+		paragraph:
+			unaPregunta likes size asString , ' likes | '
+				, unaPregunta dislikes size asString , ' dislikes'
 ]
 
 { #category : #rendering }
@@ -61,11 +64,16 @@ CuOOraQuestionComponent >> renderPageContentOn: aCanvas [
 			aCanvas
 				paragraph: [ aCanvas text: 'Realizada por '.
 					self
-						renderNombreDe: (cuoora usuarioQueHizoPregunta: pregunta)
+						renderNombreDe: (self model usuarioQueHizoPregunta: pregunta)
 						on: aCanvas.
 					aCanvas
 						text: ' | ' , pregunta respuestas size asString , ' respuestas' ].
 			self renderLikesDislikesDe: pregunta on: aCanvas.
 			aCanvas horizontalRule.
 			self renderAnswersOn: aCanvas ]
+]
+
+{ #category : #handling }
+CuOOraQuestionComponent >> return [
+	self answer
 ]

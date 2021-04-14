@@ -29,27 +29,30 @@ CuOOra class >> soleInstance [
 
 { #category : #'adding/removing' }
 CuOOra >> agregarPreguntaConTitulo: unTitulo conDescripcion: unaDescripcion conTopicos: unosTopicos deUsuario: unUsuario [
+	"Este metodo devuelve la pregunta creada"
+
 	| p |
-	unTitulo = ''
-		ifFalse: [ p := Pregunta
-				conTitulo: unTitulo
-				conDescripcion: unaDescripcion
-				conTopicos: unosTopicos.
-			preguntas add: p.
-			unUsuario agregarPregunta: p.
-			^ p ]
+	p := Pregunta
+		conTitulo: unTitulo
+		conDescripcion: unaDescripcion
+		conTopicos: unosTopicos.
+	preguntas add: p.
+	unUsuario agregarPregunta: p.
+	^ p
 ]
 
 { #category : #'adding/removing' }
 CuOOra >> agregarTopicoConNombre: unNombre conDescripcion: unaDescripcion [
-
 	"Este metodo devuelve el topico creado, o si ya habia un topico con ese nombre, lo busca y lo devuelve."
 
-	| nuevoTopico |	
-	nuevoTopico := Topico conNombre: unNombre conDescripcion: unaDescripcion.
-	topicos detect: [ :each | each nombre = (unNombre asLowercase) ]
-	ifFound: [ :eseTopico | ^ eseTopico ]
-	ifNone: [ ^ topicos add: nuevoTopico ]
+	| nuevoTopico |
+	nuevoTopico := Topico
+		conNombre: unNombre
+		conDescripcion: unaDescripcion.
+	topicos
+		detect: [ :each | each nombre = unNombre asLowercase ]
+		ifFound: [ :eseTopico | ^ eseTopico ]
+		ifNone: [ ^ topicos add: nuevoTopico ]
 ]
 
 { #category : #'adding/removing' }
@@ -62,14 +65,17 @@ CuOOra >> borrarPregunta: unaPregunta [
 { #category : #queries }
 CuOOra >> calcularPuntaje: unUsuario [
 	| misInteracciones |
-	misInteracciones := (OrderedCollection withAll: unUsuario preguntas).
+	misInteracciones := OrderedCollection withAll: unUsuario preguntas.
 	misInteracciones addAll: (self respuestasDe: unUsuario).
-	misInteracciones removeAllFoundIn: (unUsuario respuestasAMisPreguntas).
-	^misInteracciones sumNumbers: [:interaccion | interaccion puntos + interaccion puntajeLikes ]
+	misInteracciones removeAllFoundIn: unUsuario respuestasAMisPreguntas.
+	^ misInteracciones
+		sumNumbers: [ :interaccion | interaccion puntos + interaccion puntajeLikes ]
 ]
 
 { #category : #'adding/removing' }
 CuOOra >> crearUsuarioConNombre: unNombre conContrasena: unaContrasena [
+	"Este metodo devuelve el usuario creado, o si ya habia un usuario con ese nombre, lo busca y lo devuelve."
+	
 	| nuevoUsuario |
 	nuevoUsuario := UsuarioCuOOra
 		conNombre: unNombre
@@ -139,7 +145,6 @@ CuOOra >> preguntas [
 
 { #category : #queries }
 CuOOra >> preguntasDe: unTopico [
-
 	^ preguntas select: [ :pregunta | pregunta esDeTopico: unTopico ]
 ]
 
@@ -152,8 +157,8 @@ CuOOra >> preguntasRelevantesDe: unUsuario [
 
 { #category : #queries }
 CuOOra >> respuestasDe: unUsuario [
-
-	^ (preguntas flatCollect: [ :pregunta | pregunta respuestasDe: unUsuario ])
+	^ preguntas
+		flatCollect: [ :pregunta | pregunta respuestasDe: unUsuario ]
 ]
 
 { #category : #accessing }
@@ -176,6 +181,5 @@ CuOOra >> usuarioQueHizoPregunta: unaPregunta [
 
 { #category : #accessing }
 CuOOra >> usuarios [
-
 	^ usuarios
 ]

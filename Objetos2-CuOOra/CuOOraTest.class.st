@@ -250,21 +250,31 @@ CuOOraTest >> testRespuestasDe [
 
 { #category : #test }
 CuOOraTest >> testUsuarioConNombreConContrasena [
-
 	| usuario otroUsuario |
 	usuario := cuOOra crearUsuarioConNombre: 'pepe' conContrasena: 'pepe'.
-	otroUsuario := cuOOra crearUsuarioConNombre: 'carlos' conContrasena: 'carlos'. 
-	
-	self assert: (usuario = (cuOOra usuarioConNombre: 'pepe' conContrasena: 'pepe' )).
-	self deny: (otroUsuario = (cuOOra usuarioConNombre: 'pepe' conContrasena: 'pepe' )).
+	otroUsuario := cuOOra
+		crearUsuarioConNombre: 'carlos'
+		conContrasena: 'carlos'.
+	self assert: usuario = (cuOOra usuarioConNombre: 'pepe' conContrasena: 'pepe').
+	self deny: otroUsuario = (cuOOra usuarioConNombre: 'pepe' conContrasena: 'pepe')
 ]
 
 { #category : #tests }
 CuOOraTest >> testUsuarioQueHizoPregunta [
-
-	|unUsuario unaPregunta topicos|
-	unUsuario := cuOOra crearUsuarioConNombre: 'Pepe' conContrasena: 'password'.
-	topicos := OrderedCollection with: (cuOOra agregarTopicoConNombre: 'Existenciales' conDescripcion: 'Filosofia y el mundo real').
-	unaPregunta := cuOOra agregarPreguntaConTitulo: 'Hola?' conDescripcion: 'Hay alguien aquí?' conTopicos: topicos deUsuario: unUsuario.
-	self assert: ((cuOOra usuarioQueHizoPregunta: unaPregunta) == unUsuario).
+	| unUsuario unaPregunta topicos |
+	unUsuario := cuOOra
+		crearUsuarioConNombre: 'Pepe'
+		conContrasena: 'password'.
+	topicos := OrderedCollection
+		with:
+			(cuOOra
+				agregarTopicoConNombre: 'Existenciales'
+				conDescripcion: 'Filosofia y el mundo real').
+	unaPregunta := cuOOra
+		agregarPreguntaConTitulo: 'Hola?'
+		conDescripcion: 'Hay alguien aquí?'
+		conTopicos: topicos
+		deUsuario: unUsuario.
+	
+	self assert: (cuOOra usuarioQueHizoPregunta: unaPregunta) == unUsuario
 ]

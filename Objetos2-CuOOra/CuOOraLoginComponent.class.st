@@ -19,8 +19,8 @@ CuOOraLoginComponent >> contrasena [
 ]
 
 { #category : #accessing }
-CuOOraLoginComponent >> contrasena: anObject [
-	contrasena := anObject
+CuOOraLoginComponent >> contrasena: unaContrasena [ 
+	contrasena := unaContrasena
 ]
 
 { #category : #callbacks }
@@ -54,20 +54,28 @@ CuOOraLoginComponent >> nombre: unNombre [
 
 { #category : #rendering }
 CuOOraLoginComponent >> renderContentOn: aCanvas [
-	aCanvas heading level: 1; with: 'CuOOra'.
+	aCanvas heading
+		level: 1;
+		with: 'CuOOra'.
 	aCanvas form
 		class: 'login-form';
-		with: [ 
-			aCanvas heading level: 3; with: 'Bienvenido a CuOOra!'.
+		with: [ aCanvas heading
+				level: 3;
+				with: 'Bienvenido a CuOOra!'.
 			aCanvas
-				paragraph: [ aCanvas textInput placeholder: 'Usuario'; on: #nombre of: self].
+				paragraph: [ aCanvas textInput
+						placeholder: 'Usuario';
+						on: #nombre of: self ].
 			aCanvas
-				paragraph: [ aCanvas passwordInput placeholder: 'Contrasena'; on: #contrasena of: self].
+				paragraph: [ aCanvas passwordInput
+						placeholder: 'Contrasena';
+						on: #contrasena of: self ].
 			aCanvas submitButton
 				class: 'submit-button';
 				callback: [ self iniciarSesion ];
 				with: 'Iniciar Sesion' ].
-	aCanvas paragraph: 'Sesiones: pedro@cuoora.com, diego@cuoora.com, juan@cuoora.com'
+	aCanvas
+		paragraph: 'Sesiones: pedro@cuoora.com, diego@cuoora.com, juan@cuoora.com'
 ]
 
 { #category : #updating }

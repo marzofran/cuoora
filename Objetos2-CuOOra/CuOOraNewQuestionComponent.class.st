@@ -19,13 +19,13 @@ CuOOraNewQuestionComponent >> cancel [
 
 { #category : #callbacks }
 CuOOraNewQuestionComponent >> crearPregunta [
-
-	CuOOra soleInstance
-		agregarPreguntaConTitulo: titulo
-		conDescripcion: descripcion
-		conTopicos: (self generarTopicosDesde: topicos)
-		deUsuario: self session usuario.
-	self answer.
+	(titulo = '' or: [ topicos = '' ])
+		ifFalse: [ self model
+				agregarPreguntaConTitulo: titulo
+				conDescripcion: descripcion
+				conTopicos: (self generarTopicosDesde: topicos)
+				deUsuario: self session usuario.
+			self answer ]
 ]
 
 { #category : #accessing }
@@ -40,8 +40,10 @@ CuOOraNewQuestionComponent >> descripcion: unaDescripcion [
 
 { #category : #formatting }
 CuOOraNewQuestionComponent >> generarTopicosDesde: unString [
-
-	^ ((unString splitOn: ',') collect: [ :substring | substring trimBoth ]) collect: [ :unNombre |  CuOOra soleInstance agregarTopicoConNombre: unNombre conDescripcion: 'n/a' ]
+	^ ((unString splitOn: ',')
+		collect: [ :substring | substring trimBoth ])
+		collect:
+			[ :unNombre | self model agregarTopicoConNombre: unNombre conDescripcion: 'n/a' ]
 ]
 
 { #category : #rendering }
@@ -76,9 +78,12 @@ CuOOraNewQuestionComponent >> renderPageContentOn: aCanvas [
 			aCanvas submitButton
 				class: 'submit-button';
 				callback: [ self cancel ];
-				with: 'Cancelar'
-			].
-			
+				with: 'Cancelar' ]
+]
+
+{ #category : #handling }
+CuOOraNewQuestionComponent >> return [
+	self answer
 ]
 
 { #category : #accessing }

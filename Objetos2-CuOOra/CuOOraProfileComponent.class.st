@@ -39,7 +39,10 @@ CuOOraProfileComponent >> renderLikesDislikesDe: unaPregunta on: aCanvas [
 			aCanvas anchor
 				callback: [ unaPregunta agregarDislikeDe: self session usuario ];
 				with: 'dislike' ].
-	aCanvas paragraph: (unaPregunta likes size asString) , ' likes | ' , (unaPregunta dislikes size asString) , ' dislikes'
+	aCanvas
+		paragraph:
+			unaPregunta likes size asString , ' likes | '
+				, unaPregunta dislikes size asString , ' dislikes'
 ]
 
 { #category : #rendering }
@@ -51,29 +54,38 @@ CuOOraProfileComponent >> renderNombreDe: unUsuario on: aCanvas [
 
 { #category : #rendering }
 CuOOraProfileComponent >> renderPageContentOn: aCanvas [
-	self renderFollowButtonOn: aCanvas. 
+	self renderFollowButtonOn: aCanvas.
 	aCanvas heading with: 'Preguntas de ' , usuario nombre.
 	aCanvas unorderedList
 		with: [ usuario preguntas
-				do: [ :each | self renderPregunta: each on: aCanvas ] ].
+				do: [ :each | self renderPregunta: each on: aCanvas ] ]
 ]
 
 { #category : #rendering }
 CuOOraProfileComponent >> renderPregunta: unaPregunta on: aCanvas [
 	aCanvas listItem
 		class: 'pregunta';
-		with: [
-			aCanvas anchor 
-			callback: [ self call: (CuOOraAllAnswersComponent conPregunta: unaPregunta) ];
-			with: [aCanvas heading
-				class: 'pregunta-titulo';
-				level: 3;
-				with: [ aCanvas emphasis: unaPregunta titulo ]].
-			aCanvas paragraph class: 'topicos'; with: [aCanvas emphasis with: 'Tópicos: ' , (self topicosComoStringDe: unaPregunta) , '.'].
+		with: [ aCanvas anchor
+				callback: [ self call: (CuOOraAllAnswersComponent conPregunta: unaPregunta) ];
+				with: [ aCanvas heading
+						class: 'pregunta-titulo';
+						level: 3;
+						with: [ aCanvas emphasis: unaPregunta titulo ] ].
+			aCanvas paragraph
+				class: 'topicos';
+				with: [ aCanvas emphasis
+						with: 'Tópicos: ' , (self topicosComoStringDe: unaPregunta) , '.' ].
 			aCanvas
 				paragraph: [ aCanvas text: 'Realizada por '.
-					self renderNombreDe: (cuoora usuarioQueHizoPregunta: unaPregunta) on: aCanvas.
+					self
+						renderNombreDe: (self model usuarioQueHizoPregunta: unaPregunta)
+						on: aCanvas.
 					aCanvas
 						text: ' | ' , unaPregunta respuestas size asString , ' respuestas' ].
 			self renderLikesDislikesDe: unaPregunta on: aCanvas ]
+]
+
+{ #category : #handling }
+CuOOraProfileComponent >> return [
+	self answer
 ]

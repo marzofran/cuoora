@@ -30,6 +30,5 @@ Respuesta >> puntos [
 
 { #category : #accessing }
 Respuesta >> usuario [
-
 	^ usuario
 ]

@@ -19,9 +19,9 @@ Topico >> descripcion [
 ]
 
 { #category : #initialization }
-Topico >> initializeConNombre: unNombre conDescripcion: unaDescripcion [ 
-	nombre := unNombre .
-	descripcion := unaDescripcion 
+Topico >> initializeConNombre: unNombre conDescripcion: unaDescripcion [
+	nombre := unNombre.
+	descripcion := unaDescripcion
 ]
 
 { #category : #accessing }

@@ -20,8 +20,7 @@ UsuarioCuOOra class >> conNombre: unNombre conContrasena: unaContrasena [
 
 { #category : #'adding/removing' }
 UsuarioCuOOra >> agregarPregunta: unaPregunta [
-
-	preguntas add: unaPregunta.
+	preguntas add: unaPregunta
 ]
 
 { #category : #'adding/removing' }
@@ -48,18 +47,16 @@ UsuarioCuOOra >> following [
 
 { #category : #initialization }
 UsuarioCuOOra >> initialize [
-	
-	following:= OrderedCollection new.
-	topicosFav:= OrderedCollection new.
-	preguntas:= OrderedCollection new.
+	following := OrderedCollection new.
+	topicosFav := OrderedCollection new.
+	preguntas := OrderedCollection new
 ]
 
 { #category : #initialization }
 UsuarioCuOOra >> initializeConNombre: unNombre conContrasena: unaContrasena [
-
-	nombre := unNombre .
-	contrasena := unaContrasena .
-	fechaYHora := DateAndTime now.
+	nombre := unNombre.
+	contrasena := unaContrasena.
+	fechaYHora := DateAndTime now
 ]
 
 { #category : #accessing }
@@ -69,13 +66,11 @@ UsuarioCuOOra >> nombre [
 
 { #category : #accessing }
 UsuarioCuOOra >> preguntas [
-
 	^ preguntas
 ]
 
 { #category : #queries }
 UsuarioCuOOra >> respuestasAMisPreguntas [
-
 	^ preguntas flatCollect: [ :pregunta | pregunta respuestas ]
 ]
 
@@ -88,8 +83,7 @@ UsuarioCuOOra >> seguir: unUsuario [
 
 { #category : #accessing }
 UsuarioCuOOra >> topicosFav [
-
-	^ topicosFav 
+	^ topicosFav
 ]
 
 { #category : #queries }

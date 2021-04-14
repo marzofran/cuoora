@@ -9,36 +9,35 @@ Class {
 
 { #category : #callbacks }
 CuOOraNewAnswerComponent >> cancelar [
-
 	descripcion := nil.
-	self answer .
+	self answer
 ]
 
 { #category : #callbacks }
 CuOOraNewAnswerComponent >> crearRespuesta [
-
-	pregunta agregarRespuestaDe: (self session usuario) conDescripcion: descripcion.
-	descripcion := nil.
-	self answer.
+	descripcion = ''
+		ifFalse: [ pregunta
+				agregarRespuestaDe: self session usuario
+				conDescripcion: descripcion.
+			descripcion := nil.
+			self answer ]
 ]
 
 { #category : #accessing }
-CuOOraNewAnswerComponent >> descripcion [ 
-
-^ descripcion
+CuOOraNewAnswerComponent >> descripcion [
+	^ descripcion
 ]
 
 { #category : #accessing }
-CuOOraNewAnswerComponent >> descripcion: unaDescripcion [ 
-
-descripcion := unaDescripcion .
+CuOOraNewAnswerComponent >> descripcion: unaDescripcion [
+	descripcion := unaDescripcion
 ]
 
 { #category : #rendering }
 CuOOraNewAnswerComponent >> renderAnswersOn: aCanvas [
 	aCanvas form
 		class: 'answer-form';
-		with: [ aCanvas heading level: 3; with: 'Responder a ' , (cuoora usuarioQueHizoPregunta: pregunta) nombre , ': '.
+		with: [ aCanvas heading level: 3; with: 'Responder a ' , (self model usuarioQueHizoPregunta: pregunta) nombre , ': '.
 			(aCanvas textArea on: #descripcion of: self)
 				class: 'answer-input';
 				placeholder: 'Escriba su respuesta aqui';

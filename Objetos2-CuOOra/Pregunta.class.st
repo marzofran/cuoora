@@ -17,6 +17,8 @@ Pregunta class >> conTitulo: unTitulo conDescripcion: unaDescripcion conTopicos:
 
 { #category : #'adding/removing' }
 Pregunta >> agregarRespuestaDe: unUsuario conDescripcion: unaDescripcion [
+	"Este metodo devuelve la respuesta creada"
+	
 	^ respuestas
 		add: (Respuesta conDescripcion: unaDescripcion conUsuario: unUsuario)
 ]
@@ -50,12 +52,13 @@ Pregunta >> puntos [
 
 { #category : #accessing }
 Pregunta >> respuestas [
-	^ respuestas sort: [ :r1 :r2 | r1 puntajeLikes >= r2 puntajeLikes]
+	^ respuestas sort: [ :r1 :r2 | r1 puntajeLikes >= r2 puntajeLikes ]
 ]
 
 { #category : #queries }
 Pregunta >> respuestasDe: unUsuario [
-	^ (respuestas select: [ :unaRespuesta | unaRespuesta esDeUsuario: unUsuario])
+	^ respuestas
+		select: [ :unaRespuesta | unaRespuesta esDeUsuario: unUsuario ]
 ]
 
 { #category : #accessing }
