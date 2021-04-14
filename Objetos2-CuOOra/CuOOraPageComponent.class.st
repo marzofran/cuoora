@@ -3,8 +3,7 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'cuoora',
-		'header',
-		'children'
+		'header'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
