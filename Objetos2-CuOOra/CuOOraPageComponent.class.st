@@ -41,19 +41,9 @@ CuOOraPageComponent >> return [
 	self subclassResponsibility
 ]
 
-{ #category : #queries }
-CuOOraPageComponent >> topicosComoStringDe: unaPregunta [
-	^ String
-		streamContents: [ :stream | 
-			(unaPregunta topicos collect: [ :unTopico | unTopico nombre ])
-				asStringOn: stream
-				delimiter: ', ' ]
-]
-
 { #category : #updating }
-CuOOraPageComponent >> updateRoot: anHtmlRoot [
-    super updateRoot: anHtmlRoot.
-    anHtmlRoot addStyle: '
+CuOOraPageComponent >> style [ 
+	^'
 		body { 
 			font-family: sans-serif;
 			background-color: darkseagreen;
@@ -187,4 +177,13 @@ CuOOraPageComponent >> updateRoot: anHtmlRoot [
 			margin: 30px;
 		}
 		'.
+]
+
+{ #category : #queries }
+CuOOraPageComponent >> topicosComoStringDe: unaPregunta [
+	^ String
+		streamContents: [ :stream | 
+			(unaPregunta topicos collect: [ :unTopico | unTopico nombre ])
+				asStringOn: stream
+				delimiter: ', ' ]
 ]

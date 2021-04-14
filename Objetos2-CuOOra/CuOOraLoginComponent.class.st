@@ -81,19 +81,16 @@ CuOOraLoginComponent >> renderContentOn: aCanvas [
 ]
 
 { #category : #updating }
-CuOOraLoginComponent >> updateRoot: anHtmlRoot [
-	super updateRoot: anHtmlRoot.
-	anHtmlRoot
-		addStyle:
-			'
-			body { 
-				background-color: #9cc599;
-				font-family: sans-serif;
-			}
+CuOOraLoginComponent >> style [
+	^'
+		body { 
+			background-color: #9cc599;
+			font-family: sans-serif;
+		}
 
-			hr { 
+		hr { 
 				height: 5px;
-			}
+		}
 
 		h1 { 
 			font-weight: 500;
