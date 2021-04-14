@@ -64,7 +64,7 @@ CuOOraQuestionComponent >> renderPageContentOn: aCanvas [
 			aCanvas
 				paragraph: [ aCanvas text: 'Realizada por '.
 					self
-						renderNombreDe: (self model usuarioQueHizoPregunta: pregunta)
+						renderNombreDe: (model usuarioQueHizoPregunta: pregunta)
 						on: aCanvas.
 					aCanvas
 						text: ' | ' , pregunta respuestas size asString , ' respuestas' ].
@@ -75,5 +75,5 @@ CuOOraQuestionComponent >> renderPageContentOn: aCanvas [
 
 { #category : #handling }
 CuOOraQuestionComponent >> return [
-	self answer
+	self call: CuOOraHomeComponent new.
 ]

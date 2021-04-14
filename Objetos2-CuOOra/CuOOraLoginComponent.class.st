@@ -8,7 +8,8 @@ Class {
 	#superclass : #WAComponent,
 	#instVars : [
 		'nombre',
-		'contrasena'
+		'contrasena',
+		'model'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
@@ -25,7 +26,7 @@ CuOOraLoginComponent >> contrasena: unaContrasena [
 
 { #category : #callbacks }
 CuOOraLoginComponent >> iniciarSesion [
-	(self model usuarioConNombre: nombre conContrasena: contrasena)
+	(model usuarioConNombre: nombre conContrasena: contrasena)
 		ifNotNil: [ :eseUsuario | self iniciarSesionCon: eseUsuario ].
 	nombre := nil.
 	contrasena := nil
@@ -37,9 +38,10 @@ CuOOraLoginComponent >> iniciarSesionCon: unUsuario [
 	self call: CuOOraHomeComponent new
 ]
 
-{ #category : #accessing }
-CuOOraLoginComponent >> model [
-	^ CuOOra soleInstance 
+{ #category : #initialization }
+CuOOraLoginComponent >> initialize [
+	super initialize.
+	model := CuOOra soleInstance
 ]
 
 { #category : #accessing }

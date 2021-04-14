@@ -7,7 +7,7 @@ Class {
 { #category : #queries }
 CuOOraHomeComponent >> preguntasVisibles [
 	| preguntas |
-	preguntas := (self model preguntasRelevantesDe: self session usuario)
+	preguntas := (model preguntasRelevantesDe: self session usuario)
 		sort: [ :p1 :p2 | p1 fechaYHora <= p2 fechaYHora ].
 	^ OrderedCollection
 		withAll:
@@ -71,7 +71,7 @@ CuOOraHomeComponent >> renderPregunta: unaPregunta on: aCanvas [
 			aCanvas
 				paragraph: [ aCanvas text: 'Realizada por '.
 					self
-						renderNombreDe: (self model usuarioQueHizoPregunta: unaPregunta)
+						renderNombreDe: (model usuarioQueHizoPregunta: unaPregunta)
 						on: aCanvas.
 					aCanvas
 						text: ' | ' , unaPregunta respuestas size asString , ' respuestas' ].

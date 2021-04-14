@@ -16,11 +16,12 @@ CuOOraNewAnswerComponent >> cancelar [
 { #category : #callbacks }
 CuOOraNewAnswerComponent >> crearRespuesta [
 	descripcion = ''
-		ifFalse: [ pregunta
-				agregarRespuestaDe: self session usuario
-				conDescripcion: descripcion.
-			descripcion := nil.
-			self answer ]
+		ifTrue: [ ^ self ].
+	pregunta
+		agregarRespuestaDe: self session usuario
+		conDescripcion: descripcion.
+	descripcion := nil.
+	self answer
 ]
 
 { #category : #accessing }
@@ -37,7 +38,7 @@ CuOOraNewAnswerComponent >> descripcion: unaDescripcion [
 CuOOraNewAnswerComponent >> renderAnswersOn: aCanvas [
 	aCanvas form
 		class: 'answer-form';
-		with: [ aCanvas heading level: 3; with: 'Responder a ' , (self model usuarioQueHizoPregunta: pregunta) nombre , ': '.
+		with: [ aCanvas heading level: 3; with: 'Responder a ' , (model usuarioQueHizoPregunta: pregunta) nombre , ': '.
 			(aCanvas textArea on: #descripcion of: self)
 				class: 'answer-input';
 				placeholder: 'Escriba su respuesta aqui';

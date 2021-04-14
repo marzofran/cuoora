@@ -20,12 +20,13 @@ CuOOraNewQuestionComponent >> cancel [
 { #category : #callbacks }
 CuOOraNewQuestionComponent >> crearPregunta [
 	(titulo = '' or: [ topicos = '' ])
-		ifFalse: [ self model
-				agregarPreguntaConTitulo: titulo
-				conDescripcion: descripcion
-				conTopicos: (self generarTopicosDesde: topicos)
-				deUsuario: self session usuario.
-			self answer ]
+		ifTrue: [ ^ self ].
+	model
+		agregarPreguntaConTitulo: titulo
+		conDescripcion: descripcion
+		conTopicos: (self generarTopicosDesde: topicos)
+		deUsuario: self session usuario.
+	self answer
 ]
 
 { #category : #accessing }
@@ -43,7 +44,7 @@ CuOOraNewQuestionComponent >> generarTopicosDesde: unString [
 	^ ((unString splitOn: ',')
 		collect: [ :substring | substring trimBoth ])
 		collect:
-			[ :unNombre | self model agregarTopicoConNombre: unNombre conDescripcion: 'n/a' ]
+			[ :unNombre | model agregarTopicoConNombre: unNombre conDescripcion: 'n/a' ]
 ]
 
 { #category : #rendering }
@@ -83,7 +84,7 @@ CuOOraNewQuestionComponent >> renderPageContentOn: aCanvas [
 
 { #category : #handling }
 CuOOraNewQuestionComponent >> return [
-	self answer
+	self call: CuOOraHomeComponent new.
 ]
 
 { #category : #accessing }

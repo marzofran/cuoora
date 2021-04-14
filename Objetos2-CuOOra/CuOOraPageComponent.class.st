@@ -2,7 +2,8 @@ Class {
 	#name : #CuOOraPageComponent,
 	#superclass : #WAComponent,
 	#instVars : [
-		'header'
+		'header',
+		'model'
 	],
 	#category : #'Objetos2-CuOOra-UI'
 }
@@ -15,12 +16,8 @@ CuOOraPageComponent >> children [
 { #category : #initialization }
 CuOOraPageComponent >> initialize [
 	super initialize.
-	header := CuOOraHeaderComponent conParent: self.
-]
-
-{ #category : #accessing }
-CuOOraPageComponent >> model [
-	^ CuOOra soleInstance 
+	model := CuOOra soleInstance.
+	header := CuOOraHeaderComponent conParent: self
 ]
 
 { #category : #callbacks }
