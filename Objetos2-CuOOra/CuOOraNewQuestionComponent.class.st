@@ -34,8 +34,8 @@ CuOOraNewQuestionComponent >> descripcion [
 ]
 
 { #category : #accessing }
-CuOOraNewQuestionComponent >> descripcion: anObject [
-	descripcion := anObject
+CuOOraNewQuestionComponent >> descripcion: unaDescripcion [
+	descripcion := unaDescripcion 
 ]
 
 { #category : #formatting }
@@ -87,8 +87,8 @@ CuOOraNewQuestionComponent >> titulo [
 ]
 
 { #category : #accessing }
-CuOOraNewQuestionComponent >> titulo: anObject [
-	titulo := anObject
+CuOOraNewQuestionComponent >> titulo: unTitulo [
+	titulo := unTitulo
 ]
 
 { #category : #accessing }
@@ -97,6 +97,6 @@ CuOOraNewQuestionComponent >> topicos [
 ]
 
 { #category : #accessing }
-CuOOraNewQuestionComponent >> topicos: anObject [
-	topicos := anObject
+CuOOraNewQuestionComponent >> topicos: unosTopicos [
+	topicos := unosTopicos
 ]

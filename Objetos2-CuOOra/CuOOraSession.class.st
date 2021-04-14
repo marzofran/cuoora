@@ -13,6 +13,6 @@ CuOOraSession >> usuario [
 ]
 
 { #category : #accessing }
-CuOOraSession >> usuario: anObject [
-	usuario := anObject
+CuOOraSession >> usuario: unUsuario [
+	usuario := unUsuario 
 ]

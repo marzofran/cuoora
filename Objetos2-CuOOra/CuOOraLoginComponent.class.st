@@ -48,8 +48,8 @@ CuOOraLoginComponent >> nombre [
 ]
 
 { #category : #accessing }
-CuOOraLoginComponent >> nombre: anObject [
-	nombre := anObject
+CuOOraLoginComponent >> nombre: unNombre [
+	nombre := unNombre 
 ]
 
 { #category : #rendering }
