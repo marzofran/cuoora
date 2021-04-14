@@ -24,10 +24,6 @@ CuOOraTest >> testAgregarPreguntaConTituloConDescripcionConTopicosDeUsuario [
 	self denyEmpty: cuOOra preguntas.
 	self denyEmpty: usuario preguntas.
 	
-	cuOOra agregarPreguntaConTitulo: '' conDescripcion: 'No tengo nombre?' conTopicos: (OrderedCollection with: topico)  deUsuario: usuario.
-	self assert: cuOOra preguntas size equals: 1.
-	self assert: usuario preguntas size equals: 1.
-	
 
 ]
 
